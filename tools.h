@@ -85,17 +85,41 @@ public:
 	*/
 	static QString convertBase(const QString& number, int currentBase, int targetBase,bool formatOutput);
 
-	//编码HTML
+	/**
+	 * @brief 编码HTML
+	 * @param text 
+	 * @return 
+	*/
 	static QString htmlEncode(const QString& text);
-	//解码HTML
+	/**
+	 * @brief 解码HTML
+	 * @param text 
+	 * @return 
+	*/
 	static QString htmlDecode(const QString& text);
-	//URL编码
+	/**
+	 * @brief URL编码
+	 * @param plainText 
+	 * @return 
+	*/
 	static QString urlEncode(const QString& plainText);
-	//URL解码
+	/**
+	 * @brief URL解码
+	 * @param encodedText 
+	 * @return 
+	*/
 	static QString urlDecode(const QString& encodedText);
-	//Base64编码
+	/**
+	 * @brief Base64编码
+	 * @param inputString 
+	 * @return 
+	*/
 	static QString Base64Encode(const QString& inputString);
-	//Base64解码
+	/**
+	 * @brief Base64解码
+	 * @param base64String 
+	 * @return 
+	*/
 	static QString Base64Decode(const QString& base64String);
 
 };
