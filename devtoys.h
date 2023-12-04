@@ -39,6 +39,7 @@ private:
     QSplitter* splitter = new QSplitter();
     QStackedLayout* stackedLayout = new QStackedLayout();
 
+
 	QLabel* label = new QLabel();
 	JsonToYaml* jsonToYaml = new JsonToYaml();
 	Timestamp* timestamp = new Timestamp();
