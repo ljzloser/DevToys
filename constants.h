@@ -9,7 +9,7 @@
 const std::map<QString, QStringList> treeMap{
 	{"转换类型工具",{"JSON-YAML数据类型互转工具","Unix时间戳转换工具","进制转换工具"}},
 	{"编码解码类型工具",{"HTML编码解码工具","URL编码解码工具","Base64文本编码解码工具","Base64图像编码解码工具"}},
-	{"格式化类型工具",{}},
+	{"格式化类型工具",{"JSON字符串格式化工具","可扩展标记语言XML格式化工具"}},
 	{"生成类型工具",{}},
 	{"文本处理类型工具",{}},
 	{"图片处理类型工具",{}},
@@ -22,6 +22,8 @@ const std::map<QString, QString> descriptionsMap{
 	{"URL编码解码工具","将所有适用的字符编码或解码为对应的URL输出"},
 	{"Base64文本编码解码工具","编码或解码Base64文本数据"},
 	{"Base64图像编码解码工具","编码或解码Base64图像数据"},
+	{"JSON字符串格式化工具","格式化或压缩JSON字符串数据"},
+	{"可扩展标记语言XML格式化工具","格式化或压缩一个XML字符串"}
 };
 // Icon资源目录
 const QString ICONDIR = ":/DevToys/icon/";

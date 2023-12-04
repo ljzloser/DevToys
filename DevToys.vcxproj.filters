@@ -91,6 +91,9 @@
     <ClCompile Include="convertbase64image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="jsonstringformat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -133,6 +136,9 @@
     <QtMoc Include="convertbase64image.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="jsonstringformat.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="iconlabel.ui">
@@ -157,6 +163,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="convertbase64image.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="jsonstringformat.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

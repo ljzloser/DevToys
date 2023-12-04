@@ -14,6 +14,7 @@
 #include "converturl.h"
 #include "convertbase64.h"
 #include "convertbase64image.h"
+#include "jsonstringformat.h"
 
 
 
@@ -49,4 +50,5 @@ private:
 	ConvertUrl* convertUrl = new ConvertUrl();
 	ConvertBase64* convertBase64 = new ConvertBase64();
 	ConvertBase64Image* convertBase64Image = new ConvertBase64Image();
+	JsonStringFormat* jsonStringFormat = new JsonStringFormat();
 };

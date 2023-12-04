@@ -122,7 +122,6 @@ QString Tools::formatJson(const Json::Value& jnode, int indent)
 	std::string output = Json::writeString(writer, jnode);
 	return QString::fromStdString(output);
 }
-
 QString Tools::formatYaml(const YAML::Node& ynode, int indent)
 {
 	YAML::Emitter out;

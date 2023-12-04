@@ -20,5 +20,7 @@
         <file>icon/Base64文本编码解码工具.png</file>
         <file>icon/HTML编码解码工具.png</file>
         <file>icon/URL编码解码工具.png</file>
+        <file>icon/JSON字符串格式化工具.png</file>
+        <file>icon/可扩展标记语言XML格式化工具.png</file>
     </qresource>
 </RCC>

@@ -49,6 +49,11 @@ void JsonToYaml::onIndentComboBoxCurrentIndexChanged(int index)
 void JsonToYaml::onImportChanged()
 {
 	QString text = ui.importWidget->text();
+	if (text.isEmpty())
+	{
+		ui.exportsWidget->clear();
+		return;
+	}
 	// 判断当前选择的是JSON还是YAML
 	if (ui.ConvertComboBox->currentIndex() == 0)
 	{

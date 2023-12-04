@@ -140,7 +140,7 @@
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -152,7 +152,7 @@
       <Optimization>MaxSpeed</Optimization>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -164,6 +164,7 @@
     <ClCompile Include="converturl.cpp" />
     <ClCompile Include="iconlabel.cpp" />
     <ClCompile Include="iconlabellistview.cpp" />
+    <ClCompile Include="jsonstringformat.cpp" />
     <ClCompile Include="jsontoyaml.cpp" />
     <ClCompile Include="navigatorview.cpp" />
     <ClCompile Include="popupmessage.cpp" />
@@ -195,6 +196,7 @@
     <QtUic Include="converthtml.ui" />
     <QtUic Include="converturl.ui" />
     <QtUic Include="iconlabel.ui" />
+    <QtUic Include="jsonstringformat.ui" />
     <QtUic Include="JsonToYaml.ui" />
     <QtUic Include="timestamp.ui" />
   </ItemGroup>
@@ -209,6 +211,7 @@
     <QtMoc Include="converturl.h" />
     <QtMoc Include="convertbase64.h" />
     <QtMoc Include="convertbase64image.h" />
+    <QtMoc Include="jsonstringformat.h" />
     <ClInclude Include="sciscintilla.h" />
     <QtMoc Include="timestamp.h" />
     <QtMoc Include="slidebutton.h" />
