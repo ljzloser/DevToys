@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/DevToys">
+        <file>icon/编码解码类型工具.png</file>
+        <file>icon/格式化类型工具.png</file>
+        <file>icon/生成类型工具.png</file>
+        <file>icon/图片处理类型工具.png</file>
+        <file>icon/文本处理类型工具.png</file>
+        <file>icon/转换类型工具.png</file>
+        <file>icon/JSON-YAML数据类型互转工具.png</file>
+        <file>icon/Unix时间戳转换工具.png</file>
+        <file>icon/进制转换工具.png</file>
+        <file>icon/打开文件.png</file>
+        <file>icon/复制.png</file>
+        <file>icon/清空.png</file>
+        <file>icon/缩进.png</file>
+        <file>icon/粘贴.png</file>
+        <file>icon/展开.png</file>
+        <file>icon/转换.png</file>
+        <file>icon/Base64图像编码解码工具.png</file>
+        <file>icon/Base64文本编码解码工具.png</file>
+        <file>icon/HTML编码解码工具.png</file>
+        <file>icon/URL编码解码工具.png</file>
+    </qresource>
+</RCC>

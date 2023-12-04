@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+***************************************************************************************************
+ Copyright (C) 2023 The Qt Company Ltd.
+ SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+***************************************************************************************************
+-->
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\vcpkg.C.src.vcpkg.1.0.0\build\native\vcpkg.C.src.vcpkg.props" Condition="Exists('packages\vcpkg.C.src.vcpkg.1.0.0\build\native\vcpkg.C.src.vcpkg.props')" />
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E8BCCB35-DBE2-41C1-9413-AE07A8649B5B}</ProjectGuid>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.22621.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.22621.0</WindowsTargetPlatformVersion>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <ProjectName>QDevToys</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
+    <QtInstall>6.3.0_msvc2019_64</QtInstall>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtBuildConfig>debug</QtBuildConfig>
+    <QtPlugin>false</QtPlugin>
+    <QtToolsDesignTime>false</QtToolsDesignTime>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
+    <QtInstall>6.3.0_msvc2019_64</QtInstall>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtBuildConfig>release</QtBuildConfig>
+    <QtPlugin>false</QtPlugin>
+    <QtToolsDesignTime>false</QtToolsDesignTime>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnabled>
+    </VcpkgEnabled>
+    <VcpkgEnableManifest>
+    </VcpkgEnableManifest>
+    <VcpkgManifestInstall>
+    </VcpkgManifestInstall>
+    <VcpkgAutoLink>
+    </VcpkgAutoLink>
+    <VcpkgApplocalDeps>
+    </VcpkgApplocalDeps>
+    <VcpkgXUseBuiltInApplocalDeps>
+    </VcpkgXUseBuiltInApplocalDeps>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <VcpkgUseStatic>
+    </VcpkgUseStatic>
+    <VcpkgConfiguration>
+    </VcpkgConfiguration>
+    <VcpkgInstalledDir>
+    </VcpkgInstalledDir>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <VcpkgUseStatic>
+    </VcpkgUseStatic>
+    <VcpkgConfiguration>
+    </VcpkgConfiguration>
+    <VcpkgInstalledDir>
+    </VcpkgInstalledDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Link>
+      <AdditionalDependencies>qscintilla2_qt6d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>I:\project\C++\Qt\DevToys;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>I:\project\C++\Qt\QScintilla_src-2.14.0\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>QSCINTILLA_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <RuntimeLibrary>$(Qt_RUNTIME_)</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Link>
+      <AdditionalDependencies>qscintilla2_qt6.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>I:\project\C++\Qt\DevToys;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>I:\project\C++\Qt\QScintilla_src-2.14.0\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>QSCINTILLA_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <Optimization>MaxSpeed</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="convertbase64.cpp" />
+    <ClCompile Include="convertbase64image.cpp" />
+    <ClCompile Include="convertbinary.cpp" />
+    <ClCompile Include="converthtml.cpp" />
+    <ClCompile Include="converturl.cpp" />
+    <ClCompile Include="iconlabel.cpp" />
+    <ClCompile Include="iconlabellistview.cpp" />
+    <ClCompile Include="jsontoyaml.cpp" />
+    <ClCompile Include="navigatorview.cpp" />
+    <ClCompile Include="popupmessage.cpp" />
+    <ClCompile Include="sciscintilla.cpp" />
+    <ClCompile Include="slidebutton.cpp" />
+    <ClCompile Include="timestamp.cpp" />
+    <ClCompile Include="tools.cpp" />
+    <None Include="packages.config" />
+    <QtRcc Include="dark\darkstyle.qrc" />
+    <QtRcc Include="devtoys.qrc" />
+    <QtMoc Include="devtoys.h" />
+    <ClCompile Include="devtoys.cpp" />
+    <ClCompile Include="main.cpp" />
+    <None Include="cpp.hint" />
+    <None Include="DevToys.ico" />
+    <QtRcc Include="light\lightstyle.qrc" />
+    <ResourceCompile Include="DevToys.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="navigatorview.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="iconlabel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="convertbase64.ui" />
+    <QtUic Include="convertbase64image.ui" />
+    <QtUic Include="convertbinary.ui" />
+    <QtUic Include="converthtml.ui" />
+    <QtUic Include="converturl.ui" />
+    <QtUic Include="iconlabel.ui" />
+    <QtUic Include="JsonToYaml.ui" />
+    <QtUic Include="timestamp.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="iconlabellistview.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="constants.h" />
+    <QtMoc Include="popupmessage.h" />
+    <QtMoc Include="convertbinary.h" />
+    <QtMoc Include="converthtml.h" />
+    <QtMoc Include="converturl.h" />
+    <QtMoc Include="convertbase64.h" />
+    <QtMoc Include="convertbase64image.h" />
+    <ClInclude Include="sciscintilla.h" />
+    <QtMoc Include="timestamp.h" />
+    <QtMoc Include="slidebutton.h" />
+    <ClInclude Include="tools.h" />
+    <QtMoc Include="jsontoyaml.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\vcpkg.C.src.vcpkg.1.0.0\build\native\vcpkg.C.src.vcpkg.targets" Condition="Exists('packages\vcpkg.C.src.vcpkg.1.0.0\build\native\vcpkg.C.src.vcpkg.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\vcpkg.C.src.vcpkg.1.0.0\build\native\vcpkg.C.src.vcpkg.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\vcpkg.C.src.vcpkg.1.0.0\build\native\vcpkg.C.src.vcpkg.props'))" />
+    <Error Condition="!Exists('packages\vcpkg.C.src.vcpkg.1.0.0\build\native\vcpkg.C.src.vcpkg.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\vcpkg.C.src.vcpkg.1.0.0\build\native\vcpkg.C.src.vcpkg.targets'))" />
+  </Target>
+</Project>
