@@ -28,6 +28,7 @@ public:
 private slots:
     /**
 	 * @brief 根据objectName找到对应的widget并切换
+	 * 这里的name是widget的objectName
     */
     void showToolWidget(QString name);
 private:
