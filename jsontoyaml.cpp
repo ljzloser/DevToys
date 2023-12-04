@@ -139,5 +139,6 @@ void JsonToYaml::loadConnect()
 	connect(ui.expandButton, &QPushButton::clicked, [=]() 
 		{
 			ui.setGroupBox->setVisible(!ui.setGroupBox->isVisible());
+
 		});
 }
