@@ -12,6 +12,8 @@ int main(int argc, char *argv[])
 		QString styleSheet = QLatin1String(file.readAll());
 		a.setStyleSheet(styleSheet);
 	}
+
+
     DevToys w;
 	w.resize(800, 600);
     w.show();
