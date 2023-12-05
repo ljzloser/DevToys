@@ -29,9 +29,10 @@ void DevToys::loadUi()
 	this->convertBase64->setObjectName("Base64文本编码解码工具");
 	this->convertBase64Image->setObjectName("Base64图像编码解码工具");
 	this->jsonStringFormat->setObjectName("JSON字符串格式化工具");
-
+	this->xmlStringFormat->setObjectName("可扩展标记语言XML格式化工具");
 	QWidget* widget = new QWidget(this);
 	widget->setLayout(this->stackedLayout);
+
 	this->stackedLayout->setContentsMargins(0, 0, 0, 0);
 	this->stackedLayout->addWidget(this->listView);
 	this->stackedLayout->addWidget(this->label);
@@ -43,6 +44,7 @@ void DevToys::loadUi()
 	this->stackedLayout->addWidget(this->convertBase64);
 	this->stackedLayout->addWidget(this->convertBase64Image);
 	this->stackedLayout->addWidget(this->jsonStringFormat);
+	this->stackedLayout->addWidget(this->xmlStringFormat);
 
 
 	splitter->addWidget(this->navigator);

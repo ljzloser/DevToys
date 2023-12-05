@@ -122,6 +122,7 @@ QString Tools::formatJson(const Json::Value& jnode, int indent)
 	std::string output = Json::writeString(writer, jnode);
 	return QString::fromStdString(output);
 }
+
 QString Tools::formatYaml(const YAML::Node& ynode, int indent)
 {
 	YAML::Emitter out;
@@ -129,6 +130,34 @@ QString Tools::formatYaml(const YAML::Node& ynode, int indent)
 	out << ynode;
 	std::string str = out.c_str();
 	return QString::fromStdString(str);
+}
+
+bool Tools::formatXml(const QString& xmlString, int indent, QString& formattedString, QString& errorStr)
+{
+	QXmlStreamReader reader(xmlString);
+	QXmlStreamWriter writer(&formattedString);
+
+	// 设置自动格式化和缩进级别
+	writer.setAutoFormatting(indent > 0);
+	writer.setAutoFormattingIndent(indent);
+	Tools::showPopupMessage(QString::number(indent));
+	while (!reader.atEnd()) {
+		reader.readNext();
+
+		// 处理潜在的错误
+		if (reader.hasError()) {
+			// 处理错误，例如记录错误信息
+			errorStr = QString("parsing error: %1 in line:%2 col: %2").arg(reader.errorString()).arg(reader.lineNumber()).arg(reader.columnNumber());
+			// 根据应用需求选择性地处理错误
+			return false;
+		}
+
+		// 忽略空白字符，除非缩进大于0
+		if (indent > 0 || !reader.isWhitespace()) {
+			writer.writeCurrentToken(reader);
+		}
+	}
+	return true;
 }
 
 void Tools::setClipboard(QString text)
@@ -185,6 +214,7 @@ void Tools::showPopupMessage(QString content)
 		}
 	}
 }
+
 QString Tools::convertBase(const QString& number, int currentBase, int targetBase, bool formatOutput) {
 	// 将输入的字符串转换为十进制数字
 	bool ok;
@@ -259,21 +289,28 @@ QString Tools::htmlDecode(const QString& text)
 	textDocument.setHtml(text);
 	return textDocument.toPlainText();
 }
-QString Tools::urlEncode(const QString& plainText) {
+
+QString Tools::urlEncode(const QString& plainText)
+{
 	QUrl url;
 	url.setQuery(plainText);
 	return url.query(QUrl::FullyEncoded);
 }
 
-QString Tools::urlDecode(const QString& encodedText) {
+QString Tools::urlDecode(const QString& encodedText)
+{
 	return QUrl::fromPercentEncoding(encodedText.toUtf8());
 }
-QString Tools::Base64Encode(const QString& inputString) {
+
+QString Tools::Base64Encode(const QString& inputString)
+{
 	QByteArray raw = inputString.toUtf8();
 	return raw.toBase64();
 }
 
-QString Tools::Base64Decode(const QString& base64String) {
+QString Tools::Base64Decode(const QString& base64String)
+{
 	QByteArray encoded = QByteArray::fromBase64(base64String.toUtf8());
 	return QString::fromUtf8(encoded);
 }
+

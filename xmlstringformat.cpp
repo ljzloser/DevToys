@@ -1,30 +1,29 @@
-﻿#include "jsonstringformat.h"
-#include <qmessagebox.h>
+﻿#include "xmlstringformat.h"
 #include <QFileDialog>
+#include <qmessagebox.h>
 
-JsonStringFormat::JsonStringFormat(QWidget* parent)
+XmlStringFormat::XmlStringFormat(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
 	this->loadConnect();
-	QsciLexer* imporLexer = new QsciLexerJSON();
-	QsciLexer* imporLexer1 = new QsciLexerJSON();
+	QsciLexer* imporLexer = new QsciLexerXML();
+	QsciLexer* imporLexer1 = new QsciLexerXML();
 	ui.importWidget->setLexer(imporLexer);
 	ui.exportsWidget->setLexer(imporLexer1);
 }
 
-JsonStringFormat::~JsonStringFormat()
+XmlStringFormat::~XmlStringFormat()
 {}
-
-void JsonStringFormat::loadConnect()
+void XmlStringFormat::loadConnect()
 {
 
-	connect(ui.importWidget, &SciScintilla::textChanged, this, &JsonStringFormat::onImportWidgetTextChanged);
+	connect(ui.importWidget, &SciScintilla::textChanged, this, &XmlStringFormat::onImportWidgetTextChanged);
 	connect(ui.copyButton, &QPushButton::clicked, [=]() {Tools::setClipboard(ui.exportsWidget->text()); });
 	connect(ui.ClearButton, &QPushButton::clicked, ui.importWidget, &QsciScintilla::clear);
 	connect(ui.pasteButton, &QPushButton::clicked, [=]() {ui.importWidget->setText(Tools::getClipboard()); });
 	connect(ui.expandButton, &QPushButton::clicked, [=]() {ui.setGroupBox->setVisible(!ui.setGroupBox->isVisible()); });
-	connect(ui.indentComboBox, &QComboBox::currentIndexChanged, this, &JsonStringFormat::onImportWidgetTextChanged);
+	connect(ui.indentComboBox, &QComboBox::currentIndexChanged, this, &XmlStringFormat::onImportWidgetTextChanged);
 	connect(ui.OpenFileButton, &QPushButton::clicked, [=]()
 		{
 			QString fileName = QFileDialog::getOpenFileName(this, tr("选择文件"), ".");
@@ -44,35 +43,34 @@ void JsonStringFormat::loadConnect()
 }
 
 
-void JsonStringFormat::onImportWidgetTextChanged()
+void XmlStringFormat::onImportWidgetTextChanged()
 {
-	Json::Value json;
+	QString errorString = "";
 	QString text = ui.importWidget->text();
+	QString formatString = "";
 	int indent = 0;
-
+	switch (ui.indentComboBox->currentIndex())
+	{
+	case 0:
+		indent = 4;
+		break;
+	case 1:
+		indent = 2;
+		break;
+	default:
+		indent = 0;
+		break;
+	}
 	if (!text.isEmpty())
 	{
-		Json::Reader reader;
-		reader.parse(text.toStdString(), json);
-		if (!reader.getFormattedErrorMessages().empty())
+		if (Tools::formatXml(text,indent, formatString,errorString))
 		{
-			ui.exportsWidget->setText(QString::fromStdString(reader.getFormattedErrorMessages()));
+			ui.exportsWidget->setText(formatString);
 		}
 		else
 		{
-			switch (ui.indentComboBox->currentIndex())
-			{
-			case 0:
-				indent = 4;
-				break;
-			case 1:
-				indent = 2;
-				break;
-			default:
-				indent = 0;
-				break;
-			}
-			ui.exportsWidget->setText(Tools::formatJson(json, indent));
+
+			ui.exportsWidget->setText(errorString);
 		}
 	}
 	else

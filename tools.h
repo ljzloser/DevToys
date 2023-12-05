@@ -10,6 +10,8 @@
 #include "qrect.h"
 #include <qcursor.h>
 #include <qregularexpression.h>
+#include <qdom.h>
+#include <qxmlstream.h>
 
 /**
  * @brief 全局需要的静态函数的工具类
@@ -52,6 +54,16 @@ public:
 	*/
 	static QString formatYaml(const YAML::Node& ynode, int indent = 4);
 	/**
+	 * @brief 格式化XML
+	 * @param xmlString 需要格式化的字符串
+	 * @param indent 缩进空格数
+	 * @param formattedString 格式化后的字符串
+	 * @param errorStr 错误信息
+	 * @param errorLine 错误行
+	 * @return
+	*/
+	static bool formatXml(const QString& xmlString, int indent, QString& formattedString, QString& errorStr);
+	/**
 	 * @brief 向剪切板设置文本
 	 * @param text
 	*/
@@ -84,7 +96,6 @@ public:
 	 * @param formatOutput 是否格式化输出
 	*/
 	static QString convertBase(const QString& number, int currentBase, int targetBase,bool formatOutput);
-
 	/**
 	 * @brief 编码HTML
 	 * @param text 

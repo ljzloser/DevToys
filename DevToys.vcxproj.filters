@@ -94,6 +94,9 @@
     <ClCompile Include="jsonstringformat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="xmlstringformat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -139,6 +142,9 @@
     <QtMoc Include="jsonstringformat.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="xmlstringformat.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="iconlabel.ui">
@@ -166,6 +172,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="jsonstringformat.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="xmlstringformat.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

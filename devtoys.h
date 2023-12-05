@@ -15,7 +15,7 @@
 #include "convertbase64.h"
 #include "convertbase64image.h"
 #include "jsonstringformat.h"
-
+#include "xmlstringformat.h"
 
 
 class DevToys : public QWidget
@@ -36,6 +36,7 @@ private:
     void loadUi();
 
     void loadConnect();
+
     IconLabelListView* listView = new IconLabelListView();
     NavigatorView* navigator = new NavigatorView();
     QSplitter* splitter = new QSplitter();
@@ -51,4 +52,5 @@ private:
 	ConvertBase64* convertBase64 = new ConvertBase64();
 	ConvertBase64Image* convertBase64Image = new ConvertBase64Image();
 	JsonStringFormat* jsonStringFormat = new JsonStringFormat();
+    XmlStringFormat* xmlStringFormat = new XmlStringFormat();
 };

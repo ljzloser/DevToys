@@ -40,14 +40,14 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>6.3.0_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;widgets;xml</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
     <QtPlugin>false</QtPlugin>
     <QtToolsDesignTime>false</QtToolsDesignTime>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>6.3.0_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;widgets;xml</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
     <QtPlugin>false</QtPlugin>
     <QtToolsDesignTime>false</QtToolsDesignTime>
@@ -172,6 +172,7 @@
     <ClCompile Include="slidebutton.cpp" />
     <ClCompile Include="timestamp.cpp" />
     <ClCompile Include="tools.cpp" />
+    <ClCompile Include="xmlstringformat.cpp" />
     <None Include="packages.config" />
     <QtRcc Include="dark\darkstyle.qrc" />
     <QtRcc Include="devtoys.qrc" />
@@ -199,12 +200,14 @@
     <QtUic Include="jsonstringformat.ui" />
     <QtUic Include="JsonToYaml.ui" />
     <QtUic Include="timestamp.ui" />
+    <QtUic Include="xmlstringformat.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="iconlabellistview.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constants.h" />
+    <QtMoc Include="xmlstringformat.h" />
     <QtMoc Include="popupmessage.h" />
     <QtMoc Include="convertbinary.h" />
     <QtMoc Include="converthtml.h" />
