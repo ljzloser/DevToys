@@ -97,6 +97,9 @@
     <ClCompile Include="xmlstringformat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="animationopacityeffect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -143,6 +146,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="xmlstringformat.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="animationopacityeffect.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

@@ -34,7 +34,6 @@ private slots:
     void showToolWidget(QString name);
 private:
     void loadUi();
-
     void loadConnect();
 
     IconLabelListView* listView = new IconLabelListView();

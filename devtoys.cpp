@@ -1,5 +1,6 @@
 ﻿#include "devtoys.h"
 #include "qtimezone.h"
+
 DevToys::DevToys(QWidget* parent)
 	: QWidget(parent)
 {
@@ -21,6 +22,13 @@ DevToys::~DevToys()
 
 void DevToys::loadUi()
 {
+	this->setWindowOpacity(0.0);
+	QPropertyAnimation* animation = new QPropertyAnimation(this, "windowOpacity");
+	animation->setDuration(500);
+	animation->setStartValue(0.0);
+	animation->setEndValue(1.0);
+	animation->start(QPropertyAnimation::DeleteWhenStopped);
+
 	this->jsonToYaml->setObjectName("JSON-YAML数据类型互转工具");
 	this->timestamp->setObjectName("Unix时间戳转换工具");
 	this->convertBinary->setObjectName("进制转换工具");
@@ -52,6 +60,14 @@ void DevToys::loadUi()
 	QVBoxLayout* layout = new QVBoxLayout();
 	layout->addWidget(this->splitter);
 	this->setLayout(layout);
+
+	for (int i = 0; i < this->stackedLayout->count(); i++)
+	{
+		QWidget* layoutWidget = this->stackedLayout->widget(i);
+		AnimationOpacityEffect* opacityEffect = new AnimationOpacityEffect(this);
+		layoutWidget->setGraphicsEffect(opacityEffect);
+	}
+
 }
 
 void DevToys::showToolWidget(QString name)
@@ -60,7 +76,11 @@ void DevToys::showToolWidget(QString name)
 	QWidget* widget = this->findChild<QWidget*>(name);
 	if (widget)
 	{
+		// 从widget的graphicsEffect中取出GraphicsOpacityEffect并通过static_cast转换为AnimationOpacityEffect
+		AnimationOpacityEffect* opacityEffect = static_cast<AnimationOpacityEffect*>(widget->graphicsEffect());
+		opacityEffect->setOpacity(0.0);
 		this->stackedLayout->setCurrentWidget(widget);
+		opacityEffect->inAnimationStart();
 	}
 	else
 	{
@@ -73,8 +93,11 @@ void DevToys::loadConnect()
 {
 	connect(navigator, &NavigatorView::parentItemClicked, [=](QStringList names)
 		{
+			AnimationOpacityEffect* opacityEffect = static_cast<AnimationOpacityEffect*>(this->listView->graphicsEffect());
+			opacityEffect->setOpacity(0.0);
 			this->listView->setIconLabels(names);
 			this->stackedLayout->setCurrentIndex(0);
+			opacityEffect->inAnimationStart();
 		});
 	connect(this->navigator, &NavigatorView::itemClicked, this, &DevToys::showToolWidget);
 	connect(this->listView, &IconLabelListView::itemClicked, this, &DevToys::showToolWidget);

@@ -153,6 +153,10 @@ void ConvertBase64Image::loadConnect()
 			{
 				Tools::setClipboardPixmap(this->pixmap);
 			}
+			else
+			{
+				Tools::showPopupMessage("图片为空");
+			}
 		});
 	connect(ui.pasteImageButton, &QPushButton::clicked, this, [=]()
 		{

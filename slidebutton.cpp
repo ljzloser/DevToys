@@ -30,7 +30,6 @@ SlideButton::SlideButton(QWidget *parent, QVector<QString> names)
 
 
 	this->animation->setDuration(100);
-	connect(this->animation, &QPropertyAnimation::valueChanged, this, &SlideButton::updatePosition);
 	connect(this->animation, &QPropertyAnimation::finished, [=]()
 		{
 			if (this->isChecked())
@@ -43,16 +42,16 @@ SlideButton::SlideButton(QWidget *parent, QVector<QString> names)
 				this->animation->setStartValue(left);
 				this->animation->setEndValue(right);
 			}
-			this->position = this->animation->startValue().toPointF();
+			this->m_position = this->animation->startValue().toPointF();
 		});	
 }
 
 SlideButton::~SlideButton()
 {}
 
-void SlideButton::updatePosition()
+void SlideButton::setPosition(QPointF newValue)
 {
-	this->position = this->animation->currentValue().toPointF();
+	this->m_position = newValue;
 	update();
 }
 
@@ -109,7 +108,7 @@ void SlideButton::paintEvent(QPaintEvent* event)
 
 
 	double radius = qMin((this->button->width() - 5) / 2.0 - 5, (this->button->height() - 5) / 2.0);
-	QPointF point = this->button->mapToParent(this->position);
+	QPointF point = this->button->mapToParent(this->m_position);
 
 
 
@@ -143,5 +142,5 @@ void SlideButton::resizeEvent(QResizeEvent* event)
 		this->animation->setStartValue(left);
 		this->animation->setEndValue(right);
 	}
-	this->position = this->animation->startValue().toPointF();
+	this->m_position = this->animation->startValue().toPointF();
 }

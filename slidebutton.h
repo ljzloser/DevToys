@@ -16,7 +16,7 @@
 class SlideButton  : public QWidget
 {
 	Q_OBJECT
-
+	Q_PROPERTY(QPointF position READ position WRITE setPosition)
 public:
 	SlideButton(QWidget *parent = nullptr,QVector<QString> names = { "关闭","打开" });
 	~SlideButton();
@@ -61,7 +61,9 @@ private slots:
 	/**
 	 * @brief 更新位置
 	*/
-	void updatePosition();
+	void setPosition(QPointF newValue);
+	QPointF position() { return m_position; }
+
 
 
 private:
@@ -82,8 +84,8 @@ private:
 	bool m_isHover = false;
 	QLabel* NameLabel = new QLabel();
 	QWidget* button = new QWidget();
+	QPointF m_position;
 	QPropertyAnimation* animation = new QPropertyAnimation(this, "position");
-	QPointF position;
 	QPointF left;
 	QPointF right;
 	QVector<QString> m_names = {"关闭","打开"};

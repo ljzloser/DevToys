@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
 
     DevToys w;
-	w.resize(800, 600);
+	w.resize(1280, 800);
     w.show();
     return a.exec();
 }
