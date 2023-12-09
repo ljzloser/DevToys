@@ -16,7 +16,8 @@
 #include "convertbase64image.h"
 #include "jsonstringformat.h"
 #include "xmlstringformat.h"
-
+#include "passwordgeneration.h"
+#include "stringhashgeneration.h"
 
 class DevToys : public QWidget
 {
@@ -52,4 +53,7 @@ private:
 	ConvertBase64Image* convertBase64Image = new ConvertBase64Image();
 	JsonStringFormat* jsonStringFormat = new JsonStringFormat();
     XmlStringFormat* xmlStringFormat = new XmlStringFormat();
+    StringHashGeneration* stringHashGeneration = new StringHashGeneration();
+    PasswordGeneration* passwordGeneration = new PasswordGeneration();
+
 };

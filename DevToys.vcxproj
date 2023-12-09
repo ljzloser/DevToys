@@ -168,9 +168,12 @@
     <ClCompile Include="jsonstringformat.cpp" />
     <ClCompile Include="jsontoyaml.cpp" />
     <ClCompile Include="navigatorview.cpp" />
+    <ClCompile Include="passwordgeneration.cpp" />
     <ClCompile Include="popupmessage.cpp" />
+    <ClCompile Include="randomstringtask.cpp" />
     <ClCompile Include="sciscintilla.cpp" />
     <ClCompile Include="slidebutton.cpp" />
+    <ClCompile Include="stringhashgeneration.cpp" />
     <ClCompile Include="timestamp.cpp" />
     <ClCompile Include="tools.cpp" />
     <ClCompile Include="xmlstringformat.cpp" />
@@ -200,6 +203,8 @@
     <QtUic Include="iconlabel.ui" />
     <QtUic Include="jsonstringformat.ui" />
     <QtUic Include="JsonToYaml.ui" />
+    <QtUic Include="passwordgeneration.ui" />
+    <QtUic Include="stringhashgeneration.ui" />
     <QtUic Include="timestamp.ui" />
     <QtUic Include="xmlstringformat.ui" />
   </ItemGroup>
@@ -217,9 +222,12 @@
     <QtMoc Include="convertbase64.h" />
     <QtMoc Include="convertbase64image.h" />
     <QtMoc Include="jsonstringformat.h" />
+    <QtMoc Include="passwordgeneration.h" />
+    <QtMoc Include="randomstringtask.h" />
     <ClInclude Include="sciscintilla.h" />
     <QtMoc Include="timestamp.h" />
     <QtMoc Include="slidebutton.h" />
+    <QtMoc Include="stringhashgeneration.h" />
     <ClInclude Include="tools.h" />
     <QtMoc Include="jsontoyaml.h" />
   </ItemGroup>

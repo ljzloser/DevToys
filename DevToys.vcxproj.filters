@@ -100,6 +100,15 @@
     <ClCompile Include="animationopacityeffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="passwordgeneration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="randomstringtask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stringhashgeneration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -151,6 +160,15 @@
     <QtMoc Include="animationopacityeffect.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="passwordgeneration.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="randomstringtask.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="stringhashgeneration.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="iconlabel.ui">
@@ -181,6 +199,12 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="xmlstringformat.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="passwordgeneration.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="stringhashgeneration.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

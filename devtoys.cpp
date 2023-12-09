@@ -38,6 +38,9 @@ void DevToys::loadUi()
 	this->convertBase64Image->setObjectName("Base64图像编码解码工具");
 	this->jsonStringFormat->setObjectName("JSON字符串格式化工具");
 	this->xmlStringFormat->setObjectName("可扩展标记语言XML格式化工具");
+	this->stringHashGeneration->setObjectName("哈希散列生成工具");
+	this->passwordGeneration->setObjectName("密码生成器");
+
 	QWidget* widget = new QWidget(this);
 	widget->setLayout(this->stackedLayout);
 
@@ -53,6 +56,8 @@ void DevToys::loadUi()
 	this->stackedLayout->addWidget(this->convertBase64Image);
 	this->stackedLayout->addWidget(this->jsonStringFormat);
 	this->stackedLayout->addWidget(this->xmlStringFormat);
+	this->stackedLayout->addWidget(this->stringHashGeneration);
+	this->stackedLayout->addWidget(this->passwordGeneration);
 
 
 	splitter->addWidget(this->navigator);
