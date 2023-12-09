@@ -109,6 +109,9 @@
     <ClCompile Include="stringhashgeneration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="uuidgeneration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -169,6 +172,9 @@
     <QtMoc Include="stringhashgeneration.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="uuidgeneration.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="iconlabel.ui">
@@ -205,6 +211,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="stringhashgeneration.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="uuidgeneration.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

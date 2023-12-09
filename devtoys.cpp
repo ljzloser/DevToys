@@ -40,6 +40,7 @@ void DevToys::loadUi()
 	this->xmlStringFormat->setObjectName("可扩展标记语言XML格式化工具");
 	this->stringHashGeneration->setObjectName("哈希散列生成工具");
 	this->passwordGeneration->setObjectName("密码生成器");
+	this->uuidGeneration->setObjectName("通用唯一识别码生成工具");
 
 	QWidget* widget = new QWidget(this);
 	widget->setLayout(this->stackedLayout);
@@ -58,6 +59,7 @@ void DevToys::loadUi()
 	this->stackedLayout->addWidget(this->xmlStringFormat);
 	this->stackedLayout->addWidget(this->stringHashGeneration);
 	this->stackedLayout->addWidget(this->passwordGeneration);
+	this->stackedLayout->addWidget(this->uuidGeneration);
 
 
 	splitter->addWidget(this->navigator);

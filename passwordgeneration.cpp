@@ -40,7 +40,6 @@ void PasswordGeneration::onSetButtonClicked()
 void PasswordGeneration::onGenerateButtonClicked()
 {
 	QList<int> type;
-	ui.exportsTextEdit->clear();
 	int totalLength;
 	try
 	{
@@ -95,7 +94,7 @@ void PasswordGeneration::onGenerateButtonClicked()
 	ui.exportsTextEdit->blockSignals(true);
 	for (int i = 0; i < count; i++)
 	{
-		ui.exportsTextEdit->appendPlainText(text.mid( i * ui.lenSpinBox->value(), ui.lenSpinBox->value()));
+		ui.exportsTextEdit->appendPlainText(text.mid(static_cast<qsizetype>(i) * ui.lenSpinBox->value(), ui.lenSpinBox->value()));
 	}
 	ui.exportsTextEdit->blockSignals(false);
 	ui.exportsTextEdit->setUpdatesEnabled(true);

@@ -29,5 +29,6 @@
         <file>icon/notation.png</file>
         <file>icon/number.png</file>
         <file>icon/type.png</file>
+        <file>icon/-.png</file>
     </qresource>
 </RCC>

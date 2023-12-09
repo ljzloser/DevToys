@@ -176,6 +176,7 @@
     <ClCompile Include="stringhashgeneration.cpp" />
     <ClCompile Include="timestamp.cpp" />
     <ClCompile Include="tools.cpp" />
+    <ClCompile Include="uuidgeneration.cpp" />
     <ClCompile Include="xmlstringformat.cpp" />
     <None Include="packages.config" />
     <QtRcc Include="dark\darkstyle.qrc" />
@@ -206,12 +207,14 @@
     <QtUic Include="passwordgeneration.ui" />
     <QtUic Include="stringhashgeneration.ui" />
     <QtUic Include="timestamp.ui" />
+    <QtUic Include="uuidgeneration.ui" />
     <QtUic Include="xmlstringformat.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="iconlabellistview.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="uuidgeneration.h" />
     <QtMoc Include="animationopacityeffect.h" />
     <ClInclude Include="constants.h" />
     <QtMoc Include="xmlstringformat.h" />

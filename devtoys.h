@@ -18,6 +18,7 @@
 #include "xmlstringformat.h"
 #include "passwordgeneration.h"
 #include "stringhashgeneration.h"
+#include "uuidgeneration.h"
 
 class DevToys : public QWidget
 {
@@ -55,5 +56,6 @@ private:
     XmlStringFormat* xmlStringFormat = new XmlStringFormat();
     StringHashGeneration* stringHashGeneration = new StringHashGeneration();
     PasswordGeneration* passwordGeneration = new PasswordGeneration();
+	UuidGeneration* uuidGeneration = new UuidGeneration();
 
 };

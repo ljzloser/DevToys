@@ -31,7 +31,7 @@ const std::map<QString, QString> descriptionsMap{
 // Icon资源目录
 const QString ICONDIR = ":/DevToys/icon/";
 const QList<QString> typeLists = { "png", "jpeg", "jpg", "bmp", "gif","x-icon","webp","svg+xml", };
-const std::map<int, QString>RandomStringCharMap{
+const std::map<int, QString>randomStringCharMap{
 	{0,"abcdefghijklmnopqrstuvwxyz"},
 	{1,"ABCDEFGHIJKLMNOPQRSTUVWXYZ"},
 	{2,"0123456789"},
