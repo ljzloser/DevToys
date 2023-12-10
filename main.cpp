@@ -1,6 +1,7 @@
 ﻿#include "devtoys.h"
 #include <QtWidgets/QApplication>
 #include <qfile.h>
+#include <qtranslator.h>
 
 int main(int argc, char *argv[])
 {
@@ -13,7 +14,10 @@ int main(int argc, char *argv[])
 		QString styleSheet = QLatin1String(file.readAll());
 		a.setStyleSheet(styleSheet);
 	}
-
+	QTranslator translator;
+	if (translator.load(QApplication::applicationDirPath() + "\\translations\\qt_zh_CN.qm")) {
+		a.installTranslator(&translator);
+	}
 
     DevToys w;
 	w.resize(1280, 800);
