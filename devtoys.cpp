@@ -22,12 +22,7 @@ DevToys::~DevToys()
 
 void DevToys::loadUi()
 {
-	this->setWindowOpacity(0.0);
-	QPropertyAnimation* animation = new QPropertyAnimation(this, "windowOpacity");
-	animation->setDuration(500);
-	animation->setStartValue(0.0);
-	animation->setEndValue(1.0);
-	animation->start(QPropertyAnimation::DeleteWhenStopped);
+
 
 	this->jsonToYaml->setObjectName("JSON-YAML数据类型互转工具");
 	this->timestamp->setObjectName("Unix时间戳转换工具");
@@ -71,7 +66,7 @@ void DevToys::loadUi()
 	for (int i = 0; i < this->stackedLayout->count(); i++)
 	{
 		QWidget* layoutWidget = this->stackedLayout->widget(i);
-		AnimationOpacityEffect* opacityEffect = new AnimationOpacityEffect(this);
+		AnimationOpacityEffect* opacityEffect = new AnimationOpacityEffect(layoutWidget);
 		layoutWidget->setGraphicsEffect(opacityEffect);
 	}
 

@@ -167,9 +167,12 @@
     <ClCompile Include="iconlabellistview.cpp" />
     <ClCompile Include="jsonstringformat.cpp" />
     <ClCompile Include="jsontoyaml.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="navigatorview.cpp" />
     <ClCompile Include="passwordgeneration.cpp" />
     <ClCompile Include="popupmessage.cpp" />
+    <ClCompile Include="qcustommainwindow.cpp" />
+    <ClCompile Include="qcustomtitlebar.cpp" />
     <ClCompile Include="randomstringtask.cpp" />
     <ClCompile Include="sciscintilla.cpp" />
     <ClCompile Include="slidebutton.cpp" />
@@ -227,6 +230,9 @@
     <QtMoc Include="jsonstringformat.h" />
     <QtMoc Include="passwordgeneration.h" />
     <QtMoc Include="randomstringtask.h" />
+    <QtMoc Include="qcustommainwindow.h" />
+    <QtMoc Include="qcustomtitlebar.h" />
+    <QtMoc Include="MainWindow.h" />
     <ClInclude Include="sciscintilla.h" />
     <QtMoc Include="timestamp.h" />
     <QtMoc Include="slidebutton.h" />

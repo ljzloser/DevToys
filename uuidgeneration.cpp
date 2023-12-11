@@ -5,6 +5,8 @@ UuidGeneration::UuidGeneration(QWidget *parent)
 {
 	ui.setupUi(this);
 	this->loadConnect();
+	ui.upperButton->setDefaultChecked(true);
+	ui.hyphenButton->setDefaultChecked(true);
 }
 
 UuidGeneration::~UuidGeneration()

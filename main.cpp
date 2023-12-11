@@ -2,6 +2,7 @@
 #include <QtWidgets/QApplication>
 #include <qfile.h>
 #include <qtranslator.h>
+#include "MainWindow.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,8 +20,13 @@ int main(int argc, char *argv[])
 		a.installTranslator(&translator);
 	}
 
-    DevToys w;
-	w.resize(1280, 800);
+	MainWindow w;
+	// 获取当前屏幕大小
+	QRect screenRect = QGuiApplication::primaryScreen()->geometry();
+	QRect rect(0, 0, 1280, 800);
+	rect.moveCenter(screenRect.center());
+	w.setGeometry(rect);
+
     w.show();
     return a.exec();
 }

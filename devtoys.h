@@ -4,7 +4,8 @@
 #include <qsplitter.h>
 #include <qstackedlayout.h>
 #include <QLabel>
-
+#include "qcustommainwindow.h"
+#include "qcustomtitlebar.h"
 #include "iconlabellistview.h"
 #include "navigatorview.h"
 #include "jsontoyaml.h"
