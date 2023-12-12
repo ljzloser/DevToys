@@ -3,9 +3,11 @@
 #include <qfile.h>
 #include <qtranslator.h>
 #include "MainWindow.h"
+#include <cstdlib>
 
 int main(int argc, char *argv[])
 {
+	_putenv_s("QT_FONT_DPI", "96");
     QApplication a(argc, argv);
     // 加载样式表文件
 	QFile file(":/qdarkstyle/dark/darkstyle.qss");
@@ -19,7 +21,7 @@ int main(int argc, char *argv[])
 	if (translator.load(QApplication::applicationDirPath() + "\\translations\\qt_zh_CN.qm")) {
 		a.installTranslator(&translator);
 	}
-
+	QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // 启用高DPI缩放
 	MainWindow w;
 	// 获取当前屏幕大小
 	QRect screenRect = QGuiApplication::primaryScreen()->geometry();
