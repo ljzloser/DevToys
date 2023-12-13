@@ -7,16 +7,18 @@
 MainWindow::MainWindow(QWidget* parent): QCustomMainWindow(parent)
 {
     QCustomTitleBar* titleBar = new QCustomTitleBar();
+    DevToys* devtoys = new DevToys();
     titleBar->setTitleText("QDevToys");
     titleBar->setTitleIcon(QIcon(":/DevToys/icon/生成类型工具.png"));
     QObject::connect(titleBar, &QCustomTitleBar::closeButtonClicked, this, &MainWindow::close);
     QObject::connect(titleBar, &QCustomTitleBar::maxButtonClicked, this, &MainWindow::showCustomNormal);
     QObject::connect(titleBar, &QCustomTitleBar::minButtonClicked, this, &MainWindow::showMinimized);
     QObject::connect(this,&MainWindow::windowStateChanged,titleBar,&QCustomTitleBar::updateIcon);
+    QObject::connect(titleBar->comboBox, &QComboBox::currentTextChanged, devtoys, &DevToys::onFiterComboBoxTextChanged);
 
     this->setTitleBar(titleBar);
 
-    DevToys* devtoys = new DevToys();   
+
     this->setMainWidget(devtoys);
 
     this->setBorderColor(Qt::GlobalColor::lightGray,2);

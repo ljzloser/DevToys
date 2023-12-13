@@ -1,6 +1,8 @@
 ﻿#include "qcustomtitlebar.h"
 #include <QLineEdit>
 #include <qpainterpath.h>
+#include "filtercombobox.h"
+#include "constants.h"
 
 QCustomTitleBar::QCustomTitleBar(QWidget* parent) : QWidget(parent)
 {
@@ -11,17 +13,14 @@ QCustomTitleBar::QCustomTitleBar(QWidget* parent) : QWidget(parent)
 	/*自动缩放的占位符*/
 	QSpacerItem* spacerItem = new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-	QLineEdit* lineEdit = new QLineEdit(this);
-	lineEdit->setPlaceholderText("搜索");
-	//添加一个action
-	QAction* action = new QAction("搜索", this);
-	//设置图标
-	// 获取系统回车键图标
-	QPixmap pixmap = style()->standardPixmap(QStyle::SP_DialogOkButton);
-	// 设置图标
-	action->setIcon(QIcon(pixmap));
-	//加入到lineEdit中
-	lineEdit->addAction(action, QLineEdit::TrailingPosition);
+
+	QStringList list;
+	for (std::pair<const QString,QString> var: descriptionsMap)
+	{
+		list.append(var.first);
+	}
+	comboBox->setItems(list);
+
 	//再添加一个占位符，使得搜索框居中
 	QSpacerItem* spacerItem2 = new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -62,7 +61,7 @@ QCustomTitleBar::QCustomTitleBar(QWidget* parent) : QWidget(parent)
 
 
 	this->layout->addSpacerItem(spacerItem);
-	this->layout->addWidget(lineEdit);
+	this->layout->addWidget(comboBox);
 	this->layout->addSpacerItem(spacerItem2);
 	this->layout->addWidget(this->minButton);
 	this->layout->addWidget(this->maxButton);

@@ -28,6 +28,8 @@ class DevToys : public QWidget
 public:
     DevToys(QWidget *parent = nullptr);
     ~DevToys();
+public slots:
+	void onFiterComboBoxTextChanged(QString text);
 
 private slots:
     /**

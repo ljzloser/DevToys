@@ -10,6 +10,7 @@
 #include <QCursor>
 #include <QMouseEvent>
 #include <qpainter.h>
+#include "filtercombobox.h"
 
 class QCustomTitleBar : public QWidget
 {
@@ -24,6 +25,7 @@ public:
 		RestoreButtonIcon,//还原按钮图标
 		CloseButtonIcon//关闭按钮图标
 	};
+	FilterComboBox* comboBox = new FilterComboBox(this);
 	QCustomTitleBar(QWidget* parent = nullptr);
 	~QCustomTitleBar();
 	//设置标题栏图标

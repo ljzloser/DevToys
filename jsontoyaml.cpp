@@ -28,7 +28,7 @@ void JsonToYaml::onIndentComboBoxCurrentIndexChanged(int index)
 			YAML::Node node = YAML::Load(text.toStdString());
 			text = Tools::formatYaml(node, index * 2 + 2);
 		}
-		catch (const YAML::ParserException& e)
+		catch (...)
 		{
 
 		}
@@ -87,6 +87,10 @@ void JsonToYaml::onImportChanged()
 		catch (const YAML::ParserException& e)
 		{
 			ui.exportsWidget->setText(e.what());
+		}
+		catch (...)
+		{
+
 		}
 	}
 }

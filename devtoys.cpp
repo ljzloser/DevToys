@@ -1,5 +1,6 @@
 ﻿#include "devtoys.h"
 #include "qtimezone.h"
+#include <QSortFilterProxyModel>
 
 DevToys::DevToys(QWidget* parent)
 	: QWidget(parent)
@@ -18,6 +19,44 @@ DevToys::~DevToys()
 		QDir(Dir).removeRecursively();
 	}
 
+}
+
+void DevToys::onFiterComboBoxTextChanged(QString text)
+{
+	QTreeView* treeView = this->navigator->getTree();
+	QStandardItemModel* model = static_cast<QStandardItemModel*>(treeView->model());
+	bool isFind = false;
+	// 遍历所有顶级项
+	for (int row = 0; row < model->rowCount(); ++row)
+	{
+		QStandardItem* parentItem = model->item(row);
+
+		// 遍历第二级项
+		for (int childRow = 0; childRow < parentItem->rowCount(); ++childRow)
+		{
+			QStandardItem* childItem = parentItem->child(childRow);
+
+			// 检查是否匹配
+			if (childItem->text() == text)
+			{
+				// 构建 QModelIndex
+				QModelIndex indexToSelect = model->index(childRow, 0, parentItem->index());
+
+				// 获取选择模型
+				QItemSelectionModel* selectionModel = treeView->selectionModel();
+				// 清除所有选中的项
+				selectionModel->clearSelection();
+				// 选中匹配的项
+				selectionModel->select(indexToSelect, QItemSelectionModel::Select | QItemSelectionModel::Rows);
+
+				// 滚动到选中的项
+				treeView->scrollTo(indexToSelect);
+				
+				treeView->clicked(indexToSelect);
+				return;
+			}
+		}
+	}
 }
 
 void DevToys::loadUi()

@@ -140,7 +140,7 @@
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -163,6 +163,7 @@
     <ClCompile Include="convertbinary.cpp" />
     <ClCompile Include="converthtml.cpp" />
     <ClCompile Include="converturl.cpp" />
+    <ClCompile Include="filtercombobox.cpp" />
     <ClCompile Include="iconlabel.cpp" />
     <ClCompile Include="iconlabellistview.cpp" />
     <ClCompile Include="jsonstringformat.cpp" />
@@ -233,6 +234,7 @@
     <QtMoc Include="qcustommainwindow.h" />
     <QtMoc Include="qcustomtitlebar.h" />
     <QtMoc Include="MainWindow.h" />
+    <QtMoc Include="filtercombobox.h" />
     <ClInclude Include="sciscintilla.h" />
     <QtMoc Include="timestamp.h" />
     <QtMoc Include="slidebutton.h" />

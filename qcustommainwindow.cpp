@@ -68,13 +68,11 @@ void QCustomMainWindow::showCustomNormal()
 {
 	if (this->isMaximized() == false)
 	{
-		this->customNormal = new QRect(this->geometry()); //保存当前位置
 		this->showMaximized(); //最大化
 	}
 	else
 	{
 		this->showNormal();
-		this->setGeometry(*this->customNormal); //还原
 	}
 	//emit this->windowStateChanged();
 }

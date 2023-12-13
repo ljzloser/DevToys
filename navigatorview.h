@@ -64,6 +64,8 @@ public:
 	*/
 	int ItemWidth() const;
 
+	QTreeView* getTree() const { return treeView; }
+
 private slots:
 	/**
 	 * @brief 单击树Item槽函数
