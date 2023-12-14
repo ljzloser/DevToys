@@ -20,6 +20,7 @@
 #include "passwordgeneration.h"
 #include "stringhashgeneration.h"
 #include "uuidgeneration.h"
+#include "settingwidget.h"
 
 class DevToys : public QWidget
 {
@@ -37,9 +38,11 @@ private slots:
 	 * 这里的name是widget的objectName
     */
     void showToolWidget(QString name);
+    void onParentItemClicked(QStringList& names);
 private:
     void loadUi();
     void loadConnect();
+
 
     IconLabelListView* listView = new IconLabelListView();
     NavigatorView* navigator = new NavigatorView();
@@ -60,5 +63,5 @@ private:
     StringHashGeneration* stringHashGeneration = new StringHashGeneration();
     PasswordGeneration* passwordGeneration = new PasswordGeneration();
 	UuidGeneration* uuidGeneration = new UuidGeneration();
-
+	SettingWidget* settingWidget = new SettingWidget();
 };

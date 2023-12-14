@@ -31,5 +31,6 @@
         <file>icon/type.png</file>
         <file>icon/-.png</file>
         <file>ico.ico</file>
+        <file>icon/set.png</file>
     </qresource>
 </RCC>

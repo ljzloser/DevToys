@@ -7,6 +7,7 @@ DevToys::DevToys(QWidget* parent)
 {
 	this->loadUi();
 	this->loadConnect();
+	this->navigator->getAllToolsButton()->click();
 }
 
 DevToys::~DevToys()
@@ -51,7 +52,6 @@ void DevToys::onFiterComboBoxTextChanged(QString text)
 
 				// 滚动到选中的项
 				treeView->scrollTo(indexToSelect);
-				
 				treeView->clicked(indexToSelect);
 				return;
 			}
@@ -75,7 +75,7 @@ void DevToys::loadUi()
 	this->stringHashGeneration->setObjectName("哈希散列生成工具");
 	this->passwordGeneration->setObjectName("密码生成器");
 	this->uuidGeneration->setObjectName("通用唯一识别码生成工具");
-
+	this->settingWidget->setObjectName("设置");
 	QWidget* widget = new QWidget(this);
 	widget->setLayout(this->stackedLayout);
 
@@ -95,6 +95,8 @@ void DevToys::loadUi()
 	this->stackedLayout->addWidget(this->passwordGeneration);
 	this->stackedLayout->addWidget(this->uuidGeneration);
 
+
+	this->stackedLayout->addWidget(this->settingWidget);
 
 	splitter->addWidget(this->navigator);
 	splitter->addWidget(widget);
@@ -121,6 +123,9 @@ void DevToys::showToolWidget(QString name)
 		AnimationOpacityEffect* opacityEffect = static_cast<AnimationOpacityEffect*>(widget->graphicsEffect());
 		opacityEffect->setOpacity(0.0);
 		this->stackedLayout->setCurrentWidget(widget);
+		// 判断sender 是不是NavigatorView
+		if (!qobject_cast<NavigatorView*>(sender()))
+			this->onFiterComboBoxTextChanged(widget->objectName());
 		opacityEffect->inAnimationStart();
 	}
 	else
@@ -132,14 +137,25 @@ void DevToys::showToolWidget(QString name)
 
 void DevToys::loadConnect()
 {
-	connect(navigator, &NavigatorView::parentItemClicked, [=](QStringList names)
-		{
-			AnimationOpacityEffect* opacityEffect = static_cast<AnimationOpacityEffect*>(this->listView->graphicsEffect());
-			opacityEffect->setOpacity(0.0);
-			this->listView->setIconLabels(names);
-			this->stackedLayout->setCurrentIndex(0);
-			opacityEffect->inAnimationStart();
-		});
+	connect(navigator, &NavigatorView::parentItemClicked, this, &DevToys::onParentItemClicked);
 	connect(this->navigator, &NavigatorView::itemClicked, this, &DevToys::showToolWidget);
 	connect(this->listView, &IconLabelListView::itemClicked, this, &DevToys::showToolWidget);
+	connect(this->navigator->getSetButton(), &QPushButton::clicked, [=]() {showToolWidget(this->settingWidget->objectName());});
+	connect(this->navigator->getAllToolsButton(), &QPushButton::clicked, [=]() {
+			QStringList names;
+			for (std::pair<const QString,QString> var : descriptionsMap)
+			{
+				names.append(var.first);
+			}
+			this->onParentItemClicked(names);
+		});
+}
+
+void DevToys::onParentItemClicked(QStringList& names)
+{
+	AnimationOpacityEffect* opacityEffect = static_cast<AnimationOpacityEffect*>(this->listView->graphicsEffect());
+	opacityEffect->setOpacity(0.0);
+	this->listView->setIconLabels(names);
+	this->stackedLayout->setCurrentIndex(0);
+	opacityEffect->inAnimationStart();
 }

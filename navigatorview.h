@@ -9,7 +9,7 @@
 #include <QStyledItemDelegate>
 #include "constants.h"
 #include "tools.h"
-
+#include <qpushbutton.h>
 
 /**
  * @brief 用于NavigatorView的列高委托
@@ -35,7 +35,7 @@ private:
 /**
  * @brief 导航视图窗口
 */
-class NavigatorView : public QWidget
+class NavigatorView : public QFrame
 {
 	Q_OBJECT
 
@@ -65,6 +65,8 @@ public:
 	int ItemWidth() const;
 
 	QTreeView* getTree() const { return treeView; }
+	QPushButton* getSetButton() const { return setButton; }
+	QPushButton* getAllToolsButton() const { return allToolsButton; }
 
 private slots:
 	/**
@@ -76,7 +78,7 @@ signals:
 	/**
 	 * @brief 单击父树Item信号
 	*/
-	void parentItemClicked(QStringList names);
+	void parentItemClicked(QStringList& names);
 signals:
 	/**
 	 * @brief 单击子树Item信号
@@ -103,5 +105,7 @@ private:
 	// 数Map
 	std::map<QString, QStringList> loadTree();
 
+	QPushButton* setButton = new QPushButton(this);
+	QPushButton* allToolsButton = new QPushButton(this);
 
 };

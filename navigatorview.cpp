@@ -1,7 +1,7 @@
 ﻿#include "navigatorview.h"
 
 NavigatorView::NavigatorView(QWidget* parent)
-	: QWidget(parent)
+	: QFrame(parent)
 {
 	this->loadUi();
 	this->loadConnect();
@@ -89,7 +89,17 @@ void NavigatorView::loadUi()
 			parent->appendRow(child);
 		}
 	}
+	layout->addWidget(this->allToolsButton);
 	layout->addWidget(this->treeView);
+	layout->addWidget(this->setButton);
+	this->setButton->setIcon(QIcon(":/DevToys/icon/set.png"));
+	this->setButton->setText("设置");
+	// 左对齐
+	this->setButton->setStyleSheet("QPushButton { text-align: left; padding-left: 5px; }");
+
+	this->allToolsButton->setText("全部工具");
+	this->allToolsButton->setStyleSheet("QPushButton { text-align: left; padding-left: 5px; }");
+
 	this->setItemHeight(40);
 	this->setLayout(layout);
 }

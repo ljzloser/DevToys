@@ -559,7 +559,7 @@ bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, 
 
 
 			//识别标题栏拖动产生半屏全屏效果
-			if (titleBar && titleBar->rect().contains(pos)) { //如果鼠标在标题栏上
+			if (titleBar && titleBar->geometry().contains(pos)) { //如果鼠标在标题栏上
 				QWidget* child = titleBar->childAt(pos); //获取标题栏上的控件
 				if (!child) { //如果标题栏上没有控件
 					*result = HTCAPTION; //设置为标题栏
