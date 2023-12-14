@@ -158,6 +158,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="animationopacityeffect.cpp" />
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="convertbase64.cpp" />
     <ClCompile Include="convertbase64image.cpp" />
     <ClCompile Include="convertbinary.cpp" />
@@ -222,6 +223,7 @@
   <ItemGroup>
     <QtMoc Include="uuidgeneration.h" />
     <QtMoc Include="animationopacityeffect.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="constants.h" />
     <QtMoc Include="xmlstringformat.h" />
     <QtMoc Include="popupmessage.h" />

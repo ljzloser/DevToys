@@ -119,10 +119,13 @@ void DevToys::showToolWidget(QString name)
 	QWidget* widget = this->findChild<QWidget*>(name);
 	if (widget)
 	{
+		if (this->stackedLayout->currentWidget() == widget)// 判断当前widget是否是正在显示的,防止反复切换
+			return;
 		// 从widget的graphicsEffect中取出GraphicsOpacityEffect并通过static_cast转换为AnimationOpacityEffect
 		AnimationOpacityEffect* opacityEffect = static_cast<AnimationOpacityEffect*>(widget->graphicsEffect());
 		opacityEffect->setOpacity(0.0);
 		this->stackedLayout->setCurrentWidget(widget);
+		this->navigator->getTree()->selectionModel()->clearSelection();
 		// 判断sender 是不是NavigatorView
 		if (!qobject_cast<NavigatorView*>(sender()))
 			this->onFiterComboBoxTextChanged(widget->objectName());
@@ -142,6 +145,7 @@ void DevToys::loadConnect()
 	connect(this->listView, &IconLabelListView::itemClicked, this, &DevToys::showToolWidget);
 	connect(this->navigator->getSetButton(), &QPushButton::clicked, [=]() {showToolWidget(this->settingWidget->objectName());});
 	connect(this->navigator->getAllToolsButton(), &QPushButton::clicked, [=]() {
+			this->navigator->getTree()->selectionModel()->clearSelection();
 			QStringList names;
 			for (std::pair<const QString,QString> var : descriptionsMap)
 			{
@@ -150,6 +154,7 @@ void DevToys::loadConnect()
 			this->onParentItemClicked(names);
 		});
 }
+
 
 void DevToys::onParentItemClicked(QStringList& names)
 {

@@ -4,7 +4,7 @@
 #include <qtranslator.h>
 #include "MainWindow.h"
 #include <cstdlib>
-
+#include "Config.h"
 int main(int argc, char *argv[])
 {
 	_putenv_s("QT_FONT_DPI", "96");
@@ -30,5 +30,6 @@ int main(int argc, char *argv[])
 	w.setGeometry(rect);
 
     w.show();
+	w.devtoys->settingWidget->loadUi(&w);
     return a.exec();
 }

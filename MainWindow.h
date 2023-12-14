@@ -8,6 +8,6 @@ class MainWindow :public QCustomMainWindow//QCustomMainWindow
 public:
 	MainWindow(QWidget *parent = nullptr);
 	~MainWindow();
-	
+	DevToys* devtoys = new DevToys();
 };
 

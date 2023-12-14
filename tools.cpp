@@ -140,14 +140,13 @@ bool Tools::formatXml(const QString& xmlString, int indent, QString& formattedSt
 	// 设置自动格式化和缩进级别
 	writer.setAutoFormatting(indent > 0);
 	writer.setAutoFormattingIndent(indent);
-	Tools::showPopupMessage(QString::number(indent));
 	while (!reader.atEnd()) {
 		reader.readNext();
 
 		// 处理潜在的错误
 		if (reader.hasError()) {
 			// 处理错误，例如记录错误信息
-			errorStr = QString("parsing error: %1 in line:%2 col: %2").arg(reader.errorString()).arg(reader.lineNumber()).arg(reader.columnNumber());
+			errorStr = QString("parsing error: %1 in line:%2 col: %3").arg(reader.errorString()).arg(reader.lineNumber()).arg(reader.columnNumber());
 			// 根据应用需求选择性地处理错误
 			return false;
 		}

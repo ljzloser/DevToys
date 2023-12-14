@@ -21,6 +21,7 @@
 #include "stringhashgeneration.h"
 #include "uuidgeneration.h"
 #include "settingwidget.h"
+#include <qevent.h>
 
 class DevToys : public QWidget
 {
@@ -29,6 +30,7 @@ class DevToys : public QWidget
 public:
     DevToys(QWidget *parent = nullptr);
     ~DevToys();
+    SettingWidget* settingWidget = new SettingWidget();
 public slots:
 	void onFiterComboBoxTextChanged(QString text);
 
@@ -39,10 +41,10 @@ private slots:
     */
     void showToolWidget(QString name);
     void onParentItemClicked(QStringList& names);
+
 private:
     void loadUi();
     void loadConnect();
-
 
     IconLabelListView* listView = new IconLabelListView();
     NavigatorView* navigator = new NavigatorView();
@@ -63,5 +65,5 @@ private:
     StringHashGeneration* stringHashGeneration = new StringHashGeneration();
     PasswordGeneration* passwordGeneration = new PasswordGeneration();
 	UuidGeneration* uuidGeneration = new UuidGeneration();
-	SettingWidget* settingWidget = new SettingWidget();
+
 };

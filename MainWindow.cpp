@@ -7,7 +7,7 @@
 MainWindow::MainWindow(QWidget* parent): QCustomMainWindow(parent)
 {
     QCustomTitleBar* titleBar = new QCustomTitleBar();
-    DevToys* devtoys = new DevToys();
+
     titleBar->setTitleText("QDevToys");
     titleBar->setTitleIcon(QIcon(":/DevToys/icon/生成类型工具.png"));
     QObject::connect(titleBar, &QCustomTitleBar::closeButtonClicked, this, &MainWindow::close);
