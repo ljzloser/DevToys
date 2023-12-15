@@ -47,6 +47,11 @@ public:
 	*/
 	static QString formatJson(const Json::Value& jnode, int indent = 4);
 	/**
+	 * @brief 将\uxxxx转换为UTF-8
+	 * @param result 
+	*/
+	static QString replaceUtf8(QString result);
+	/**
 	 * @brief 格式化YAML
 	 * @param ynode 需要格式化的YAML
 	 * @param indent 缩进空格数

@@ -120,7 +120,23 @@ QString Tools::formatJson(const Json::Value& jnode, int indent)
 	Json::StreamWriterBuilder writer;
 	writer.settings_["indentation"] = std::string(indent, ' ');
 	std::string output = Json::writeString(writer, jnode);
-	return QString::fromStdString(output);
+	QString result =  QString::fromUtf8(output.c_str());
+	return replaceUtf8(result);
+}
+
+QString Tools::replaceUtf8(QString result)
+{
+	// 创建一个正则表达式来匹配所有的 Unicode 转义序列
+	QRegularExpression re("\\\\u([0-9a-fA-F]{4})");
+	QRegularExpressionMatchIterator i = re.globalMatch(result);
+	while (i.hasNext()) {
+		QRegularExpressionMatch match = i.next();
+		QString unicode = match.captured(1);
+		int codePoint = unicode.toInt(nullptr, 16);
+		QChar character(codePoint);
+		result.replace(match.captured(0), character);
+	}
+	return result;
 }
 
 QString Tools::formatYaml(const YAML::Node& ynode, int indent)
@@ -129,7 +145,7 @@ QString Tools::formatYaml(const YAML::Node& ynode, int indent)
 	out.SetIndent(indent);
 	out << ynode;
 	std::string str = out.c_str();
-	return QString::fromStdString(str);
+	return replaceUtf8(QString::fromStdString(str));
 }
 
 bool Tools::formatXml(const QString& xmlString, int indent, QString& formattedString, QString& errorStr)

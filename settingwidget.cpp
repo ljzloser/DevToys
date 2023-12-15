@@ -3,6 +3,7 @@
 #include "sciscintilla.h"
 #include <qplaintextedit.h>
 #include <QDesktopServices>
+
 SettingWidget::SettingWidget(QWidget *parent)
 	: QWidget(parent)
 {
@@ -45,7 +46,6 @@ void SettingWidget::loadConfig()
 			}
 		}
 	}
-
 }
 void SettingWidget::saveConfig()
 {
@@ -164,8 +164,6 @@ void SettingWidget::loadUi(QWidget* widget)
 			}
 			ui.aboutLabel->setFont(font);
 			ui.aboutLabel->setWordWrap(ui.autoLineButton->isChecked());
-
-
 			widget->update();
 		}
 	}
