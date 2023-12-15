@@ -26,6 +26,7 @@ public:
 		CloseButtonIcon//关闭按钮图标
 	};
 	FilterComboBox* comboBox = new FilterComboBox(this);
+	QPushButton* topButton;
 	QCustomTitleBar(QWidget* parent = nullptr);
 	~QCustomTitleBar();
 	//设置标题栏图标
@@ -78,6 +79,7 @@ private:
 	QMenu* menu; //标题栏菜单
 	bool flag; //最大化按钮标志
 	QMap<ButtonIcon, QIcon> standardIconMap; //标准按钮图标
+
 };
 
 #endif // CUSTOMTITLE_H

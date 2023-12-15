@@ -21,6 +21,13 @@ QCustomTitleBar::QCustomTitleBar(QWidget* parent) : QWidget(parent)
 	}
 	comboBox->setItems(list);
 
+	this->topButton = new QPushButton(this);
+	this->topButton->setFixedSize(25, 25);
+	this->topButton->setCheckable(true);
+	this->topButton->setChecked(false);
+	this->topButton->setIcon(QIcon(":/DevToys/icon/top.png"));
+	this->topButton->setToolTip("置顶");
+
 	//再添加一个占位符，使得搜索框居中
 	QSpacerItem* spacerItem2 = new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -62,6 +69,7 @@ QCustomTitleBar::QCustomTitleBar(QWidget* parent) : QWidget(parent)
 
 	this->layout->addSpacerItem(spacerItem);
 	this->layout->addWidget(comboBox);
+	this->layout->addWidget(this->topButton);
 	this->layout->addSpacerItem(spacerItem2);
 	this->layout->addWidget(this->minButton);
 	this->layout->addWidget(this->maxButton);

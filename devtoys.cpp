@@ -125,7 +125,8 @@ void DevToys::showToolWidget(QString name)
 		AnimationOpacityEffect* opacityEffect = static_cast<AnimationOpacityEffect*>(widget->graphicsEffect());
 		opacityEffect->setOpacity(0.0);
 		this->stackedLayout->setCurrentWidget(widget);
-		this->navigator->getTree()->selectionModel()->clearSelection();
+		if (!descriptionsMap.count(name))
+			this->navigator->getTree()->selectionModel()->clearSelection();
 		// 判断sender 是不是NavigatorView
 		if (!qobject_cast<NavigatorView*>(sender()))
 			this->onFiterComboBoxTextChanged(widget->objectName());
