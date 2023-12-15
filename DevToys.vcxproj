@@ -40,14 +40,14 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>6.3.0_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets;xml</QtModules>
+    <QtModules>core;gui;widgets;sql;xml</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
     <QtPlugin>false</QtPlugin>
     <QtToolsDesignTime>false</QtToolsDesignTime>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>6.3.0_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets;xml</QtModules>
+    <QtModules>core;gui;widgets;sql;xml</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
     <QtPlugin>false</QtPlugin>
     <QtToolsDesignTime>false</QtToolsDesignTime>
@@ -72,6 +72,7 @@
     <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <SourcePath>$(SourcePath)</SourcePath>
+    <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <ReferencePath>$(ReferencePath)</ReferencePath>
@@ -79,6 +80,7 @@
     <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <SourcePath>$(SourcePath)</SourcePath>
+    <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
     <VcpkgEnabled>
@@ -179,6 +181,7 @@
     <ClCompile Include="sciscintilla.cpp" />
     <ClCompile Include="settingwidget.cpp" />
     <ClCompile Include="slidebutton.cpp" />
+    <ClCompile Include="sqllog.cpp" />
     <ClCompile Include="stringhashgeneration.cpp" />
     <ClCompile Include="timestamp.cpp" />
     <ClCompile Include="tools.cpp" />
@@ -244,8 +247,13 @@
     <QtMoc Include="slidebutton.h" />
     <QtMoc Include="stringhashgeneration.h" />
     <QtMoc Include="settingwidget.h" />
+    <ClInclude Include="SqlExecutor.h" />
+    <QtMoc Include="sqllog.h" />
     <ClInclude Include="tools.h" />
     <QtMoc Include="jsontoyaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="app.manifest" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

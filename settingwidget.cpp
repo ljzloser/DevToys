@@ -1,13 +1,18 @@
-#include "settingwidget.h"
+﻿#include "settingwidget.h"
 #include <qtextedit.h>
 #include "sciscintilla.h"
 #include <qplaintextedit.h>
+#include <QDesktopServices>
 SettingWidget::SettingWidget(QWidget *parent)
 	: QWidget(parent)
 {
+	SqlLog::saveLog("打开设置界面");
 	ui.setupUi(this);
 	this->loadConfig();
 	this->loadConnect();
+	ui.tableWidget->setVisible(false);
+	ui.beginDateEdit->setDate(QDate::currentDate());
+	ui.endDateEdit->setDate(QDate::currentDate().addDays(1));
 }
 
 SettingWidget::~SettingWidget()
@@ -81,13 +86,63 @@ void SettingWidget::loadConnect()
 	connect(ui.fontComboBox, &QFontComboBox::currentTextChanged, this, &SettingWidget::saveConfig);
 	connect(ui.autoLineButton, &SlideButton::clicked, this, &SettingWidget::saveConfig);
 	connect(ui.fontSizespinBox, &QSpinBox::valueChanged, this, &SettingWidget::saveConfig);
+	connect(ui.openLineButton, &QPushButton::clicked, [=]()
+		{
+			QUrl url("https://github.com/ljzloser/DevToys");
+			QDesktopServices::openUrl(url);
+		});
+	connect(ui.openLineButton_2, &QPushButton::clicked, [=]()
+		{
+			QUrl url("http://saolei.wang/Player/Index.asp?Id=21720");
+			QDesktopServices::openUrl(url);
+		});
+	connect(ui.pushButton, &QPushButton::clicked, [=]()
+		{
+			ui.tableWidget->setVisible(!ui.tableWidget->isVisible());
+		});
+	connect(ui.beginDateEdit, &QDateEdit::dateChanged, this, &SettingWidget::loadLog);
+	connect(ui.endDateEdit, &QDateEdit::dateChanged, this, &SettingWidget::loadLog);
+}
+
+void SettingWidget::loadLog()
+{
+	QList<QVariantMap> result = SqlLog::readLog(ui.beginDateEdit->date(), ui.endDateEdit->date());
+	ui.tableWidget->clear();
+	if (result.size() > 0)
+	{
+		// 创建表头
+		QStringList header;
+		QVariantMap map = result[0];
+		header << "序号" << "时间" << "日志";
+		ui.tableWidget->setColumnCount(header.size());
+		ui.tableWidget->setHorizontalHeaderLabels(header);
+		// 添加数据
+		ui.tableWidget->setRowCount(result.size());
+		for (int i = 0; i < result.size(); ++i)
+		{
+			QVariantMap map = result[i];
+			for (QString key : header)
+			{
+				ui.tableWidget->setItem(i, header.indexOf(key), new QTableWidgetItem(map.value(key).toString()));
+			}
+		}
+	}
+	else
+	{
+		ui.tableWidget->setRowCount(0);
+		ui.tableWidget->setColumnCount(0);
+	}
+	// 自适应列宽和行高
+	ui.tableWidget->resizeColumnsToContents();
+	ui.tableWidget->resizeRowsToContents();
+
 }
 
 void SettingWidget::loadUi(QWidget* widget)
 {
 	QApplication* app = qobject_cast<QApplication*>(QCoreApplication::instance());
 
-	// ʹ��Ӧ�ó�������ȡ������ָ��
+	// 使用应用程序对象获取主窗口指针
 	if (app) {
 		widget =  widget == nullptr ? qobject_cast<QWidget*>(app->activeWindow()) : widget;
 		if (widget) {

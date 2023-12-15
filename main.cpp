@@ -30,6 +30,5 @@ int main(int argc, char *argv[])
 	w.setGeometry(rect);
 
     w.show();
-	w.devtoys->settingWidget->loadUi(&w);
     return a.exec();
 }

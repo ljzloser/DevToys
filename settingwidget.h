@@ -3,6 +3,7 @@
 #include <QWidget>
 #include "ui_settingwidget.h"
 #include "Config.h"
+#include "sqllog.h"
 class SettingWidget : public QWidget
 {
 	Q_OBJECT
@@ -15,7 +16,7 @@ private:
 	Ui::SettingWidgetClass ui;
 	void loadConfig();
 	void loadConnect();
-
+	void loadLog();
 private slots:
 	void saveConfig();
 

@@ -34,5 +34,9 @@
         <file>icon/set.png</file>
         <file>icon/down.png</file>
         <file>icon/top.png</file>
+        <file>icon/font.png</file>
+        <file>icon/link.png</file>
+        <file>icon/wrap.png</file>
+        <file>icon/boom.png</file>
     </qresource>
 </RCC>
