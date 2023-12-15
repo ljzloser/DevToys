@@ -3,7 +3,7 @@
 #include "sciscintilla.h"
 #include <qplaintextedit.h>
 #include <QDesktopServices>
-
+#include <qdebug.h>
 SettingWidget::SettingWidget(QWidget *parent)
 	: QWidget(parent)
 {

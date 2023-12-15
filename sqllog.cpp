@@ -24,6 +24,30 @@ void SqlLog::saveLog(const QString content)
 	sqlExecutor.executeNonQuery(sql);
 }
 
+int SqlLog::getLogCount()
+{
+	SqlLog::createTable();
+	SqlExecutor sqlExecutor(QApplication::applicationDirPath() + "\\log.db");
+	QString sql = "SELECT count(*) FROM log ";
+	return sqlExecutor.executeScalar(sql, 0);
+}
+
+QList<QDateTime> SqlLog::getLogDate()
+{
+	SqlLog::createTable();
+	SqlExecutor sqlExecutor(QApplication::applicationDirPath() + "\\log.db");
+	QString sql = "SELECT datetime FROM log ";
+	return sqlExecutor.executeFirstColumn<QDateTime>(sql);
+}
+
+QVariantMap SqlLog::getLog(int index)
+{
+	SqlLog::createTable();
+	SqlExecutor sqlExecutor(QApplication::applicationDirPath() + "\\log.db");
+	QString sql = QString("SELECT id as '序号',datetime as '时间', content as '日志' FROM log WHERE id = %1").arg(index);
+	return sqlExecutor.executeFirstRow(sql);
+}
+
 void SqlLog::createTable()
 {
 	QString sql = "CREATE TABLE IF NOT EXISTS log ("

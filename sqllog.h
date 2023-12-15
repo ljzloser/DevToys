@@ -14,6 +14,9 @@ public:
 	~SqlLog();
 	static QList<QVariantMap> readLog(QDate BeginDate,QDate endDate);
 	static void saveLog(const QString content);
+	static int getLogCount();
+	static QList<QDateTime> getLogDate();
+	static QVariantMap getLog(int index);
 private:
 	static void createTable();
 };
