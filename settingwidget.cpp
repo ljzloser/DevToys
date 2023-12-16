@@ -7,7 +7,6 @@
 SettingWidget::SettingWidget(QWidget *parent)
 	: QWidget(parent)
 {
-	SqlLog::saveLog("打开设置界面");
 	ui.setupUi(this);
 	this->loadConfig();
 	this->loadConnect();

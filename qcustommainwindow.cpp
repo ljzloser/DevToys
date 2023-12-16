@@ -1,6 +1,10 @@
 ﻿#include "qcustommainwindow.h"
 #include "windows.h"
 #include "windowsx.h"
+#include <qcoreapplication.h>
+#include <qobject.h>
+#include <qwindowdefs.h>
+#include <qapplication.h>
 #pragma comment (lib,"user32.lib")
 
 
@@ -16,13 +20,13 @@ QCustomMainWindow::QCustomMainWindow(QWidget* parent)
 	this->timer->setParent(this); //设置父对象
 	this->timer->start(1000); //启动定时器
 	this->layout->setContentsMargins(this->edge_size, this->edge_size, this->edge_size, this->edge_size); //设置布局边距
-	this->layout->setSpacing(2); //设置布局间距
+	this->layout->setSpacing(0); //设置布局间距
 	this->setLayout(this->layout); //设置布局
-	#ifdef Q_OS_WIN
-		HWND hwnd = (HWND)this->winId();
-		DWORD style = ::GetWindowLong(hwnd, GWL_STYLE);
-		::SetWindowLong(hwnd, GWL_STYLE, style | WS_MAXIMIZEBOX | WS_THICKFRAME | WS_CAPTION);
-	#endif
+#ifdef Q_OS_WIN
+	HWND hwnd = (HWND)this->winId();
+	DWORD style = ::GetWindowLong(hwnd, GWL_STYLE);
+	::SetWindowLong(hwnd, GWL_STYLE, style | WS_MAXIMIZEBOX | WS_THICKFRAME | WS_CAPTION | WS_SYSMENU);
+#endif
 	//安装事件过滤器识别拖动
 	this->installEventFilter(this);
 
@@ -131,7 +135,7 @@ void QCustomMainWindow::setBackgroundColor(QColor background_color)
 
 void QCustomMainWindow::paintEvent(QPaintEvent* event)
 {
-	
+
 	QPainter* painter = new QPainter(this);
 	painter->setRenderHint(QPainter::Antialiasing); //反锯齿
 	painter->setPen(Qt::NoPen); //无边框
@@ -161,7 +165,7 @@ void QCustomMainWindow::paintEvent(QPaintEvent* event)
 	}
 	painter->end();
 	delete painter;
-	
+
 }
 
 void QCustomMainWindow::updateCursorShape()
@@ -485,7 +489,7 @@ void QCustomMainWindow::mouseReleaseEvent(QMouseEvent* event)
 		this->setCursor(Qt::ArrowCursor);
 	}
 	*/
-	
+
 }
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))//Qt6
 bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
@@ -493,23 +497,26 @@ bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, 
 bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, long* result)
 #endif
 {
-	if (eventType == "windows_generic_MSG") {
-
+	if (eventType == "windows_generic_MSG")
+	{
 
 		MSG* msg = static_cast<MSG*>(message);//转换类型
-
 		//不同的消息类型和参数进行不同的处理
-		if (msg->message == WM_NCCALCSIZE) { //如果是计算窗口大小消息
+		if (msg->message == WM_NCCALCSIZE)
+		{ //如果是计算窗口大小消息
 			*result = 0;
 			return true;
 		}
-		else if (msg->message == WM_SYSKEYDOWN) {//如果是alt键按下
+		else if (msg->message == WM_SYSKEYDOWN)
+		{//如果是alt键按下
 			//屏蔽alt键按下
 		}
-		else if (msg->message == WM_SYSKEYUP) {//如果是alt键松开
+		else if (msg->message == WM_SYSKEYUP)
+		{//如果是alt键松开
 			//屏蔽alt键松开
 		}
-		else if (msg->message == WM_NCHITTEST) {//如果是鼠标消息
+		else if (msg->message == WM_NCHITTEST)
+		{//如果是鼠标消息
 
 			long x = GET_X_LPARAM(msg->lParam);//获取鼠标x坐标
 			long y = GET_Y_LPARAM(msg->lParam);//获取鼠标y坐标
@@ -523,35 +530,45 @@ bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, 
 			bool resizeEnable = true;//是否允许改变窗口大小
 			//鼠标移动到四个角,这个消息是当鼠标移动或者有鼠标键按下时候发出的
 			*result = 0;
-			if (resizeEnable) {
-				if (left && top) {
+			if (resizeEnable)
+			{
+				if (left && top)
+				{
 					*result = HTTOPLEFT;//
 				}
-				else if (left && bottom) {
+				else if (left && bottom)
+				{
 					*result = HTBOTTOMLEFT;
 				}
-				else if (right && top) {
+				else if (right && top)
+				{
 					*result = HTTOPRIGHT;
 				}
-				else if (right && bottom) {
+				else if (right && bottom)
+				{
 					*result = HTBOTTOMRIGHT;
 				}
-				else if (left) {
+				else if (left)
+				{
 					*result = HTLEFT;
 				}
-				else if (right) {
+				else if (right)
+				{
 					*result = HTRIGHT;
 				}
-				else if (top) {
+				else if (top)
+				{
 					*result = HTTOP;
 				}
-				else if (bottom) {
+				else if (bottom)
+				{
 					*result = HTBOTTOM;
 				}
 			}
 
 			//先处理掉拉伸
-			if (0 != *result) {
+			if (0 != *result)
+			{
 				this->update();
 				return true;
 			}
@@ -559,9 +576,11 @@ bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, 
 
 
 			//识别标题栏拖动产生半屏全屏效果
-			if (titleBar && titleBar->geometry().contains(pos)) { //如果鼠标在标题栏上
+			if (titleBar && titleBar->geometry().contains(pos))
+			{ //如果鼠标在标题栏上
 				QWidget* child = titleBar->childAt(pos); //获取标题栏上的控件
-				if (!child) { //如果标题栏上没有控件
+				if (!child)
+				{ //如果标题栏上没有控件
 					*result = HTCAPTION; //设置为标题栏
 					return true;
 				}
@@ -573,20 +592,58 @@ bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, 
 			}
 
 		}
-		else if (msg->wParam == PBT_APMSUSPEND && msg->message == WM_POWERBROADCAST) {
+		else if (msg->wParam == PBT_APMSUSPEND && msg->message == WM_POWERBROADCAST)
+		{
 			//系统休眠的时候自动最小化可以规避程序可能出现的问题
 			this->showMinimized();
 		}
-		else if (msg->wParam == PBT_APMRESUMEAUTOMATIC) {
+		else if (msg->wParam == PBT_APMRESUMEAUTOMATIC)
+		{
 			//休眠唤醒后自动打开
 			this->showCustomNormal();
 		}
-		else if (msg->message == WM_NCRBUTTONUP)
+		else if (msg->message == WM_NCRBUTTONUP) //如果是鼠标右键
 		{
+
+			// 获取系统菜单的句柄
+			HMENU hMenu = GetSystemMenu((HWND)this->winId(), FALSE);
+
+			// 获取鼠标位置
+			POINT cursor;
+			GetCursorPos(&cursor);
+
+			// 设置前台窗口
+			SetForegroundWindow((HWND)this->winId());
+
+			// 显示系统菜单
+			switch (TrackPopupMenu(hMenu, TPM_LEFTBUTTON | TPM_RETURNCMD, cursor.x, cursor.y, 0, (HWND)this->winId(), NULL))
+			{
+			case SC_RESTORE: // 还原
+				ShowWindow((HWND)this->winId(), SW_RESTORE);
+				break;
+			case SC_MOVE: // 移动
+				SendMessage((HWND)this->winId(), WM_SYSCOMMAND, SC_MOVE, 0);
+				break;
+			case SC_SIZE: // 大小
+				SendMessage((HWND)this->winId(), WM_SYSCOMMAND, SC_SIZE, 0);
+				break;
+			case SC_MINIMIZE: // 最小化
+				ShowWindow((HWND)this->winId(), SW_MINIMIZE);
+				break;
+			case SC_MAXIMIZE: // 最大化
+				ShowWindow((HWND)this->winId(), SW_MAXIMIZE);
+				break;
+			case SC_CLOSE: // 关闭
+				SendMessage((HWND)this->winId(), WM_CLOSE, 0, 0);
+				break;
+			default:
+				break;
+			}
+			*result = 0;
+			// 发送消息给窗口以告知菜单已关闭
+			PostMessage((HWND)this->winId(), WM_NULL, 0, 0);
 			return true;
 		}
-
-
 	}
 	return false;
 }
@@ -606,7 +663,7 @@ bool QCustomMainWindow::eventFilter(QObject* obj, QEvent* event)
 			emit windowStateChanged();
 		}
 
-		
+
 	}
 	return QWidget::eventFilter(obj, event);
 }
