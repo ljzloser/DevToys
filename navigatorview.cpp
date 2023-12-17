@@ -98,6 +98,7 @@ void NavigatorView::loadUi()
 	this->setButton->setStyleSheet("QPushButton { text-align: left; padding-left: 5px; }");
 
 	this->allToolsButton->setText("全部工具");
+	this->allToolsButton->setIcon(QIcon(":/DevToys/icon/home.png"));
 	this->allToolsButton->setStyleSheet("QPushButton { text-align: left; padding-left: 5px; }");
 
 	this->setItemHeight(40);

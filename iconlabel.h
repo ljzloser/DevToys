@@ -3,7 +3,7 @@
 #include <QFrame>
 #include "ui_iconlabel.h"
 #include <qevent.h>
-
+#include <qpushbutton.h>
 /**
  * @brief 图标标签类
 */

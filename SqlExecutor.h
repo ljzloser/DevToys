@@ -1,4 +1,4 @@
-#include <QSqlDatabase>
+ï»¿#include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QSqlRecord>
@@ -26,10 +26,10 @@ public:
 		//delete &db;
     }
     /**
-	 * @brief ²éÑ¯µÚÒ»ĞĞµÚÒ»ÁĞ£¬Èç¹ûÃ»ÓĞ¾Í·µ»ØTµÄÄ¬ÈÏÖµ
-	 * @tparam T Òª·µ»ØµÄÀàĞÍ
-     * @param query ÒªÖ´ĞĞµÄÓï¾ä 
-	 * @param nullValue Îª¿ÕÊ±·µ»ØµÄÖµ
+	 * @brief æŸ¥è¯¢ç¬¬ä¸€è¡Œç¬¬ä¸€åˆ—ï¼Œå¦‚æœæ²¡æœ‰å°±è¿”å›Tçš„é»˜è®¤å€¼
+	 * @tparam T è¦è¿”å›çš„ç±»å‹
+     * @param query è¦æ‰§è¡Œçš„è¯­å¥ 
+	 * @param nullValue ä¸ºç©ºæ—¶è¿”å›çš„å€¼
      * @return 
     */
     template<typename T>
@@ -58,10 +58,10 @@ public:
 		return v.value<T>();
     }
 	/**
-	 * @brief ²éÑ¯µÚÒ»ÁĞµÄÖµ
-	 * @tparam T Òª·µ»ØµÄÀàĞÍ
-	 * @param query ÒªÖ´ĞĞµÄÓï¾ä
-	 * @param nullValue Îª¿ÕÊ±·µ»ØµÄÖµ
+	 * @brief æŸ¥è¯¢ç¬¬ä¸€åˆ—çš„å€¼
+	 * @tparam T è¦è¿”å›çš„ç±»å‹
+	 * @param query è¦æ‰§è¡Œçš„è¯­å¥
+	 * @param nullValue ä¸ºç©ºæ—¶è¿”å›çš„å€¼
 	 * @return 
 	*/
 	template<typename T>
@@ -89,9 +89,9 @@ public:
 		return list;
 	}
     /**
-	 * @brief ²éÑ¯µÚÒ»ĞĞ
-	 * @param query ÒªÖ´ĞĞµÄÓï¾ä
-	 * @return ´øÓĞ×Ö¶ÎÃûµÄQMap
+	 * @brief æŸ¥è¯¢ç¬¬ä¸€è¡Œ
+	 * @param query è¦æ‰§è¡Œçš„è¯­å¥
+	 * @return å¸¦æœ‰å­—æ®µåçš„QMap
     */
     QMap<QString, QVariant> executeFirstRow(const QString& query) {
 		if (!db.open()) {
@@ -116,10 +116,10 @@ public:
         }
     }
     /**
-	 * @brief Ö´ĞĞ·Ç²éÑ¯Óï¾ä
-	 * @param query ÒªÖ´ĞĞµÄÓï¾ä
-	 * @param useTransaction ÊÇ·ñ¿ªÆôÊÂÎñ
-	 * @return ÊÜÓ°ÏìµÄĞĞÊı
+	 * @brief æ‰§è¡ŒéæŸ¥è¯¢è¯­å¥
+	 * @param query è¦æ‰§è¡Œçš„è¯­å¥
+	 * @param useTransaction æ˜¯å¦å¼€å¯äº‹åŠ¡
+	 * @return å—å½±å“çš„è¡Œæ•°
     */
     int executeNonQuery(const QString &query, bool useTransaction = true) {
         if (!db.open()) {
@@ -131,13 +131,19 @@ public:
         if (useTransaction && !db.transaction()) {
             throw std::runtime_error(db.lastError().text().toStdString());
         }
-
-        if (!q.exec(query)) {
-            if (useTransaction) {
-                db.rollback();
+        try
+        {
+            if (!q.exec(query)) {
+                if (useTransaction) {
+                    db.rollback();
+                }
+                throw std::runtime_error(q.lastError().text().toStdString());
             }
-            throw std::runtime_error(q.lastError().text().toStdString());
         }
+        catch (...)
+        {
+        }
+
 
         if (useTransaction && !db.commit()) {
             throw std::runtime_error(db.lastError().text().toStdString());
@@ -147,10 +153,10 @@ public:
         return r;
     }
     /**
-	 * @brief Ö´ĞĞ²éÑ¯
-	 * @param query ÒªÖ´ĞĞµÄÓï¾ä
-	 * @param useTransaction ÊÇ·ñ¿ªÆôÊÂÎñ
-	 * @return ·µ»ØÒ»¸öQVariantMapÁĞ±í
+	 * @brief æ‰§è¡ŒæŸ¥è¯¢
+	 * @param query è¦æ‰§è¡Œçš„è¯­å¥
+	 * @param useTransaction æ˜¯å¦å¼€å¯äº‹åŠ¡
+	 * @return è¿”å›ä¸€ä¸ªQVariantMapåˆ—è¡¨
     */
     QList<QVariantMap> executeQuery(const QString &query, bool useTransaction = true) {
         if (!db.open()) {

@@ -22,7 +22,7 @@ void IconLabelListView::setIconLabels(QStringList names)
 	this->clear();
 	for (QString name : names)
 	{
-		QListWidgetItem* item = new QListWidgetItem(name, this);
+		QListWidgetItem* item = new QListWidgetItem(this);
 		IconLabel* label = new IconLabel(this);
 		item->setSizeHint(QSize(label->size()));
 		label->setTitle(name);

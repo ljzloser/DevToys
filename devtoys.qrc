@@ -38,5 +38,8 @@
         <file>icon/link.png</file>
         <file>icon/wrap.png</file>
         <file>icon/boom.png</file>
+        <file>icon/生成类型工具-black.png</file>
+        <file>icon/home.png</file>
+        <file>icon/theme.png</file>
     </qresource>
 </RCC>

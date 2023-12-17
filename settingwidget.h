@@ -11,12 +11,17 @@ class SettingWidget : public QWidget
 public:
 	SettingWidget(QWidget *parent = nullptr);
 	~SettingWidget();
+signals:
+	void themeChanged(int);
+public slots:
 	void loadUi(QWidget * widget = nullptr);
 private:
 	Ui::SettingWidgetClass ui;
 	void loadConfig();
 	void loadConnect();
 	void loadLog();
+	void showEvent(QShowEvent* event) override;
+	int theme = -1;
 private slots:
 	void saveConfig();
 

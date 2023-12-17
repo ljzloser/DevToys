@@ -4,7 +4,8 @@
 #include <qplaintextedit.h>
 #include <QDesktopServices>
 #include <qdebug.h>
-SettingWidget::SettingWidget(QWidget *parent)
+#include "tools.h"
+SettingWidget::SettingWidget(QWidget* parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
@@ -16,7 +17,9 @@ SettingWidget::SettingWidget(QWidget *parent)
 }
 
 SettingWidget::~SettingWidget()
-{}
+{
+	SqlLog::writeLog();
+}
 
 void SettingWidget::loadConfig()
 {
@@ -73,7 +76,7 @@ void SettingWidget::saveConfig()
 	}
 	if (isOk)
 	{
-		Config::setValue(objectName,value);
+		Config::setValue(objectName, value);
 		loadUi();
 	}
 }
@@ -85,6 +88,7 @@ void SettingWidget::loadConnect()
 	connect(ui.fontComboBox, &QFontComboBox::currentTextChanged, this, &SettingWidget::saveConfig);
 	connect(ui.autoLineButton, &SlideButton::clicked, this, &SettingWidget::saveConfig);
 	connect(ui.fontSizespinBox, &QSpinBox::valueChanged, this, &SettingWidget::saveConfig);
+	connect(ui.themeComboBox, &QComboBox::currentTextChanged, this, &SettingWidget::saveConfig);
 	connect(ui.openLineButton, &QPushButton::clicked, [=]()
 		{
 			QUrl url("https://github.com/ljzloser/DevToys");
@@ -137,13 +141,19 @@ void SettingWidget::loadLog()
 
 }
 
+void SettingWidget::showEvent(QShowEvent* event)
+{
+	SqlLog::writeLog();
+	this->loadLog();
+}
+
 void SettingWidget::loadUi(QWidget* widget)
 {
 	QApplication* app = qobject_cast<QApplication*>(QCoreApplication::instance());
 
 	// 使用应用程序对象获取主窗口指针
 	if (app) {
-		widget =  widget == nullptr ? qobject_cast<QWidget*>(app->activeWindow()) : widget;
+		widget = widget == nullptr ? qobject_cast<QWidget*>(app->activeWindow()) : widget;
 		if (widget) {
 			QFont font = ui.fontComboBox->currentFont();
 			font.setPointSize(ui.fontSizespinBox->value());
@@ -155,7 +165,7 @@ void SettingWidget::loadUi(QWidget* widget)
 				scintilla->lexer()->setFont(font);
 				scintilla->setWrapMode(ui.autoLineButton->isChecked() ? QsciScintilla::WrapMode::WrapWord : QsciScintilla::WrapMode::WrapNone);
 			}
-			QList<QPlainTextEdit *> plantTextEdits = widget->findChildren<QPlainTextEdit *>();
+			QList<QPlainTextEdit*> plantTextEdits = widget->findChildren<QPlainTextEdit*>();
 			for (QPlainTextEdit* plainTextEdit : plantTextEdits)
 			{
 				plainTextEdit->setFont(font);
@@ -163,6 +173,42 @@ void SettingWidget::loadUi(QWidget* widget)
 			}
 			ui.aboutLabel->setFont(font);
 			ui.aboutLabel->setWordWrap(ui.autoLineButton->isChecked());
+
+			bool isdark = false;
+			switch (ui.themeComboBox->currentIndex())
+			{
+			case 0:
+			{
+				isdark = false;
+				break;
+			}
+			case 1:
+			{
+				isdark = true;
+				break;
+			}
+			case 2:
+			{
+				isdark = Tools::IsSystemDarkModeActive();
+				break;
+			}
+			default:
+				break;
+			}
+			if ( (isdark != (theme == 1)) || theme == -1)
+			{
+				QString filename = isdark ? ":/qdarkstyle/dark/darkstyle.qss" : ":/qdarkstyle/light/lightstyle.qss";
+				QFile file(filename);
+				file.open(QFile::ReadOnly);
+				if (file.isOpen())
+				{
+					QString styleSheet = QLatin1String(file.readAll());
+					app->setStyleSheet(styleSheet);
+				}
+				theme = isdark;
+				emit themeChanged(theme);
+			}
+
 			widget->update();
 		}
 	}

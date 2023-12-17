@@ -74,6 +74,7 @@ public:
 	virtual void resizeEvent(QResizeEvent* event);
 signals:
 	void windowStateChanged();
+	void systemSettingsChanged();
 protected:
 	QString dragging_edge = nullptr; //拖动的边缘
 	bool is_dragging = false; //是否正在拖动

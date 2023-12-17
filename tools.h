@@ -12,7 +12,7 @@
 #include <qregularexpression.h>
 #include <qdom.h>
 #include <qxmlstream.h>
-
+#include <qsettings.h>
 /**
  * @brief 全局需要的静态函数的工具类
 */
@@ -137,6 +137,11 @@ public:
 	 * @return 
 	*/
 	static QString Base64Decode(const QString& base64String);
+	/**
+	 * @brief 判断系统是否处于深色模式
+	 * @return 
+	*/
+	static bool IsSystemDarkModeActive();
 
 };
 

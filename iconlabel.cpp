@@ -6,7 +6,7 @@ IconLabel::IconLabel(QWidget* parent)
 	: QFrame(parent)
 {
 	ui.setupUi(this);
-	this->setStyleSheet("background-color: rgb(54, 71, 96);");
+	this->setStyleSheet("background-color: #9E9E9E;");
 	//设置换行
 	ui.descriptionLabel->setWordWrap(true);
 	QWidget* widget = new QWidget();
@@ -34,12 +34,12 @@ void IconLabel::setDescriptions(QString descriptions)
 
 void IconLabel::enterEvent(QEnterEvent* event)
 {
-	this->setStyleSheet("background-color: rgb(101, 129, 174);");
+	this->setStyleSheet("background-color: #515151;");
 }
 
 void IconLabel::leaveEvent(QEvent* event)
 {
-	this->setStyleSheet("background-color: rgb(54, 71, 96);");
+	this->setStyleSheet("background-color: #9E9E9E;");
 }
 
 void IconLabel::mousePressEvent(QMouseEvent* event)

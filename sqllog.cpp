@@ -1,11 +1,8 @@
 ﻿#include "sqllog.h"
 
-SqlLog::SqlLog(QObject *parent)
-	: QObject(parent)
-{}
+QList<QString> SqlLog::logs;
+int SqlLog::cacheCount = 10;
 
-SqlLog::~SqlLog()
-{}
 
 QList<QVariantMap> SqlLog::readLog(QDate BeginDate, QDate endDate)
 {
@@ -13,15 +10,18 @@ QList<QVariantMap> SqlLog::readLog(QDate BeginDate, QDate endDate)
 	SqlExecutor sqlExecutor(QApplication::applicationDirPath() + "\\log.db");
 	QString sql = QString("SELECT id as '序号',datetime as '时间', content as '日志' FROM log WHERE datetime BETWEEN '%1' AND '%2'").arg(BeginDate.toString("yyyy-MM-dd"), endDate.toString("yyyy-MM-dd"));
 	return sqlExecutor.executeQuery(sql);
+
 }
 
 
-void SqlLog::saveLog(const QString content)
+void SqlLog::saveLog(const QString content, bool isWrite)
 {
-	SqlLog::createTable();
-	SqlExecutor sqlExecutor(QApplication::applicationDirPath() + "\\log.db");
-	QString sql = QString("INSERT INTO log (datetime, content) VALUES ('%1', '%2');").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss"), content);
-	sqlExecutor.executeNonQuery(sql);
+
+	SqlLog::logs<< QString("('%1', '%2')").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss"), content);
+	if (logs.count() >= SqlLog::cacheCount || isWrite)
+	{
+		SqlLog::writeLog();
+	}
 }
 
 int SqlLog::getLogCount()
@@ -57,5 +57,23 @@ void SqlLog::createTable()
 		");";
 	SqlExecutor sqlExecutor(QApplication::applicationDirPath() + "\\log.db");
 	sqlExecutor.executeNonQuery(sql);
+}
+
+void SqlLog::writeLog()
+{
+	if (logs.isEmpty())
+	{
+		return;
+	}
+	SqlLog::createTable();
+	SqlExecutor sqlExecutor(QApplication::applicationDirPath() + "\\log.db");
+	QString sql = QString("INSERT INTO log (datetime, content) VALUES %1;").arg(logs.join(","));
+	sqlExecutor.executeNonQuery(sql);
+	logs.clear();
+}
+
+void SqlLog::setCacheCount(int count)
+{
+	SqlLog::cacheCount = count > 0 ? count : 10;
 }
 

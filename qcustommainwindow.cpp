@@ -5,6 +5,7 @@
 #include <qobject.h>
 #include <qwindowdefs.h>
 #include <qapplication.h>
+#include "tools.h"
 #pragma comment (lib,"user32.lib")
 
 
@@ -491,6 +492,7 @@ void QCustomMainWindow::mouseReleaseEvent(QMouseEvent* event)
 	*/
 
 }
+
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))//Qt6
 bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
 #else
@@ -572,9 +574,6 @@ bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, 
 				this->update();
 				return true;
 			}
-
-
-
 			//识别标题栏拖动产生半屏全屏效果
 			if (titleBar && titleBar->geometry().contains(pos))
 			{ //如果鼠标在标题栏上
@@ -643,6 +642,10 @@ bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, 
 			// 发送消息给窗口以告知菜单已关闭
 			PostMessage((HWND)this->winId(), WM_NULL, 0, 0);
 			return true;
+		}
+		else if (msg->message == WM_SETTINGCHANGE)
+		{
+			emit this->systemSettingsChanged();
 		}
 	}
 	return false;

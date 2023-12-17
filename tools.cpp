@@ -1,5 +1,5 @@
 ﻿#include "tools.h"
-
+#include "sqllog.h"
 
 bool Tools::convertYamlToJson(const YAML::Node& ynode, Json::Value& jnode)
 {
@@ -120,7 +120,7 @@ QString Tools::formatJson(const Json::Value& jnode, int indent)
 	Json::StreamWriterBuilder writer;
 	writer.settings_["indentation"] = std::string(indent, ' ');
 	std::string output = Json::writeString(writer, jnode);
-	QString result =  QString::fromUtf8(output.c_str());
+	QString result = QString::fromUtf8(output.c_str());
 	return replaceUtf8(result);
 }
 
@@ -205,7 +205,7 @@ void Tools::showPopupMessage(QString content)
 {
 	// 获取应用程序对象
 	QApplication* app = qobject_cast<QApplication*>(QCoreApplication::instance());
-
+	SqlLog::saveLog(content);
 	// 使用应用程序对象获取主窗口指针
 	if (app) {
 		QWidget* widget = qobject_cast<QWidget*>(app->activeWindow());
@@ -327,5 +327,12 @@ QString Tools::Base64Decode(const QString& base64String)
 {
 	QByteArray encoded = QByteArray::fromBase64(base64String.toUtf8());
 	return QString::fromUtf8(encoded);
+}
+
+bool Tools::IsSystemDarkModeActive()
+{
+	QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", QSettings::NativeFormat);
+	QVariant themeValue = settings.value("AppsUseLightTheme", QVariant(1)); // 默认使用浅色主题
+	return themeValue.isValid() && themeValue.toInt() == 0;
 }
 
