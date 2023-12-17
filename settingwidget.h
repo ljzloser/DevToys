@@ -13,6 +13,8 @@ public:
 	~SettingWidget();
 signals:
 	void themeChanged(int);
+	void borderColorChanged(QColor);
+	void borderRadiusChanged(int);
 public slots:
 	void loadUi(QWidget * widget = nullptr);
 private:

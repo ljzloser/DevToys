@@ -5,6 +5,7 @@
 #include <QDesktopServices>
 #include <qdebug.h>
 #include "tools.h"
+#include <qcolordialog.h>
 SettingWidget::SettingWidget(QWidget* parent)
 	: QWidget(parent)
 {
@@ -45,6 +46,19 @@ void SettingWidget::loadConfig()
 			{
 				QSpinBox* spinBox = qobject_cast<QSpinBox*>(obj);
 				spinBox->setValue(value.toInt());
+			}
+			else if (qobject_cast<QPushButton*>(obj))
+			{
+				QPushButton* pushButton = qobject_cast<QPushButton*>(obj);
+				if (objectName == "colorButton")
+				{
+					QColor color = value.value<QColor>();
+					pushButton->setStyleSheet(QString("background-color:%1;").arg(color.name()));
+				}
+			}
+			else
+			{
+
 			}
 		}
 	}
@@ -105,6 +119,18 @@ void SettingWidget::loadConnect()
 		});
 	connect(ui.beginDateEdit, &QDateEdit::dateChanged, this, &SettingWidget::loadLog);
 	connect(ui.endDateEdit, &QDateEdit::dateChanged, this, &SettingWidget::loadLog);
+	connect(ui.colorButton, &QPushButton::clicked, [=]()
+		{
+			QColorDialog dialog(ui.colorButton->palette().color(QPalette::Button),this);
+			if (dialog.exec())
+			{
+				ui.colorButton->setStyleSheet(QString("background-color:%1").arg(dialog.currentColor().name()));
+				emit borderColorChanged(ui.colorButton->palette().color(QPalette::Button).name());
+				Config::setValue("colorButton", dialog.currentColor().name());
+			}
+		});
+	connect(ui.boderRadiusSpinBox, &QSpinBox::valueChanged, this, &SettingWidget::saveConfig);
+
 }
 
 void SettingWidget::loadLog()
@@ -208,7 +234,8 @@ void SettingWidget::loadUi(QWidget* widget)
 				theme = isdark;
 				emit themeChanged(theme);
 			}
-
+			emit borderColorChanged(ui.colorButton->palette().color(QPalette::Button).name());
+			emit borderRadiusChanged(ui.boderRadiusSpinBox->value());
 			widget->update();
 		}
 	}

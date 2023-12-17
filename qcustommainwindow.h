@@ -47,7 +47,7 @@ public:
 	//设置圆角半径
 	virtual void setRadius(int radius);
 	//设置边框颜色
-	virtual void setBorderColor(QColor border_color, int border_size);
+	virtual void setBorderColor(QColor border_color, int border_size = 2);
 	//设置背景颜色
 	virtual void setBackgroundColor(QColor background_color);
 	//绘图事件
@@ -55,11 +55,11 @@ public:
 	//光标更新事件
 	virtual void updateCursorShape();
 	//鼠标移动事件
-	virtual void mouseMoveEvent(QMouseEvent* event);
+	void mouseMoveEvent(QMouseEvent* event);
 	//鼠标按下事件
-	virtual void mousePressEvent(QMouseEvent* event);
+	void mousePressEvent(QMouseEvent* event);
 	//鼠标释放事件
-	virtual void mouseReleaseEvent(QMouseEvent* event);
+	void mouseReleaseEvent(QMouseEvent* event);
 	//拦截事件
 	#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
 		bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result);

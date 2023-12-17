@@ -5,6 +5,7 @@
 #include "MainWindow.h"
 #include <cstdlib>
 #include "Config.h"
+#include <qcolordialog.h>
 
 int main(int argc, char *argv[])
 {

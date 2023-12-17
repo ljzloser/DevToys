@@ -60,9 +60,9 @@ QWidget::item:selected {
   background-color: #346792;
 }
 
-QWidget::item:hover:!selected {
+/* QWidget::item:hover:!selected {
   background-color: #1A72BB;
-}
+} */
 
 /* QMainWindow ------------------------------------------------------------
 

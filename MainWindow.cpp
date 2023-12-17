@@ -66,11 +66,14 @@ MainWindow::MainWindow(QWidget* parent): QCustomMainWindow(parent)
 			SqlLog::saveLog(QString("主题切换为%1").arg(theme == 1 ? "深色" : "浅色"));
         }
     );
+    QObject::connect(devtoys->settingWidget, &SettingWidget::borderColorChanged, [=](QColor color)
+        {
+			this->setBorderColor(color, 2);
+            this->update();
+        });
+    QObject::connect(devtoys->settingWidget, &SettingWidget::borderRadiusChanged, [=](int radius) {this->setRadius(radius); });
     this->setTitleBar(titleBar);
-
-
     this->setMainWidget(devtoys);
-
     this->setBorderColor(Qt::GlobalColor::lightGray,2);
 
     this->setEdgeSize(8);
