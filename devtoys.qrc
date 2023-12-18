@@ -31,7 +31,6 @@
         <file>icon/type.png</file>
         <file>icon/-.png</file>
         <file>ico.ico</file>
-        <file>icon/set.png</file>
         <file>icon/down.png</file>
         <file>icon/top.png</file>
         <file>icon/font.png</file>
@@ -42,5 +41,6 @@
         <file>icon/home.png</file>
         <file>icon/theme.png</file>
         <file>icon/文本转义-反转义.png</file>
+        <file>icon/设置.png</file>
     </qresource>
 </RCC>

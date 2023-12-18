@@ -24,9 +24,17 @@ DevToys::~DevToys()
 
 void DevToys::onFiterComboBoxTextChanged(QString text)
 {
+	if (text.isEmpty())
+	{
+		return;
+	}
 	QTreeView* treeView = this->navigator->getTree();
 	QStandardItemModel* model = static_cast<QStandardItemModel*>(treeView->model());
 	bool isFind = false;
+	// 获取选择模型
+	QItemSelectionModel* selectionModel = treeView->selectionModel();
+	// 清除所有选中的项
+	selectionModel->clearSelection();
 	// 遍历所有顶级项
 	for (int row = 0; row < model->rowCount(); ++row)
 	{
@@ -43,10 +51,6 @@ void DevToys::onFiterComboBoxTextChanged(QString text)
 				// 构建 QModelIndex
 				QModelIndex indexToSelect = model->index(childRow, 0, parentItem->index());
 
-				// 获取选择模型
-				QItemSelectionModel* selectionModel = treeView->selectionModel();
-				// 清除所有选中的项
-				selectionModel->clearSelection();
 				// 选中匹配的项
 				selectionModel->select(indexToSelect, QItemSelectionModel::Select | QItemSelectionModel::Rows);
 
@@ -57,6 +61,8 @@ void DevToys::onFiterComboBoxTextChanged(QString text)
 			}
 		}
 	}
+	// 如果没有找到匹配项。说明没在树中
+	this->showToolWidget(text);
 }
 
 void DevToys::loadUi()

@@ -32,6 +32,7 @@ public:
     DevToys(QWidget *parent = nullptr);
     ~DevToys();
     SettingWidget* settingWidget = new SettingWidget();
+    QSplitter* splitter = new QSplitter();
 public slots:
 	void onFiterComboBoxTextChanged(QString text);
 
@@ -49,7 +50,7 @@ private:
 
     IconLabelListView* listView = new IconLabelListView();
     NavigatorView* navigator = new NavigatorView();
-    QSplitter* splitter = new QSplitter();
+
     QStackedLayout* stackedLayout = new QStackedLayout();
 
 

@@ -15,6 +15,7 @@ class Config
 {
 public:
 	static QVariant getValue(QString& key);
+	static QVariant getValue(QString key);
 	static void setValue(QString key, QVariant value);
 	static QJsonObject getConfig();
 private:

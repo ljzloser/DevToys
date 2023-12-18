@@ -15,6 +15,29 @@ SettingWidget::SettingWidget(QWidget* parent)
 	ui.tableWidget->setVisible(false);
 	ui.beginDateEdit->setDate(QDate::currentDate());
 	ui.endDateEdit->setDate(QDate::currentDate().addDays(1));
+	ui.textBrowser->setMarkdown(
+	R"(
+# QDevToys
+
+#### 介绍
+- 无聊写的仿Devtoys工具，说实话Devtoys有好多bug尤其是那个复制，我只能点按钮，快捷键直接崩溃,再加上一点点吐槽。
+
+#### 软件架构
+- 本程序基于VS2022+Qt6.3.0,并使用了以下第三方库,图片资源来自阿里巴巴矢量图标库.
+	- 1.QsciScintilla;
+	- 2.Json-cpp;
+	- 3.YamI-cpp:
+	- 4.qdarkstyle;
+)");
+	ui.frame_8->setVisible(false);
+	ui.frame_9->setVisible(false);
+	ui.frame_10->setVisible(false);
+	ui.frame_11->setVisible(false);
+	ui.frame_2->setVisible(false);
+	ui.frame_3->setVisible(false);
+	ui.plainTextEdit->setVisible(false);
+	ui.frame_6->setVisible(false);
+	ui.textBrowser->setVisible(false);
 }
 
 SettingWidget::~SettingWidget()
@@ -22,7 +45,7 @@ SettingWidget::~SettingWidget()
 	SqlLog::writeLog();
 }
 
-void SettingWidget::loadConfig()
+void SettingWidget::loadConfig() const
 {
 	QJsonObject config = Config::getConfig();
 	for (auto it = config.begin(); it != config.end(); ++it)
@@ -56,6 +79,11 @@ void SettingWidget::loadConfig()
 					pushButton->setStyleSheet(QString("background-color:%1;").arg(color.name()));
 				}
 			}
+			else if (qobject_cast<QPlainTextEdit*>(obj))
+			{
+				QPlainTextEdit* plainTextEdit = qobject_cast<QPlainTextEdit*>(obj);
+				plainTextEdit->setPlainText(value.toString());
+			}
 			else
 			{
 
@@ -83,6 +111,11 @@ void SettingWidget::saveConfig()
 	{
 		QSpinBox* spinBox = qobject_cast<QSpinBox*>(sender());
 		value = spinBox->value();
+	}
+	else if (qobject_cast<QPlainTextEdit*>(sender()))
+	{
+		QPlainTextEdit* plainTextEdit = qobject_cast<QPlainTextEdit*>(sender());
+		value = plainTextEdit->toPlainText();
 	}
 	else
 	{
@@ -131,7 +164,26 @@ void SettingWidget::loadConnect()
 		});
 	connect(ui.boderRadiusSpinBox, &QSpinBox::valueChanged, this, &SettingWidget::saveConfig);
 	connect(ui.boderSizeSpinBox, &QSpinBox::valueChanged, this, &SettingWidget::saveConfig);
-
+	connect(ui.plainTextEdit, &QPlainTextEdit::textChanged, this, &SettingWidget::saveConfig);
+	connect(ui.opacitySpinBox, &QSpinBox::valueChanged, this, &SettingWidget::saveConfig);
+	connect(ui.expandButton, &QPushButton::clicked, [=]()
+		{
+			ui.frame_8->setVisible(!ui.frame_8->isVisible());
+			ui.frame_9->setVisible(!ui.frame_9->isVisible());
+			ui.frame_10->setVisible(!ui.frame_10->isVisible());
+			ui.frame_11->setVisible(!ui.frame_11->isVisible());
+		});
+	connect(ui.expandButton_2, &QPushButton::clicked, [=]()
+		{
+			ui.frame_2->setVisible(!ui.frame_2->isVisible());
+			ui.frame_3->setVisible(!ui.frame_3->isVisible());
+			ui.plainTextEdit->setVisible(!ui.plainTextEdit->isVisible());
+		});
+	connect(ui.expandButton_3, &QPushButton::clicked, [=]()
+		{
+			ui.frame_6->setVisible(!ui.frame_6->isVisible());
+			ui.textBrowser->setVisible(!ui.textBrowser->isVisible());
+		});
 }
 
 void SettingWidget::loadLog()
@@ -162,8 +214,8 @@ void SettingWidget::loadLog()
 		ui.tableWidget->setRowCount(0);
 		ui.tableWidget->setColumnCount(0);
 	}
-	// 自适应列宽和行高
-	ui.tableWidget->resizeColumnsToContents();
+	//// 自适应列宽和行高
+	//ui.tableWidget->resizeColumnsToContents();
 	ui.tableWidget->resizeRowsToContents();
 
 }
@@ -238,6 +290,7 @@ void SettingWidget::loadUi(QWidget* widget)
 			emit borderColorChanged(ui.colorButton->palette().color(QPalette::Button).name());
 			emit borderRadiusChanged(ui.boderRadiusSpinBox->value());
 			emit borderSizeChanged(ui.boderSizeSpinBox->value());
+			emit this->opacityChanged(ui.opacitySpinBox->value());
 			widget->update();
 		}
 	}

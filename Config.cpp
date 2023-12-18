@@ -25,7 +25,30 @@ QVariant Config::getValue(QString& key)
 	}
 
 }
+QVariant Config::getValue(QString key)
+{
+	Config::createConfigFile();
 
+	//读取配置文件中的XML
+	QString path = QApplication::applicationDirPath() + "/config.json";
+	QFile file(path);
+	if (!file.open(QIODevice::ReadOnly))
+	{
+		return QVariant();
+	}
+	else
+	{
+		QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
+		QJsonObject obj = doc.object();
+		if (!obj.contains(key))
+		{
+			return QVariant();
+		}
+		QVariant value = obj.value(key).toVariant();
+		return value;
+	}
+
+}
 void Config::setValue(QString key, QVariant value)
 {
 	Config::createConfigFile();

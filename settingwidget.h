@@ -4,6 +4,7 @@
 #include "ui_settingwidget.h"
 #include "Config.h"
 #include "sqllog.h"
+
 class SettingWidget : public QWidget
 {
 	Q_OBJECT
@@ -16,11 +17,12 @@ signals:
 	void borderColorChanged(QColor);
 	void borderRadiusChanged(int);
 	void borderSizeChanged(int);
+	void opacityChanged(int);
 public slots:
 	void loadUi(QWidget * widget = nullptr);
 private:
 	Ui::SettingWidgetClass ui;
-	void loadConfig();
+	void loadConfig() const;
 	void loadConnect();
 	void loadLog();
 	void showEvent(QShowEvent* event) override;

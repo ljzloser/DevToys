@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	MainWindow w;
 	// 获取当前屏幕大小
 	QRect screenRect = QGuiApplication::primaryScreen()->geometry();
-	QRect rect(0, 0, 1280, 800);
+	QRect rect(0, 0, 1280, 720);
 	rect.moveCenter(screenRect.center());
 	w.setGeometry(rect);
 	QObject::connect(&a, &QGuiApplication::paletteChanged, [&a]()

@@ -92,7 +92,7 @@ void NavigatorView::loadUi()
 	layout->addWidget(this->allToolsButton);
 	layout->addWidget(this->treeView);
 	layout->addWidget(this->setButton);
-	this->setButton->setIcon(QIcon(":/DevToys/icon/set.png"));
+	this->setButton->setIcon(QIcon(":/DevToys/icon/设置.png"));
 	this->setButton->setText("设置");
 	// 左对齐
 	this->setButton->setStyleSheet("QPushButton { text-align: left; padding-left: 5px; }");

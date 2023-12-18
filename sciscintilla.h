@@ -4,7 +4,7 @@
 #include <Qsci/qscilexerjson.h>
 #include <Qsci/qscilexeryaml.h>
 #include <Qsci/qsciscintillabase.h>
-
+#include <Qsci/qscilexermarkdown.h>
 
 /**
  * @brief QScintilla 的子类,用于扩展,使其支持自定义语法和样式。

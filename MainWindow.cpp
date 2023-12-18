@@ -1,9 +1,11 @@
 ﻿#include "MainWindow.h"
-
+#include <numeric>
 #include <qmainwindow.h>
 #include "sqllog.h"
 #include "windows.h"
 #include "windowsx.h"
+#include <qmath.h>
+
 #pragma comment (lib,"user32.lib")
 
 MainWindow::MainWindow(QWidget* parent): QCustomMainWindow(parent)
@@ -20,17 +22,30 @@ MainWindow::MainWindow(QWidget* parent): QCustomMainWindow(parent)
     QObject::connect(titleBar->comboBox, &QComboBox::currentTextChanged, devtoys, &DevToys::onFiterComboBoxTextChanged);
     QObject::connect(titleBar->topButton, &QPushButton::clicked, [=](bool checked)
         {
+
+
             // 切换窗口的置顶状态
             if (windowFlags() & Qt::WindowStaysOnTopHint) {
                 // 当前是置顶，移除置顶标志
                 setWindowFlags(windowFlags() & ~Qt::WindowStaysOnTopHint);
                 titleBar->topButton->setIcon(QIcon(":/DevToys/icon/top.png"));
+				QRect rect = this->geometry();
+				QRect newRect (0, 0, 1280, 720);
+				newRect.moveCenter(rect.center());
+				this->setGeometry(newRect);
+                devtoys->splitter->setSizes({ 350,1280 - 350 });
                 titleBar->topButton->setToolTip("置顶");
             }
             else {
                 // 当前不是置顶，添加置顶标志
                 setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
                 titleBar->topButton->setIcon(QIcon(":/DevToys/icon/down.png"));
+                QRect rect = this->geometry();
+                QRect newRect(0, 0, 720, 720);
+                newRect.moveCenter(rect.center());
+                this->setGeometry(newRect);
+                QList<int> sizes = devtoys->splitter->sizes();
+                devtoys->splitter->setSizes({ 0, 720 });
                 titleBar->topButton->setToolTip("取消置顶");
             }
             #ifdef Q_OS_WIN
@@ -72,6 +87,7 @@ MainWindow::MainWindow(QWidget* parent): QCustomMainWindow(parent)
         });
     QObject::connect(devtoys->settingWidget, &SettingWidget::borderRadiusChanged, [=](int radius) {this->setRadius(radius); });
 	QObject::connect(devtoys->settingWidget, &SettingWidget::borderSizeChanged, [=](int size) {this->setBorderSize(size); });
+    QObject::connect(devtoys->settingWidget, &SettingWidget::opacityChanged, [=](int size) {this->setWindowOpacity(size / 100.0); });
     this->setTitleBar(titleBar);
     this->setMainWidget(devtoys);
     this->setBorderColor(Qt::GlobalColor::lightGray);
@@ -81,7 +97,8 @@ MainWindow::MainWindow(QWidget* parent): QCustomMainWindow(parent)
     QPropertyAnimation* animation = new QPropertyAnimation(this, "windowOpacity");
     animation->setDuration(500);
     animation->setStartValue(0.0);
-    animation->setEndValue(1.0);
+    QVariant opacity = Config::getValue("opacitySpinBox");
+    animation->setEndValue(opacity.isValid() ? opacity.toDouble() / 100 : 1.0);
     animation->start(QPropertyAnimation::DeleteWhenStopped);
     devtoys->settingWidget->loadUi(this);
 }
