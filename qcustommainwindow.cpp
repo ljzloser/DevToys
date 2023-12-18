@@ -18,8 +18,8 @@ QCustomMainWindow::QCustomMainWindow(QWidget* parent)
 	//connect(this->timer, &QTimer::timeout, [=]() {
 	//	this->updateCursorShape(); //更新光标形状
 	//	});
-	this->timer->setParent(this); //设置父对象
-	this->timer->start(1000); //启动定时器
+	//this->timer->setParent(this); //设置父对象
+	//this->timer->start(1000); //启动定时器
 	this->layout->setContentsMargins(this->edge_size, this->edge_size, this->edge_size, this->edge_size); //设置布局边距
 	this->layout->setSpacing(0); //设置布局间距
 	this->setLayout(this->layout); //设置布局
@@ -123,9 +123,13 @@ void QCustomMainWindow::setRadius(int radius)
 	this->radius = radius;
 }
 
-void QCustomMainWindow::setBorderColor(QColor border_color, int border_size)
+void QCustomMainWindow::setBorderColor(QColor border_color)
 {
 	this->border_color = border_color;
+}
+
+void QCustomMainWindow::setBorderSize(int border_size)
+{
 	this->border_size = border_size;
 }
 

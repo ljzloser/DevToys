@@ -20,6 +20,13 @@ class Tools
 {
 public:
 	/**
+	 * @brief 将文本转义或反转义
+	 * @param text 待处理的文本
+	 * @param escape 是否转义
+	 * @return
+	*/
+	static QString escapeString(QString text, bool escape = true);
+	/**
 	 * @brief 将YAML转换为JSON
 	 * @param ynode  要转换的YAML
 	 * @param jnode  转换后的JSON
@@ -48,7 +55,7 @@ public:
 	static QString formatJson(const Json::Value& jnode, int indent = 4);
 	/**
 	 * @brief 将\uxxxx转换为UTF-8
-	 * @param result 
+	 * @param result
 	*/
 	static QString replaceUtf8(QString result);
 	/**
@@ -80,12 +87,12 @@ public:
 	static QString getClipboard();
 	/**
 	 * @brief 向剪切板设置图片
-	 * @param pixmap 
+	 * @param pixmap
 	*/
 	static void setClipboardPixmap(QPixmap pixmap);
 	/**
 	 * @brief 获取剪切板的图片
-	 * @return 
+	 * @return
 	*/
 	static QPixmap getClipboardPixmap();
 	/**
@@ -100,46 +107,46 @@ public:
 	 * @param targetBase 目标进制
 	 * @param formatOutput 是否格式化输出
 	*/
-	static QString convertBase(const QString& number, int currentBase, int targetBase,bool formatOutput);
+	static QString convertBase(const QString& number, int currentBase, int targetBase, bool formatOutput);
 	/**
 	 * @brief 编码HTML
-	 * @param text 
-	 * @return 
+	 * @param text
+	 * @return
 	*/
 	static QString htmlEncode(const QString& text);
 	/**
 	 * @brief 解码HTML
-	 * @param text 
-	 * @return 
+	 * @param text
+	 * @return
 	*/
 	static QString htmlDecode(const QString& text);
 	/**
 	 * @brief URL编码
-	 * @param plainText 
-	 * @return 
+	 * @param plainText
+	 * @return
 	*/
 	static QString urlEncode(const QString& plainText);
 	/**
 	 * @brief URL解码
-	 * @param encodedText 
-	 * @return 
+	 * @param encodedText
+	 * @return
 	*/
 	static QString urlDecode(const QString& encodedText);
 	/**
 	 * @brief Base64编码
-	 * @param inputString 
-	 * @return 
+	 * @param inputString
+	 * @return
 	*/
 	static QString Base64Encode(const QString& inputString);
 	/**
 	 * @brief Base64解码
-	 * @param base64String 
-	 * @return 
+	 * @param base64String
+	 * @return
 	*/
 	static QString Base64Decode(const QString& base64String);
 	/**
 	 * @brief 判断系统是否处于深色模式
-	 * @return 
+	 * @return
 	*/
 	static bool IsSystemDarkModeActive();
 

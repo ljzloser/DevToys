@@ -166,6 +166,7 @@
     <ClCompile Include="convertbinary.cpp" />
     <ClCompile Include="converthtml.cpp" />
     <ClCompile Include="converturl.cpp" />
+    <ClCompile Include="escapestringwidget.cpp" />
     <ClCompile Include="filtercombobox.cpp" />
     <ClCompile Include="iconlabel.cpp" />
     <ClCompile Include="iconlabellistview.cpp" />
@@ -210,6 +211,7 @@
     <QtUic Include="convertbinary.ui" />
     <QtUic Include="converthtml.ui" />
     <QtUic Include="converturl.ui" />
+    <QtUic Include="escapestringwidget.ui" />
     <QtUic Include="iconlabel.ui" />
     <QtUic Include="jsonstringformat.ui" />
     <QtUic Include="JsonToYaml.ui" />
@@ -242,6 +244,7 @@
     <QtMoc Include="qcustomtitlebar.h" />
     <QtMoc Include="MainWindow.h" />
     <QtMoc Include="filtercombobox.h" />
+    <QtMoc Include="escapestringwidget.h" />
     <ClInclude Include="sciscintilla.h" />
     <QtMoc Include="timestamp.h" />
     <QtMoc Include="slidebutton.h" />

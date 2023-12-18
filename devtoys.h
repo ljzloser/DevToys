@@ -21,6 +21,7 @@
 #include "stringhashgeneration.h"
 #include "uuidgeneration.h"
 #include "settingwidget.h"
+#include "escapestringwidget.h"
 #include <qevent.h>
 
 class DevToys : public QWidget
@@ -65,5 +66,6 @@ private:
     StringHashGeneration* stringHashGeneration = new StringHashGeneration();
     PasswordGeneration* passwordGeneration = new PasswordGeneration();
 	UuidGeneration* uuidGeneration = new UuidGeneration();
+	EscapeStringWidget* escapeStringWidget = new EscapeStringWidget();
 
 };

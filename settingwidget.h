@@ -15,6 +15,7 @@ signals:
 	void themeChanged(int);
 	void borderColorChanged(QColor);
 	void borderRadiusChanged(int);
+	void borderSizeChanged(int);
 public slots:
 	void loadUi(QWidget * widget = nullptr);
 private:

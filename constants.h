@@ -11,7 +11,7 @@ const std::map<QString, QStringList> treeMap{
 	{"编码解码类型工具",{"HTML编码解码工具","URL编码解码工具","Base64文本编码解码工具","Base64图像编码解码工具"}},
 	{"格式化类型工具",{"JSON字符串格式化工具","可扩展标记语言XML格式化工具"}},
 	{"生成类型工具",{"哈希散列生成工具","密码生成器","通用唯一识别码生成工具"}},
-	{"文本处理类型工具",{}},
+	{"文本处理类型工具",{"文本转义-反转义"}},
 	{"图片处理类型工具",{}},
 };
 const std::map<QString, QString> descriptionsMap{
@@ -26,7 +26,8 @@ const std::map<QString, QString> descriptionsMap{
 	{"可扩展标记语言XML格式化工具","格式化或压缩一个XML字符串"},
 	{"哈希散列生成工具","从文本数据计算MD5,SHA1,SHA256和SHA512的哈希值"},
 	{"密码生成器","生成随机密码"},
-	{"通用唯一识别码生成工具","生成唯一识别码"}
+	{"通用唯一识别码生成工具","生成唯一识别码"},
+	{"文本转义-反转义","转义或反转义一个字符串"}
 };
 // Icon资源目录
 const QString ICONDIR = ":/DevToys/icon/";

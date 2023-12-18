@@ -133,6 +133,9 @@
     <ClCompile Include="sqllog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="escapestringwidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -214,6 +217,9 @@
     <QtMoc Include="sqllog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="escapestringwidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="iconlabel.ui">
@@ -256,6 +262,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="settingwidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="escapestringwidget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿#include "Config.h"
-
+#include "sqllog.h"
 
 QVariant Config::getValue(QString& key)
 {
@@ -46,6 +46,7 @@ void Config::setValue(QString key, QVariant value)
 		file.write(QJsonDocument(obj).toJson());
 		file.close();
 	}
+	SqlLog::saveLog(QString("更新配置文件{%1:%2}").arg(key).arg(value.toString()), true);
 }
 
 QJsonObject Config::getConfig()

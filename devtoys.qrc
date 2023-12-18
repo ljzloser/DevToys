@@ -41,5 +41,6 @@
         <file>icon/生成类型工具-black.png</file>
         <file>icon/home.png</file>
         <file>icon/theme.png</file>
+        <file>icon/文本转义-反转义.png</file>
     </qresource>
 </RCC>

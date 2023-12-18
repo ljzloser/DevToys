@@ -47,7 +47,9 @@ public:
 	//设置圆角半径
 	virtual void setRadius(int radius);
 	//设置边框颜色
-	virtual void setBorderColor(QColor border_color, int border_size = 2);
+	virtual void setBorderColor(QColor border_color);
+	//设置边框大小
+	virtual void setBorderSize(int border_size = 2);
 	//设置背景颜色
 	virtual void setBackgroundColor(QColor background_color);
 	//绘图事件
@@ -90,7 +92,7 @@ protected:
 	QWidget* statusBar = nullptr; //状态栏
 	QPoint* drag_pos = nullptr; //拖动位置
 	QRect* customNormal = nullptr; //自定义正常状态
-	QTimer* timer = new QTimer(); //定时器
+	//QTimer* timer = new QTimer(); //定时器
 	QVBoxLayout* layout = new QVBoxLayout(); //布局
 	//分割线颜色
 	QColor split_line_color = Qt::GlobalColor::gray;

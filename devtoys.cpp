@@ -75,6 +75,7 @@ void DevToys::loadUi()
 	this->stringHashGeneration->setObjectName("哈希散列生成工具");
 	this->passwordGeneration->setObjectName("密码生成器");
 	this->uuidGeneration->setObjectName("通用唯一识别码生成工具");
+	this->escapeStringWidget->setObjectName("文本转义-反转义");
 	this->settingWidget->setObjectName("设置");
 	QWidget* widget = new QWidget(this);
 	widget->setLayout(this->stackedLayout);
@@ -94,7 +95,7 @@ void DevToys::loadUi()
 	this->stackedLayout->addWidget(this->stringHashGeneration);
 	this->stackedLayout->addWidget(this->passwordGeneration);
 	this->stackedLayout->addWidget(this->uuidGeneration);
-
+	this->stackedLayout->addWidget(this->escapeStringWidget);
 
 	this->stackedLayout->addWidget(this->settingWidget);
 

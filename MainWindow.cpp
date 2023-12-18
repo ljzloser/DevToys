@@ -63,18 +63,18 @@ MainWindow::MainWindow(QWidget* parent): QCustomMainWindow(parent)
                 this->setSplitLineColor(QColor("#19232D"));
                 titleBar->setTitleIcon(QIcon(":/DevToys/icon/生成类型工具.png"));
             }
-			SqlLog::saveLog(QString("主题切换为%1").arg(theme == 1 ? "深色" : "浅色"));
         }
     );
     QObject::connect(devtoys->settingWidget, &SettingWidget::borderColorChanged, [=](QColor color)
         {
-			this->setBorderColor(color, 2);
+			this->setBorderColor(color);
             this->update();
         });
     QObject::connect(devtoys->settingWidget, &SettingWidget::borderRadiusChanged, [=](int radius) {this->setRadius(radius); });
+	QObject::connect(devtoys->settingWidget, &SettingWidget::borderSizeChanged, [=](int size) {this->setBorderSize(size); });
     this->setTitleBar(titleBar);
     this->setMainWidget(devtoys);
-    this->setBorderColor(Qt::GlobalColor::lightGray,2);
+    this->setBorderColor(Qt::GlobalColor::lightGray);
 
     this->setEdgeSize(8);
     this->setWindowOpacity(0.0);

@@ -1,5 +1,31 @@
 ﻿#include "tools.h"
 #include "sqllog.h"
+#include "sqllog.h"
+
+QString Tools::escapeString(QString text, bool escape) {
+	// 如果为真对文本进行转义
+	if (escape)
+	{
+		// 转义
+		text = text.replace("\\", "\\\\");
+		text = text.replace("\"", "\\\"");
+		text = text.replace("\'", "\\\'");
+		text = text.replace("\n", "\\n");
+		text = text.replace("\r", "\\r");
+		text = text.replace("\t", "\\t");
+	}
+	else
+	{
+		//反转义
+		text = text.replace("\\\\", "\\");
+		text = text.replace("\\\"", "\"");
+		text = text.replace("\\\'", "\'");
+		text = text.replace("\\n", "\n");
+		text = text.replace("\\r", "\r");
+		text = text.replace("\\t", "\t");
+	}
+	return text;
+}
 
 bool Tools::convertYamlToJson(const YAML::Node& ynode, Json::Value& jnode)
 {

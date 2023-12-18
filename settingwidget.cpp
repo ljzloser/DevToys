@@ -130,6 +130,7 @@ void SettingWidget::loadConnect()
 			}
 		});
 	connect(ui.boderRadiusSpinBox, &QSpinBox::valueChanged, this, &SettingWidget::saveConfig);
+	connect(ui.boderSizeSpinBox, &QSpinBox::valueChanged, this, &SettingWidget::saveConfig);
 
 }
 
@@ -197,8 +198,8 @@ void SettingWidget::loadUi(QWidget* widget)
 				plainTextEdit->setFont(font);
 				plainTextEdit->setLineWrapMode(ui.autoLineButton->isChecked() ? QPlainTextEdit::WidgetWidth : QPlainTextEdit::NoWrap);
 			}
-			ui.aboutLabel->setFont(font);
-			ui.aboutLabel->setWordWrap(ui.autoLineButton->isChecked());
+			//ui.aboutLabel->setFont(font);
+			//ui.aboutLabel->setWordWrap(ui.autoLineButton->isChecked());
 
 			bool isdark = false;
 			switch (ui.themeComboBox->currentIndex())
@@ -236,6 +237,7 @@ void SettingWidget::loadUi(QWidget* widget)
 			}
 			emit borderColorChanged(ui.colorButton->palette().color(QPalette::Button).name());
 			emit borderRadiusChanged(ui.boderRadiusSpinBox->value());
+			emit borderSizeChanged(ui.boderSizeSpinBox->value());
 			widget->update();
 		}
 	}
