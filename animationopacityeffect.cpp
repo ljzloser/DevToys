@@ -13,19 +13,21 @@ AnimationOpacityEffect::~AnimationOpacityEffect()
 void AnimationOpacityEffect::inAnimationStart()
 {
 	QPropertyAnimation* fadeInAnimation = new QPropertyAnimation(this, "opacity");
-	fadeInAnimation->setDuration(this->m_duration);  
-	fadeInAnimation->setStartValue(0.0);  
-	fadeInAnimation->setEndValue(1.0);    
-	fadeInAnimation->start(QPropertyAnimation::DeleteWhenStopped);
 	connect(fadeInAnimation, &QPropertyAnimation::finished, [=]() {emit this->inAnimationFinished(); });
+	this->setAnimation(fadeInAnimation,0.0,1.0);
+}
+
+void AnimationOpacityEffect::setAnimation(QPropertyAnimation* animation, const QVariant& begin, const QVariant& end) const
+{
+	animation->setDuration(this->m_duration);
+	animation->setStartValue(begin);
+	animation->setEndValue(end);
+	animation->start(QPropertyAnimation::DeleteWhenStopped);
 }
 
 void AnimationOpacityEffect::outAnimationStart()
 {
 	QPropertyAnimation* fadeOutAnimation = new QPropertyAnimation(this, "opacity");
-	fadeOutAnimation->setDuration(this->m_duration);  
-	fadeOutAnimation->setStartValue(1.0);  
-	fadeOutAnimation->setEndValue(0.0);    
-	fadeOutAnimation->start(QPropertyAnimation::DeleteWhenStopped);
 	connect(fadeOutAnimation, &QPropertyAnimation::finished, [=]() {emit this->outAnimationFinished(); });
+	this->setAnimation(fadeOutAnimation, 1.0, 0.0);
 }
