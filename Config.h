@@ -17,9 +17,10 @@ public:
 	static QVariant getValue(QString& key);
 	static QVariant getValue(QString key);
 	static void setValue(QString key, QVariant value);
-	static QJsonObject getConfig();
+	static QVariantMap getConfig();
 private:
-	// 创建配置文件
-	static void createConfigFile();
+	/**
+	 * @brief 如果没有配置表则创建
+	*/
+	static void createTable();
 };
-

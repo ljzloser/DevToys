@@ -36,7 +36,7 @@ public:
 	template<typename T>
 	T executeScalar(const QString& query, T nullValue = T()) {
 		QVariant v = executeScalar(query);
-		return v.isNull() ? v.value<T>() : nullValue;
+		return v.isNull() ? nullValue : v.value<T>();
 	}
 	/**
 	 * @brief 查询第一行第一列
@@ -75,7 +75,7 @@ public:
 		QList<T> result;
 		for (QVariant v : list)
 		{
-			result.append(v.isNull() ? v.value<T>() : nullValue);
+			result.append(v.isNull() ? nullValue : v.value<T>());
 		}
 		return result;
 	}

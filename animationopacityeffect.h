@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QGraphicsEffect>
+#include <QPropertyAnimation>
 
 class AnimationOpacityEffect  : public QGraphicsOpacityEffect
 {

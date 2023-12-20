@@ -47,11 +47,11 @@ SettingWidget::~SettingWidget()
 
 void SettingWidget::loadConfig() const
 {
-	QJsonObject config = Config::getConfig();
+	QVariantMap config = Config::getConfig();
 	for (auto it = config.begin(); it != config.end(); ++it)
 	{
 		QString objectName = it.key();
-		QVariant value = it.value().toVariant();
+		QVariant value = it.value();
 		QObject* obj = this->findChild<QObject*>(objectName);
 		if (obj)
 		{

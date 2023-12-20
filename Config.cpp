@@ -3,102 +3,54 @@
 
 QVariant Config::getValue(QString& key)
 {
-	Config::createConfigFile();
-
-	//读取配置文件中的XML
-	QString path = QApplication::applicationDirPath() + "/config.json";
-	QFile file(path);
-	if (!file.open(QIODevice::ReadOnly))
-	{
-		return QVariant();
-	}
-	else
-	{
-		QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
-		QJsonObject obj = doc.object();
-		if (!obj.contains(key))
-		{
-			return QVariant();
-		}
-		QVariant value = obj.value(key).toVariant();
-		return value;
-	}
-
+	Config::createTable();
+	SqlExecutor sqlExecutor(QApplication::applicationDirPath() + "\\database.db");
+	QString sql = QString("SELECT value FROM config WHERE key = '%1'").arg(key);
+	return 	sqlExecutor.executeScalar<QVariant>(sql);
 }
 QVariant Config::getValue(QString key)
 {
-	Config::createConfigFile();
-
-	//读取配置文件中的XML
-	QString path = QApplication::applicationDirPath() + "/config.json";
-	QFile file(path);
-	if (!file.open(QIODevice::ReadOnly))
-	{
-		return QVariant();
-	}
-	else
-	{
-		QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
-		QJsonObject obj = doc.object();
-		if (!obj.contains(key))
-		{
-			return QVariant();
-		}
-		QVariant value = obj.value(key).toVariant();
-		return value;
-	}
-
+	Config::createTable();
+	SqlExecutor sqlExecutor(QApplication::applicationDirPath() + "\\database.db");
+	QString sql = QString("SELECT value FROM config WHERE key = '%1'").arg(key);
+	return 	sqlExecutor.executeScalar<QVariant>(sql);
 }
 void Config::setValue(QString key, QVariant value)
 {
-	Config::createConfigFile();
-	QString path = QApplication::applicationDirPath() + "/config.json";
-
-	QFile file(path);
-	if (!file.open(QIODevice::ReadOnly))
+	Config::createTable();
+	SqlExecutor sqlExecutor(QApplication::applicationDirPath() + "\\database.db");
+	QString sql = QString("SELECT COUNT(id) FROM config where Key = '%1'").arg(key);
+	if (sqlExecutor.executeScalar(sql, 0) == 0)
 	{
-		return;
+		sql = QString("insert into config(key,value) values('%1','%2')").arg(key).arg(value.toString());
 	}
 	else
 	{
-		QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
-		QJsonObject obj = doc.object();
-		obj.insert(key, value.toJsonValue());
-		file.close();
-		file.open(QIODevice::WriteOnly);
-		file.write(QJsonDocument(obj).toJson());
-		file.close();
+		sql = QString("update config set value = '%1' where key = '%2'").arg(value.toString()).arg(key);
 	}
-	SqlLog::saveLog(QString("更新配置文件{%1:%2}").arg(key).arg(value.toString()), true);
+	sqlExecutor.executeNonQuery(sql);
+	SqlLog::saveLog(QString("{%1,%2}").arg(key).arg(value.toString()));
 }
 
-QJsonObject Config::getConfig()
+QVariantMap Config::getConfig()
 {
-	Config::createConfigFile();
-
-	//读取配置文件中的XML
-	QString path = QApplication::applicationDirPath() + "/config.json";
-	QFile file(path);
-	if (!file.open(QIODevice::ReadOnly))
+	Config::createTable();
+	SqlExecutor sqlExecutor(QApplication::applicationDirPath() + "\\database.db");
+	QVariantMap result;
+	for (QVariantMap& map : sqlExecutor.executeQuery("select * from config"))
 	{
-		return QJsonObject();
+		result[map["key"].toString()] = map["value"];
 	}
-	else
-	{
-		QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
-		return doc.object();
-	}
+	return result;
 }
 
-
-void Config::createConfigFile()
+void Config::createTable()
 {
-	QString path = QApplication::applicationDirPath() + "/config.json";
-	if (!QFile::exists(path))
-	{
-		QFile file(path);
-		file.open(QIODevice::WriteOnly);
-		file.close();
-	}
-
+	QString sql = "CREATE TABLE IF NOT EXISTS config ("
+		"id INTEGER PRIMARY KEY AUTOINCREMENT,"
+		"key TEXT,"
+		"value TEXT"
+		");";
+	SqlExecutor sqlExecutor(QApplication::applicationDirPath() + "\\database.db");
+	sqlExecutor.executeNonQuery(sql);
 }
