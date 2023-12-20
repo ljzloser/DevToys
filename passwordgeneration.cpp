@@ -51,6 +51,7 @@ void PasswordGeneration::onGenerateButtonClicked()
 		Tools::showPopupMessage("密码长度超出int范围");
 	}
 
+#pragma region 初始化变量
 	const int numThreads = QThread::idealThreadCount();
 	const int numPerThread = totalLength / numThreads;
 	int count = ui.countspinBox->value();
@@ -75,6 +76,9 @@ void PasswordGeneration::onGenerateButtonClicked()
 	text.fill(' ', totalLength);
 	QMutex mutex;
 	QThreadPool pool;
+#pragma endregion
+
+#pragma region 循环加入到线程池
 	for (int i = 0; i < numThreads; ++i)
 	{
 		int offset = i * numPerThread;
@@ -87,8 +91,11 @@ void PasswordGeneration::onGenerateButtonClicked()
 			connect(task, &RandomStringTask::progress, &progressDialog, &QProgressDialog::setValue);
 		}
 	}
+#pragma endregion
+
 	if (flag) progressDialog.exec();
 	pool.waitForDone();
+#pragma region 关闭文本编辑器的相关功能来加速渲染并赋值
 	ui.exportsTextEdit->setUpdatesEnabled(false);
 	ui.exportsTextEdit->blockSignals(true);
 	for (int i = 0; i < count; i++)
@@ -98,4 +105,5 @@ void PasswordGeneration::onGenerateButtonClicked()
 	ui.exportsTextEdit->blockSignals(false);
 	ui.exportsTextEdit->setUpdatesEnabled(true);
 	ui.exportsTextEdit->update();
+#pragma endregion
 }

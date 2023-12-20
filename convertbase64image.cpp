@@ -1,7 +1,7 @@
 ﻿#include "convertbase64image.h"
+#include <QBuffer>
 #include <QFileDialog>
 #include <qmessagebox.h>
-#include <QBuffer>
 
 ConvertBase64Image::ConvertBase64Image(QWidget* parent)
 	: QWidget(parent)

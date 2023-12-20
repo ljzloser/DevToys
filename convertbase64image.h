@@ -1,14 +1,14 @@
 ﻿#pragma once
 
-#include <QWidget>
-#include "ui_convertbase64image.h"
 #include "tools.h"
+#include "ui_convertbase64image.h"
+#include <qcursor.h>
+#include <QDesktopServices>
+#include <qevent.h>
 #include <qimagereader.h>
 #include <qmimedata.h>
-#include <qcursor.h>
-#include <qevent.h>
 #include <QTemporaryFile>
-#include <QDesktopServices>
+#include <QWidget>
 class ConvertBase64Image : public QWidget
 {
 	Q_OBJECT

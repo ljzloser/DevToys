@@ -1,9 +1,13 @@
 ﻿#pragma once
 
-#include <QFrame>
 #include "ui_iconlabel.h"
 #include <qevent.h>
-#include <qpushbutton.h>
+#include <qcoreevent.h>
+#include <qstring.h>
+#include <qtmetamacros.h>
+#include <qpixmap.h>
+#include <qframe.h>
+#include <qwidget.h>
 /**
  * @brief 图标标签类
 */

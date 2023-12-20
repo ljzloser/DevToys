@@ -1,6 +1,5 @@
 ﻿#include "tools.h"
 #include "sqllog.h"
-#include "sqllog.h"
 
 QString Tools::escapeString(QString text, bool escape) {
 	// 如果为真对文本进行转义

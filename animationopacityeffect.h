@@ -1,7 +1,10 @@
 #pragma once
 
-#include <QGraphicsEffect>
-#include <QPropertyAnimation>
+#include <qgraphicseffect.h>
+#include <qobject.h>
+#include <qpropertyanimation.h>
+#include <qtmetamacros.h>
+#include <qvariant.h>
 
 class AnimationOpacityEffect : public QGraphicsOpacityEffect
 {

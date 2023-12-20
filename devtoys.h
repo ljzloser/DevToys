@@ -1,29 +1,29 @@
 ﻿#pragma once
 
-#include <QtWidgets/QWidget>
-#include <qsplitter.h>
-#include <qstackedlayout.h>
-#include <QLabel>
-#include "qcustommainwindow.h"
-#include "qcustomtitlebar.h"
-#include "iconlabellistview.h"
-#include "navigatorview.h"
-#include "jsontoyaml.h"
-#include "timestamp.h"
+#include "convertbase64.h"
+#include "convertbase64image.h"
 #include "convertbinary.h"
 #include "converthtml.h"
 #include "converturl.h"
-#include "convertbase64.h"
-#include "convertbase64image.h"
-#include "jsonstringformat.h"
-#include "xmlstringformat.h"
-#include "passwordgeneration.h"
-#include "stringhashgeneration.h"
-#include "uuidgeneration.h"
-#include "settingwidget.h"
 #include "escapestringwidget.h"
+#include "iconlabellistview.h"
+#include "jsonstringformat.h"
+#include "jsontoyaml.h"
 #include "markdownpreviewwidget.h"
-#include <qevent.h>
+#include "navigatorview.h"
+#include "passwordgeneration.h"
+#include "settingwidget.h"
+#include "stringhashgeneration.h"
+#include "timestamp.h"
+#include "uuidgeneration.h"
+#include "xmlstringformat.h"
+#include <qcontainerfwd.h>
+#include <qlabel.h>
+#include <qsplitter.h>
+#include <qstackedlayout.h>
+#include <qstring.h>
+#include <qtmetamacros.h>
+#include <qwidget.h>
 
 class DevToys : public QWidget
 {

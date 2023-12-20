@@ -29,5 +29,6 @@ int main(int argc, char* argv[])
 			qDebug() << QGuiApplication::palette();
 		});
 	w.show();
+	qDebug() << "程序启动";
 	return a.exec();
 }

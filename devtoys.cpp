@@ -1,6 +1,21 @@
-﻿#include "devtoys.h"
-#include "qtimezone.h"
-#include <QSortFilterProxyModel>
+﻿#include "animationopacityeffect.h"
+#include "constants.h"
+#include "devtoys.h"
+#include "iconlabellistview.h"
+#include "navigatorview.h"
+#include <qabstractitemmodel.h>
+#include <qapplication.h>
+#include <qboxlayout.h>
+#include <qcontainerfwd.h>
+#include <qdir.h>
+#include <qitemselectionmodel.h>
+#include <qobject.h>
+#include <qpushbutton.h>
+#include <qstandarditemmodel.h>
+#include <qstring.h>
+#include <qtreeview.h>
+#include <qwidget.h>
+#include <utility>
 
 DevToys::DevToys(QWidget* parent)
 	: QWidget(parent)
