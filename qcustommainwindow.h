@@ -63,11 +63,11 @@ public:
 	//鼠标释放事件
 	void mouseReleaseEvent(QMouseEvent* event);
 	//拦截事件
-	#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
-		bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result);
-	#else
-		bool nativeEvent(const QByteArray& eventType, void* message, long* result);
-	#endif
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+	bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result);
+#else
+	bool nativeEvent(const QByteArray& eventType, void* message, long* result);
+#endif
 	//设置分割线颜色
 	virtual void setSplitLineColor(QColor split_line_color);
 	//事件过滤器

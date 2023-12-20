@@ -1,6 +1,6 @@
 ﻿#include "uuidgeneration.h"
 
-UuidGeneration::UuidGeneration(QWidget *parent)
+UuidGeneration::UuidGeneration(QWidget* parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);

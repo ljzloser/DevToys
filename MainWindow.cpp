@@ -12,7 +12,6 @@ MainWindow::MainWindow(QWidget* parent) : QCustomMainWindow(parent)
 {
 	SqlLog::saveLog("QDevToys启动");
 
-
 	this->loadConnect();
 	this->loadUi();
 	QPropertyAnimation* animation = new QPropertyAnimation(this, "windowOpacity");
@@ -113,4 +112,3 @@ MainWindow::~MainWindow()
 {
 	SqlLog::saveLog("QDevToys退出", true);
 }
-

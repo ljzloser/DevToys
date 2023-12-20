@@ -9,13 +9,11 @@ QCustomTitleBar::QCustomTitleBar(QWidget* parent) : QWidget(parent)
 	this->layout = new QHBoxLayout(this);
 	this->layout->setContentsMargins(0, 0, 0, 0);
 
-
 	/*自动缩放的占位符*/
 	QSpacerItem* spacerItem = new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-
 	QStringList list;
-	for (std::pair<const QString,QString> var: descriptionsMap)
+	for (std::pair<const QString, QString> var : descriptionsMap)
 	{
 		list.append(var.first);
 	}
@@ -30,7 +28,6 @@ QCustomTitleBar::QCustomTitleBar(QWidget* parent) : QWidget(parent)
 
 	//再添加一个占位符，使得搜索框居中
 	QSpacerItem* spacerItem2 = new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
 
 	//初始化按钮图标
 	this->standardIconMap.insert(ButtonIcon::MinButtonIcon, style()->standardIcon(QStyle::SP_TitleBarMinButton));
@@ -65,7 +62,6 @@ QCustomTitleBar::QCustomTitleBar(QWidget* parent) : QWidget(parent)
 	this->closeButton->setCursor(Qt::PointingHandCursor);
 	connect(this->closeButton, &QPushButton::clicked, this, &QCustomTitleBar::closeButtonClicked);
 	this->closeButton->setToolTip("关闭");
-
 
 	this->layout->addSpacerItem(spacerItem);
 	this->layout->addWidget(comboBox);
@@ -125,16 +121,15 @@ void QCustomTitleBar::setTitleText(const QString& text)
 void QCustomTitleBar::updateIcon()
 {
 	if (this->flag) {
-		
 		this->maxButton->setIcon(this->standardIconMap.value(ButtonIcon::MaxButtonIcon));
 		for (QAction* action : menu->actions()) {
 			if (action->objectName() == "maximizeAction") {
 				action->setIcon(this->standardIconMap.value(ButtonIcon::MaxButtonIcon));
-				
+
 				continue;
 			}
 		}
-/*		QCustomTitleBar::maxButtonClicked()*/;
+		/*		QCustomTitleBar::maxButtonClicked()*/;
 		this->flag = false;
 	}
 	else {
@@ -279,7 +274,7 @@ void QCustomTitleBar::paintEvent(QPaintEvent* event)
 	//微软雅黑
 	font.setFamily("Microsoft YaHei");
 	painter.setFont(font);
-	 
+
 	// 绘制标题
 	painter.drawText(40, 0, this->width() - 40, 25, Qt::AlignLeft | Qt::AlignVCenter, this->title);
 	painter.end();

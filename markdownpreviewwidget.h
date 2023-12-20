@@ -8,7 +8,7 @@ class MarkDownPreviewWidget : public QWidget
 	Q_OBJECT
 
 public:
-	MarkDownPreviewWidget(QWidget *parent = nullptr);
+	MarkDownPreviewWidget(QWidget* parent = nullptr);
 	~MarkDownPreviewWidget();
 
 private:

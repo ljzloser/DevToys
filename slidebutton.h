@@ -9,26 +9,25 @@
 #include <QPropertyAnimation>
 #include <qpushbutton.h>
 
-
 /**
  * @brief 滑动按钮
 */
-class SlideButton  : public QWidget
+class SlideButton : public QWidget
 {
 	Q_OBJECT
-	Q_PROPERTY(QPointF position READ position WRITE setPosition)
+		Q_PROPERTY(QPointF position READ position WRITE setPosition)
 public:
-	SlideButton(QWidget *parent = nullptr,QVector<QString> names = { "关闭","打开" });
+	SlideButton(QWidget* parent = nullptr, QVector<QString> names = { "关闭","打开" });
 	~SlideButton();
 	/**
 	 * @brief 点击
-	 * @return 
+	 * @return
 	*/
 	bool click();
 	bool isChecked() const;
 	/**
 	 * @brief 设置默认选中
-	 * @param checked 
+	 * @param checked
 	*/
 	void setDefaultChecked(bool checked) { this->m_isChecked = checked; this->NameLabel->setText(m_names[checked]); }
 
@@ -43,7 +42,7 @@ public:
 	 * @param names 第一个为关闭，第二个为开
 	*/
 	void setName(QVector<QString> names) { this->m_names = names; this->NameLabel->setText(m_names[this->isChecked()]); }
-	
+
 	QColor borderColor() const { return this->m_borderColor; }
 	QColor borderColorHover() const { return this->m_borderColorHover; }
 	QColor backgroundColor() const { return this->m_backgroundColor; }
@@ -63,8 +62,6 @@ private slots:
 	*/
 	void setPosition(QPointF newValue);
 	QPointF position() { return m_position; }
-
-
 
 private:
 	void mouseReleaseEvent(QMouseEvent* event);
@@ -88,5 +85,5 @@ private:
 	QPropertyAnimation* animation = new QPropertyAnimation(this, "position");
 	QPointF left;
 	QPointF right;
-	QVector<QString> m_names = {"关闭","打开"};
+	QVector<QString> m_names = { "关闭","打开" };
 };

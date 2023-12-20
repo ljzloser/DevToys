@@ -3,7 +3,7 @@
 #include <QGraphicsEffect>
 #include <QPropertyAnimation>
 
-class AnimationOpacityEffect  : public QGraphicsOpacityEffect
+class AnimationOpacityEffect : public QGraphicsOpacityEffect
 {
 	Q_OBJECT
 signals:
@@ -11,7 +11,7 @@ signals:
 	void outAnimationFinished();
 
 public:
-	AnimationOpacityEffect(QObject *parent);
+	AnimationOpacityEffect(QObject* parent);
 	~AnimationOpacityEffect();
 	void setDuration(int duration) { this->m_duration = duration; };
 	virtual void inAnimationStart();

@@ -149,6 +149,4 @@ public:
 	 * @return
 	*/
 	static bool IsSystemDarkModeActive();
-
 };
-

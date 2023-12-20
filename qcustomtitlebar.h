@@ -54,7 +54,7 @@ public:
 	//设置关闭按钮图标
 	QIcon setCloseButtonIcon(const QIcon& icon);
 	QIcon setCloseButtonIcon(const QString& iconPath);
-	
+
 	void paintEvent(QPaintEvent* event) override;
 
 signals:
@@ -79,7 +79,6 @@ private:
 	QMenu* menu; //标题栏菜单
 	bool flag; //最大化按钮标志
 	QMap<ButtonIcon, QIcon> standardIconMap; //标准按钮图标
-
 };
 
 #endif // CUSTOMTITLE_H

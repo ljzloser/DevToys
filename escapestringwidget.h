@@ -11,7 +11,7 @@ class EscapeStringWidget : public QWidget
 	Q_OBJECT
 
 public:
-	EscapeStringWidget(QWidget *parent = nullptr);
+	EscapeStringWidget(QWidget* parent = nullptr);
 	~EscapeStringWidget();
 
 private:

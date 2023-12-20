@@ -5,13 +5,12 @@
 #include "tools.h"
 #include <QCryptographicHash>
 
-
 class StringHashGeneration : public QWidget
 {
 	Q_OBJECT
 
 public:
-	StringHashGeneration(QWidget *parent = nullptr);
+	StringHashGeneration(QWidget* parent = nullptr);
 	~StringHashGeneration();
 
 private:

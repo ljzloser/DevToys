@@ -7,11 +7,11 @@
 #include "Config.h"
 #include <qcolordialog.h>
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	_putenv_s("QT_FONT_DPI", "96");
-    QApplication a(argc, argv);
-    // 加载样式表文件
+	QApplication a(argc, argv);
+	// 加载样式表文件
 
 	QTranslator translator;
 	if (translator.load(QApplication::applicationDirPath() + "\\translations\\qt_zh_CN.qm")) {
@@ -26,8 +26,8 @@ int main(int argc, char *argv[])
 	w.setGeometry(rect);
 	QObject::connect(&a, &QGuiApplication::paletteChanged, [&a]()
 		{
-			qDebug()<<QGuiApplication::palette();
+			qDebug() << QGuiApplication::palette();
 		});
-    w.show();
-    return a.exec();
+	w.show();
+	return a.exec();
 }

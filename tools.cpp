@@ -236,12 +236,11 @@ void Tools::showPopupMessage(QString content)
 	if (app) {
 		QWidget* widget = qobject_cast<QWidget*>(app->activeWindow());
 		if (widget) {
-			// 在这里使用主窗口指针	
+			// 在这里使用主窗口指针
 			PopupMessage* message = new PopupMessage(widget);
 			// 计算文本需要的Rect
 			QFontMetrics fm = message->fontMetrics();
 			QRect rect1 = fm.boundingRect(content);
-
 
 			message->setFixedSize(rect1.width() + 30, rect1.height() + 30);
 
@@ -259,7 +258,6 @@ void Tools::showPopupMessage(QString content)
 QString Tools::convertBase(const QString& number, int currentBase, int targetBase, bool formatOutput) {
 	// 将输入的字符串转换为十进制数字
 	bool ok;
-
 
 	QRegularExpression separator("\\s");
 	QString strippedNumber = number;
@@ -280,8 +278,6 @@ QString Tools::convertBase(const QString& number, int currentBase, int targetBas
 	}
 
 	int decimalNumber = strippedNumber.toInt(&ok, currentBase);
-
-
 
 	if (!ok)
 	{
@@ -361,4 +357,3 @@ bool Tools::IsSystemDarkModeActive()
 	QVariant themeValue = settings.value("AppsUseLightTheme", QVariant(1)); // 默认使用浅色主题
 	return themeValue.isValid() && themeValue.toInt() == 0;
 }
-

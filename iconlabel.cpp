@@ -18,7 +18,6 @@ IconLabel::~IconLabel()
 
 void IconLabel::setIcon(QPixmap icon)
 {
-
 	ui.imageLabel->setPixmap(icon.scaled(ui.imageLabel->size()));
 }
 

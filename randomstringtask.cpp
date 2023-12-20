@@ -1,6 +1,6 @@
 ﻿#include "randomstringtask.h"
 
-RandomStringTask::RandomStringTask(int length, QString* result, QMutex* mutex, int offset, QAtomicInt* atomicInt,QList<int> type)
+RandomStringTask::RandomStringTask(int length, QString* result, QMutex* mutex, int offset, QAtomicInt* atomicInt, QList<int> type)
 	: QRunnable()
 {
 	this->m_length = length;

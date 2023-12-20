@@ -5,12 +5,12 @@
 #include <qlineedit.h>
 #include <qstringlistmodel.h>
 
-class FilterComboBox  : public QComboBox
+class FilterComboBox : public QComboBox
 {
 	Q_OBJECT
 
 public:
-	FilterComboBox(QWidget*parent = nullptr);
+	FilterComboBox(QWidget* parent = nullptr);
 	~FilterComboBox();
 	QCompleter* completer = new QCompleter(this);
 

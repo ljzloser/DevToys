@@ -10,13 +10,13 @@ class JsonStringFormat : public QWidget
 	Q_OBJECT
 
 public:
-	JsonStringFormat(QWidget *parent = nullptr);
+	JsonStringFormat(QWidget* parent = nullptr);
 	~JsonStringFormat();
 
 private:
 	Ui::JsonStringFormatClass ui;
 	void loadConnect();
-	
+
 private slots:
 	void onImportWidgetTextChanged();
 };

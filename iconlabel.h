@@ -12,7 +12,7 @@ class IconLabel : public QFrame
 	Q_OBJECT
 
 public:
-	IconLabel(QWidget *parent = nullptr);
+	IconLabel(QWidget* parent = nullptr);
 	~IconLabel();
 	/**
 	 * @brief 设置图标
@@ -21,12 +21,12 @@ public:
 	void setIcon(QPixmap icon);
 	/**
 	 * @brief 设置标题
-	 * @param title 
+	 * @param title
 	*/
 	void setTitle(QString title);
 	/**
 	 * @brief 设置描述
-	 * @param descriptions 
+	 * @param descriptions
 	*/
 	void setDescriptions(QString descriptions);
 

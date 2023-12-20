@@ -19,7 +19,6 @@ DevToys::~DevToys()
 		// 清理临时文件
 		QDir(Dir).removeRecursively();
 	}
-
 }
 
 void DevToys::onFiterComboBoxTextChanged(QString text)
@@ -67,8 +66,6 @@ void DevToys::onFiterComboBoxTextChanged(QString text)
 
 void DevToys::loadUi()
 {
-
-
 	this->jsonToYaml->setObjectName("JSON-YAML数据类型互转工具");
 	this->timestamp->setObjectName("Unix时间戳转换工具");
 	this->convertBinary->setObjectName("进制转换工具");
@@ -119,7 +116,6 @@ void DevToys::loadUi()
 		AnimationOpacityEffect* opacityEffect = new AnimationOpacityEffect(layoutWidget);
 		layoutWidget->setGraphicsEffect(opacityEffect);
 	}
-
 }
 
 void DevToys::showToolWidget(QString name)
@@ -153,18 +149,17 @@ void DevToys::loadConnect()
 	connect(navigator, &NavigatorView::parentItemClicked, this, &DevToys::onParentItemClicked);
 	connect(this->navigator, &NavigatorView::itemClicked, this, &DevToys::showToolWidget);
 	connect(this->listView, &IconLabelListView::itemClicked, this, &DevToys::showToolWidget);
-	connect(this->navigator->getSetButton(), &QPushButton::clicked, [=]() {showToolWidget(this->settingWidget->objectName());});
+	connect(this->navigator->getSetButton(), &QPushButton::clicked, [=]() {showToolWidget(this->settingWidget->objectName()); });
 	connect(this->navigator->getAllToolsButton(), &QPushButton::clicked, [=]() {
-			this->navigator->getTree()->selectionModel()->clearSelection();
-			QStringList names;
-			for (std::pair<const QString,QString> var : descriptionsMap)
-			{
-				names.append(var.first);
-			}
-			this->onParentItemClicked(names);
+		this->navigator->getTree()->selectionModel()->clearSelection();
+		QStringList names;
+		for (std::pair<const QString, QString> var : descriptionsMap)
+		{
+			names.append(var.first);
+		}
+		this->onParentItemClicked(names);
 		});
 }
-
 
 void DevToys::onParentItemClicked(QStringList& names)
 {

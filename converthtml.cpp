@@ -2,7 +2,7 @@
 #include <QFileDialog>
 #include <qmessagebox.h>
 
-ConvertHtml::ConvertHtml(QWidget *parent)
+ConvertHtml::ConvertHtml(QWidget* parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
@@ -15,7 +15,7 @@ ConvertHtml::~ConvertHtml()
 
 void ConvertHtml::loadConnect()
 {
-	connect(ui.ClearButton, &QPushButton::clicked, ui.importPlainTextEdit,&QPlainTextEdit::clear);
+	connect(ui.ClearButton, &QPushButton::clicked, ui.importPlainTextEdit, &QPlainTextEdit::clear);
 	connect(ui.pasteButton, &QPushButton::clicked, [=]() {ui.importPlainTextEdit->setPlainText(Tools::getClipboard()); });
 	connect(ui.OpenFileButton, &QPushButton::clicked, [=]()
 		{

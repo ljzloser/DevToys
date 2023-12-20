@@ -1,7 +1,6 @@
 ﻿#include "popupmessage.h"
 
-
-PopupMessage::PopupMessage(QWidget *parent)
+PopupMessage::PopupMessage(QWidget* parent)
 	: QLabel(parent)
 {
 	// 设置窗口透明度效果
@@ -16,7 +15,7 @@ PopupMessage::PopupMessage(QWidget *parent)
 PopupMessage::~PopupMessage()
 {}
 
-void PopupMessage::showEvent(QShowEvent * event)
+void PopupMessage::showEvent(QShowEvent* event)
 {
 	QTimer::singleShot(this->m_showTime, [=]() {this->opacityEffect->outAnimationStart(); });
 }

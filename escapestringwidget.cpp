@@ -1,6 +1,6 @@
 ﻿#include "escapestringwidget.h"
 
-EscapeStringWidget::EscapeStringWidget(QWidget *parent)
+EscapeStringWidget::EscapeStringWidget(QWidget* parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
@@ -39,7 +39,7 @@ void EscapeStringWidget::loadConnect()
 	connect(ui.copyButton, &QPushButton::clicked, [=]() {Tools::setClipboard(ui.exportsPlainTextEdit->toPlainText()); });
 	connect(ui.importPlainTextEdit, &QPlainTextEdit::textChanged, [=]()
 		{
-			ui.exportsPlainTextEdit->setPlainText(Tools::escapeString(ui.importPlainTextEdit->toPlainText(),ui.slideButton->isChecked()));
+			ui.exportsPlainTextEdit->setPlainText(Tools::escapeString(ui.importPlainTextEdit->toPlainText(), ui.slideButton->isChecked()));
 		});
 	connect(ui.slideButton, &SlideButton::clicked, [=]()
 		{

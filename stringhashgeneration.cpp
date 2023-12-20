@@ -20,7 +20,7 @@ void StringHashGeneration::loadConnect()
 	connect(ui.SHA512CopyButton, &QPushButton::clicked, [=]() {Tools::setClipboard(ui.SHA512LineEdit->text()); });
 	connect(ui.clearButton, &QPushButton::clicked, ui.importTextEdit, &QPlainTextEdit::clear);
 	connect(ui.pasteButton, &QPushButton::clicked, [=]() {ui.importTextEdit->setPlainText(Tools::getClipboard()); });
-	connect(ui.openFileButton, &QPushButton::clicked, [=]() 
+	connect(ui.openFileButton, &QPushButton::clicked, [=]()
 		{
 			QString fileName = QFileDialog::getOpenFileName(this, tr("选择文件"), ".");
 			if (!fileName.isEmpty())
@@ -36,7 +36,7 @@ void StringHashGeneration::loadConnect()
 				}
 			}
 		});
-	connect(ui.lowerButton, &SlideButton::clicked,this, &StringHashGeneration::onImportTextEditChanged);
+	connect(ui.lowerButton, &SlideButton::clicked, this, &StringHashGeneration::onImportTextEditChanged);
 	connect(ui.comboBox, &QComboBox::currentIndexChanged, this, &StringHashGeneration::onImportTextEditChanged);
 	connect(ui.importTextEdit, &QPlainTextEdit::textChanged, this, &StringHashGeneration::onImportTextEditChanged);
 }

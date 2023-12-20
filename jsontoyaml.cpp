@@ -22,7 +22,6 @@ void JsonToYaml::onIndentComboBoxCurrentIndexChanged(int index)
 	QString text = ui.exportsWidget->text();
 	if (ui.ConvertComboBox->currentIndex() == 0)
 	{
-
 		try
 		{
 			YAML::Node node = YAML::Load(text.toStdString());
@@ -30,7 +29,6 @@ void JsonToYaml::onIndentComboBoxCurrentIndexChanged(int index)
 		}
 		catch (...)
 		{
-
 		}
 	}
 	else
@@ -90,7 +88,6 @@ void JsonToYaml::onImportChanged()
 		}
 		catch (...)
 		{
-
 		}
 	}
 }
@@ -112,7 +109,6 @@ void JsonToYaml::onConvertComboBoxCurrentIndexChanged(int index)
 	}
 	ui.importWidget->setLexer(imporLexer);
 	ui.exportsWidget->setLexer(exportLexer);
-
 }
 void JsonToYaml::setUi()
 {
@@ -145,9 +141,8 @@ void JsonToYaml::loadConnect()
 				}
 			}
 		});
-	connect(ui.expandButton, &QPushButton::clicked, [=]() 
+	connect(ui.expandButton, &QPushButton::clicked, [=]()
 		{
 			ui.setGroupBox->setVisible(!ui.setGroupBox->isVisible());
-
 		});
 }

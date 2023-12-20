@@ -16,7 +16,7 @@ SettingWidget::SettingWidget(QWidget* parent)
 	ui.beginDateEdit->setDate(QDate::currentDate());
 	ui.endDateEdit->setDate(QDate::currentDate().addDays(1));
 	ui.textBrowser->setMarkdown(
-	R"(
+		R"(
 # QDevToys
 
 #### 介绍
@@ -86,7 +86,6 @@ void SettingWidget::loadConfig() const
 			}
 			else
 			{
-
 			}
 		}
 	}
@@ -128,8 +127,6 @@ void SettingWidget::saveConfig()
 	}
 }
 
-
-
 void SettingWidget::loadConnect()
 {
 	connect(ui.fontComboBox, &QFontComboBox::currentTextChanged, this, &SettingWidget::saveConfig);
@@ -154,7 +151,7 @@ void SettingWidget::loadConnect()
 	connect(ui.endDateEdit, &QDateEdit::dateChanged, this, &SettingWidget::loadLog);
 	connect(ui.colorButton, &QPushButton::clicked, [=]()
 		{
-			QColorDialog dialog(ui.colorButton->palette().color(QPalette::Button),this);
+			QColorDialog dialog(ui.colorButton->palette().color(QPalette::Button), this);
 			if (dialog.exec())
 			{
 				ui.colorButton->setStyleSheet(QString("background-color:%1").arg(dialog.currentColor().name()));
@@ -217,7 +214,6 @@ void SettingWidget::loadLog()
 	//// 自适应列宽和行高
 	//ui.tableWidget->resizeColumnsToContents();
 	ui.tableWidget->resizeRowsToContents();
-
 }
 
 void SettingWidget::showEvent(QShowEvent* event)
@@ -274,7 +270,7 @@ void SettingWidget::loadUi(QWidget* widget)
 			default:
 				break;
 			}
-			if ( (isdark != (theme == 1)) || theme == -1)
+			if ((isdark != (theme == 1)) || theme == -1)
 			{
 				QString filename = isdark ? ":/qdarkstyle/dark/darkstyle.qss" : ":/qdarkstyle/light/lightstyle.qss";
 				QFile file(filename);
@@ -295,4 +291,3 @@ void SettingWidget::loadUi(QWidget* widget)
 		}
 	}
 }
-

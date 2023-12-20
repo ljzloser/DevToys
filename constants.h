@@ -30,9 +30,6 @@ const std::map<QString, QString> descriptionsMap{
 	{"文本转义-反转义","转义或反转义一个字符串"},
 	{"MarkDown预览工具","预览MarkDown文档"},
 
-
-
-
 	{"设置","对程序某些选项进行设置提供更好的体验"}
 };
 // Icon资源目录

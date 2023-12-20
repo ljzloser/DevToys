@@ -5,14 +5,12 @@ ConvertBinary::ConvertBinary(QWidget* parent)
 {
 	ui.setupUi(this);
 	this->loadConnect();
-
 }
 ConvertBinary::~ConvertBinary()
 {}
 
 void ConvertBinary::onLineEidtTextChange()
 {
-
 	QWidget* widget = (QWidget*)sender();
 	for (QLineEdit* lineEdit : this->findChildren<QLineEdit*>())
 	{
@@ -21,7 +19,7 @@ void ConvertBinary::onLineEidtTextChange()
 	if (widget->objectName() == "slideButton")
 	{
 		ui.SixTeenLineEdit->setText(Tools::convertBase(ui.SixTeenLineEdit->text(), 16, 16, ui.slideButton->isChecked()));
-		ui.tenLineEdit->setText(Tools::convertBase(ui.tenLineEdit->text(), 10 ,10, ui.slideButton->isChecked()));
+		ui.tenLineEdit->setText(Tools::convertBase(ui.tenLineEdit->text(), 10, 10, ui.slideButton->isChecked()));
 		ui.eightLineEdit->setText(Tools::convertBase(ui.eightLineEdit->text(), 8, 8, ui.slideButton->isChecked()));
 		ui.twoLineEdit->setText(Tools::convertBase(ui.twoLineEdit->text(), 2, 2, ui.slideButton->isChecked()));
 	}
@@ -77,7 +75,6 @@ void ConvertBinary::loadConnect()
 	connect(ui.copyPushButton_2, &QPushButton::clicked, [=]() {Tools::setClipboard(ui.tenLineEdit->text()); });
 	connect(ui.copyPushButton_3, &QPushButton::clicked, [=]() {Tools::setClipboard(ui.eightLineEdit->text()); });
 	connect(ui.copyPushButton_4, &QPushButton::clicked, [=]() {Tools::setClipboard(ui.twoLineEdit->text()); });
-
 }
 
 void ConvertBinary::setLineEditText(QLineEdit* lineEidt, QString text)

@@ -6,7 +6,7 @@
 #include <QApplication>
 #include <qstring.h>
 
-class SqlLog  : public QObject
+class SqlLog : public QObject
 {
 	Q_OBJECT
 
@@ -15,16 +15,16 @@ public:
 	 * @brief 读取日志
 	 * @param BeginDate 开始日期
 	 * @param endDate 结束日期
-	 * @return 
+	 * @return
 	*/
-	static QList<QVariantMap> readLog(QDate BeginDate,QDate endDate);
+	static QList<QVariantMap> readLog(QDate BeginDate, QDate endDate);
 	/**
 	 * @brief 保存日志，这里是进行缓存。
 	 * 如果需要及时保存，传入isWrite = true，注意传入后会将已经缓存的一并写入
 	 * @param content 日志内容
 	 * @param isWrite 是否写入
 	*/
-	static void saveLog(const QString content,bool isWrite = false);
+	static void saveLog(const QString content, bool isWrite = false);
 	static int getLogCount();
 	static QList<QDateTime> getLogDate();
 	static QVariantMap getLog(int index);

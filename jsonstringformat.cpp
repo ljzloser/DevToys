@@ -18,7 +18,6 @@ JsonStringFormat::~JsonStringFormat()
 
 void JsonStringFormat::loadConnect()
 {
-
 	connect(ui.importWidget, &SciScintilla::textChanged, this, &JsonStringFormat::onImportWidgetTextChanged);
 	connect(ui.copyButton, &QPushButton::clicked, [=]() {Tools::setClipboard(ui.exportsWidget->text()); });
 	connect(ui.ClearButton, &QPushButton::clicked, ui.importWidget, &QsciScintilla::clear);
@@ -42,7 +41,6 @@ void JsonStringFormat::loadConnect()
 			}
 		});
 }
-
 
 void JsonStringFormat::onImportWidgetTextChanged()
 {

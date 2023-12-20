@@ -10,7 +10,7 @@ class UuidGeneration : public QWidget
 	Q_OBJECT
 
 public:
-	UuidGeneration(QWidget *parent = nullptr);
+	UuidGeneration(QWidget* parent = nullptr);
 	~UuidGeneration();
 
 private:

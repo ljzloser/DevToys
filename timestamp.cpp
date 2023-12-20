@@ -77,7 +77,7 @@ void Timestamp::loadConnect()
 	{
 		connect(spinBox, &QSpinBox::valueChanged, this, &Timestamp::setDateTime);
 	}
-	
+
 	connect(ui.CurrDatePushButton, &QPushButton::clicked, [=]() {this->setDateTime(true); });
 	connect(ui.timedoubleSpinBox, &QDoubleSpinBox::valueChanged, [=]() {this->setDateTime(false); });
 	connect(ui.copyButton, &QPushButton::clicked, [=]() {Tools::setClipboard(QString::number((qint64)ui.timedoubleSpinBox->value())); });

@@ -1,6 +1,6 @@
 ﻿#include "convertbase64.h"
 
-ConvertBase64::ConvertBase64(QWidget *parent)
+ConvertBase64::ConvertBase64(QWidget* parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);

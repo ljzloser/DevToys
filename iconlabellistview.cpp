@@ -1,13 +1,13 @@
 ﻿#include "iconlabellistview.h"
 #include <qlistview.h>
 #include "navigatorview.h"
-IconLabelListView::IconLabelListView(QWidget *parent)
+IconLabelListView::IconLabelListView(QWidget* parent)
 	: QListWidget(parent)
 {
 	this->setViewMode(QListWidget::IconMode);
 	this->setFlow(QListView::Flow::LeftToRight);
 	// 设置不横向滚动
-	
+
 	this->setResizeMode(QListView::ResizeMode::Adjust);
 	this->setSpacing(15);
 	// 禁止拖动
@@ -33,7 +33,6 @@ void IconLabelListView::setIconLabels(QStringList names)
 				emit this->itemClicked(name);
 			});
 		this->addItem(item);
-		this->setItemWidget(item,label);
-
+		this->setItemWidget(item, label);
 	}
 }

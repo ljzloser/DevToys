@@ -1,6 +1,6 @@
 ﻿#include "slidebutton.h"
 
-SlideButton::SlideButton(QWidget *parent, QVector<QString> names)
+SlideButton::SlideButton(QWidget* parent, QVector<QString> names)
 	: QWidget(parent)
 {
 	QVector<QString> m_names = names;
@@ -12,8 +12,6 @@ SlideButton::SlideButton(QWidget *parent, QVector<QString> names)
 	this->setbuttonColor(QColor(0, 0, 0));
 	this->setbuttonColorHover(QColor(0, 0, 0));
 
-
-
 	QHBoxLayout* layout = new QHBoxLayout();
 	layout->setContentsMargins(0, 0, 0, 0);
 
@@ -23,11 +21,7 @@ SlideButton::SlideButton(QWidget *parent, QVector<QString> names)
 	layout->addWidget(this->NameLabel);
 	layout->addWidget(this->button);
 
-
 	this->setLayout(layout);
-
-
-
 
 	this->animation->setDuration(100);
 	connect(this->animation, &QPropertyAnimation::finished, [=]()
@@ -43,7 +37,7 @@ SlideButton::SlideButton(QWidget *parent, QVector<QString> names)
 				this->animation->setEndValue(right);
 			}
 			this->m_position = this->animation->startValue().toPointF();
-		});	
+		});
 }
 
 SlideButton::~SlideButton()
@@ -69,7 +63,7 @@ bool SlideButton::isChecked() const
 	return this->m_isChecked;
 }
 
-void SlideButton::mouseReleaseEvent(QMouseEvent * event)
+void SlideButton::mouseReleaseEvent(QMouseEvent* event)
 {
 	if (event->button() == Qt::LeftButton)
 	{
@@ -96,21 +90,15 @@ void SlideButton::paintEvent(QPaintEvent* event)
 	QColor buttonColor = this->m_isHover ? this->buttonColorHover() : this->buttonColor();
 
 	painter.setRenderHint(QPainter::Antialiasing);
-	
+
 	painter.setPen(borderColor);
 
 	painter.setBrush(this->backgroundColor());
 	QRectF rect = this->button->geometry();
 	painter.drawRoundedRect(rect, 10, 10);
-	
-	
-
-
 
 	double radius = qMin((this->button->width() - 5) / 2.0 - 5, (this->button->height() - 5) / 2.0);
 	QPointF point = this->button->mapToParent(this->m_position);
-
-
 
 	if (this->isChecked())
 	{
@@ -120,12 +108,10 @@ void SlideButton::paintEvent(QPaintEvent* event)
 		painter.drawRoundedRect(rect, 10, 10);
 	}
 
-
 	painter.setBrush(buttonColor);
 	painter.drawEllipse(point, radius, radius);
 	update();
 }
-
 
 void SlideButton::resizeEvent(QResizeEvent* event)
 {

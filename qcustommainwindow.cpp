@@ -8,7 +8,6 @@
 #include "tools.h"
 #pragma comment (lib,"user32.lib")
 
-
 QCustomMainWindow::QCustomMainWindow(QWidget* parent)
 	: QWidget(parent)
 {
@@ -30,7 +29,6 @@ QCustomMainWindow::QCustomMainWindow(QWidget* parent)
 #endif
 	//安装事件过滤器识别拖动
 	this->installEventFilter(this);
-
 }
 
 QCustomMainWindow::~QCustomMainWindow()
@@ -140,7 +138,6 @@ void QCustomMainWindow::setBackgroundColor(QColor background_color)
 
 void QCustomMainWindow::paintEvent(QPaintEvent* event)
 {
-
 	QPainter* painter = new QPainter(this);
 	painter->setRenderHint(QPainter::Antialiasing); //反锯齿
 	painter->setPen(Qt::NoPen); //无边框
@@ -170,7 +167,6 @@ void QCustomMainWindow::paintEvent(QPaintEvent* event)
 	}
 	painter->end();
 	delete painter;
-
 }
 
 void QCustomMainWindow::updateCursorShape()
@@ -454,7 +450,6 @@ void QCustomMainWindow::mouseMoveEvent(QMouseEvent* event)
 			//标题栏不为空,并且拖动位置不为空
 			this->move(this->pos() + (event->pos() - *this->drag_pos));
 		}
-
 	}
 	*/
 }
@@ -494,7 +489,6 @@ void QCustomMainWindow::mouseReleaseEvent(QMouseEvent* event)
 		this->setCursor(Qt::ArrowCursor);
 	}
 	*/
-
 }
 
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))//Qt6
@@ -505,7 +499,6 @@ bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, 
 {
 	if (eventType == "windows_generic_MSG")
 	{
-
 		MSG* msg = static_cast<MSG*>(message);//转换类型
 		//不同的消息类型和参数进行不同的处理
 		if (msg->message == WM_NCCALCSIZE)
@@ -523,7 +516,6 @@ bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, 
 		}
 		else if (msg->message == WM_NCHITTEST)
 		{//如果是鼠标消息
-
 			long x = GET_X_LPARAM(msg->lParam);//获取鼠标x坐标
 			long y = GET_Y_LPARAM(msg->lParam);//获取鼠标y坐标
 			QPoint pos = mapFromGlobal(QPoint(x, y));
@@ -593,7 +585,6 @@ bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, 
 					return true;
 				}
 			}
-
 		}
 		else if (msg->wParam == PBT_APMSUSPEND && msg->message == WM_POWERBROADCAST)
 		{
@@ -607,7 +598,6 @@ bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, 
 		}
 		else if (msg->message == WM_NCRBUTTONUP) //如果是鼠标右键
 		{
-
 			// 获取系统菜单的句柄
 			HMENU hMenu = GetSystemMenu((HWND)this->winId(), FALSE);
 
@@ -664,13 +654,10 @@ bool QCustomMainWindow::eventFilter(QObject* obj, QEvent* event)
 {
 	if (obj == this)
 	{
-
 		if (event->type() == QEvent::WindowStateChange)
 		{
 			emit windowStateChanged();
 		}
-
-
 	}
 	return QWidget::eventFilter(obj, event);
 }

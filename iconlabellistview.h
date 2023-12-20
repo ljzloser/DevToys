@@ -13,11 +13,11 @@ class IconLabelListView : public QListWidget
 	Q_OBJECT
 
 public:
-	IconLabelListView(QWidget *parent = nullptr);
+	IconLabelListView(QWidget* parent = nullptr);
 	~IconLabelListView();
 	/**
 	 * @brief 设置图标标签类,IconLabel
-	 * @param names 
+	 * @param names
 	*/
 	void setIconLabels(QStringList names);
 signals:

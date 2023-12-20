@@ -2,7 +2,7 @@
 #include <QFileDialog>
 #include <qmessagebox.h>
 
-XmlStringFormat::XmlStringFormat(QWidget *parent)
+XmlStringFormat::XmlStringFormat(QWidget* parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
@@ -17,7 +17,6 @@ XmlStringFormat::~XmlStringFormat()
 {}
 void XmlStringFormat::loadConnect()
 {
-
 	connect(ui.importWidget, &SciScintilla::textChanged, this, &XmlStringFormat::onImportWidgetTextChanged);
 	connect(ui.copyButton, &QPushButton::clicked, [=]() {Tools::setClipboard(ui.exportsWidget->text()); });
 	connect(ui.ClearButton, &QPushButton::clicked, ui.importWidget, &QsciScintilla::clear);
@@ -42,7 +41,6 @@ void XmlStringFormat::loadConnect()
 		});
 }
 
-
 void XmlStringFormat::onImportWidgetTextChanged()
 {
 	QString errorString = "";
@@ -63,13 +61,12 @@ void XmlStringFormat::onImportWidgetTextChanged()
 	}
 	if (!text.isEmpty())
 	{
-		if (Tools::formatXml(text,indent, formatString,errorString))
+		if (Tools::formatXml(text, indent, formatString, errorString))
 		{
 			ui.exportsWidget->setText(formatString);
 		}
 		else
 		{
-
 			ui.exportsWidget->setText(errorString);
 		}
 	}

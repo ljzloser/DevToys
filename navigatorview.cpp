@@ -11,7 +11,7 @@ NavigatorView::~NavigatorView()
 {}
 void NavigatorView::onTreeItemClicked(QModelIndex index)
 {
-	QStandardItem * item = qobject_cast<QStandardItemModel*>(this->treeView->model())->itemFromIndex(index);
+	QStandardItem* item = qobject_cast<QStandardItemModel*>(this->treeView->model())->itemFromIndex(index);
 	if (item->hasChildren())
 	{
 		if (this->treeView->isExpanded(index))
@@ -21,7 +21,7 @@ void NavigatorView::onTreeItemClicked(QModelIndex index)
 		else
 		{
 			this->treeView->expand(index);
-		}	
+		}
 	}
 	if (this->loadTree().count(item->text()))
 	{
@@ -114,5 +114,3 @@ std::map<QString, QStringList> NavigatorView::loadTree()
 {
 	return treeMap;
 }
-
-

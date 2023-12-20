@@ -26,7 +26,7 @@ public:
 	}
 	/**
 	 * @brief 设置列高
-	 * @param height 
+	 * @param height
 	*/
 	void setItemHeight(int height) { this->height = height; }
 private:
@@ -45,22 +45,22 @@ public:
 	~NavigatorView();
 	/**
 	 * @brief 设置列高
-	 * @param height 
+	 * @param height
 	*/
 	void setItemHeight(int height);
 	/**
 	 * @brief 获取列高
-	 * @return  
+	 * @return
 	*/
 	int ItemHeight() const;
 	/**
 	 * @brief 设置列宽
-	 * @param width 
+	 * @param width
 	*/
 	void setItemWidth(int width);
 	/**
 	 * @brief 获取列宽
-	 * @return 
+	 * @return
 	*/
 	int ItemWidth() const;
 
@@ -107,5 +107,4 @@ private:
 
 	QPushButton* setButton = new QPushButton(this);
 	QPushButton* allToolsButton = new QPushButton(this);
-
 };

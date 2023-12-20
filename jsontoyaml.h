@@ -18,8 +18,6 @@ public:
 	JsonToYaml(QWidget* parent = nullptr);
 	~JsonToYaml();
 
-
-
 public slots:
 	/**
 	 * @brief 转换ComboBox的索引改变

@@ -11,7 +11,7 @@ class ConvertBase64 : public QWidget
 	Q_OBJECT
 
 public:
-	ConvertBase64(QWidget *parent = nullptr);
+	ConvertBase64(QWidget* parent = nullptr);
 	~ConvertBase64();
 
 private:

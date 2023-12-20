@@ -14,7 +14,7 @@ class ConvertBase64Image : public QWidget
 	Q_OBJECT
 
 public:
-	ConvertBase64Image(QWidget *parent = nullptr);
+	ConvertBase64Image(QWidget* parent = nullptr);
 	~ConvertBase64Image();
 
 public slots:
@@ -30,12 +30,12 @@ private:
 	void dragEnterEvent(QDragEnterEvent* event);
 	// 拖入松手后事件
 	void dropEvent(QDropEvent* event);
-	void dragMoveEvent(QDragMoveEvent * event);
+	void dragMoveEvent(QDragMoveEvent* event);
 	QString imageType;
 	QPixmap pixmap;
 	// 检查位置是否在您希望允许拖放的区域内
 
-	bool isWithinDropArea() const 
+	bool isWithinDropArea() const
 	{
 		QPoint pos = ui.frame_3->mapFromGlobal(QCursor::pos());
 		QRect dropArea = ui.frame_3->rect();

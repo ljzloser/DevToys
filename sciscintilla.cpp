@@ -1,6 +1,6 @@
 ﻿#include "sciscintilla.h"
 
-SciScintilla::SciScintilla(QWidget *parent)
+SciScintilla::SciScintilla(QWidget* parent)
 	: QsciScintilla(parent)
 {
 	this->setIndentationsUseTabs(false); // 不使用制表符

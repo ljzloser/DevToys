@@ -3,14 +3,13 @@
 #include <qmessagebox.h>
 #include <QBuffer>
 
-ConvertBase64Image::ConvertBase64Image(QWidget *parent)
+ConvertBase64Image::ConvertBase64Image(QWidget* parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
 	this->loadConnect();
 	// 开启拖入
 	this->setAcceptDrops(true);
-	
 }
 
 ConvertBase64Image::~ConvertBase64Image()
@@ -195,7 +194,7 @@ void ConvertBase64Image::loadConnect()
 				return;
 			}
 			//随机生成一个临时文件名
-			QString tempFileName = QApplication::applicationDirPath() +"\\temp\\" + QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch()) + ".png";
+			QString tempFileName = QApplication::applicationDirPath() + "\\temp\\" + QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch()) + ".png";
 			// 判断有没有temp文件夹
 			if (!QDir(QApplication::applicationDirPath() + "\\temp").exists())
 			{
@@ -223,7 +222,7 @@ void ConvertBase64Image::resizeEvent(QResizeEvent* event)
 }
 
 void ConvertBase64Image::dragEnterEvent(QDragEnterEvent* event)
-{	
+{
 	event->accept();
 	if (event->mimeData()->hasUrls())
 	{

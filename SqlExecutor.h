@@ -24,7 +24,6 @@ public:
 		}
 	}
 	~SqlExecutor() {
-
 	}
 	/**
 	 * @brief 查询第一行第一列，如果没有就返回T的默认值

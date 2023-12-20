@@ -2,7 +2,7 @@
 #include <QFileDialog>
 #include <qmessagebox.h>
 
-ConvertUrl::ConvertUrl(QWidget *parent)
+ConvertUrl::ConvertUrl(QWidget* parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);

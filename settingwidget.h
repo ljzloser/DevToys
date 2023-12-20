@@ -10,7 +10,7 @@ class SettingWidget : public QWidget
 	Q_OBJECT
 
 public:
-	SettingWidget(QWidget *parent = nullptr);
+	SettingWidget(QWidget* parent = nullptr);
 	~SettingWidget();
 signals:
 	void themeChanged(int);
@@ -19,7 +19,7 @@ signals:
 	void borderSizeChanged(int);
 	void opacityChanged(int);
 public slots:
-	void loadUi(QWidget * widget = nullptr);
+	void loadUi(QWidget* widget = nullptr);
 private:
 	Ui::SettingWidgetClass ui;
 	void loadConfig() const;
@@ -29,5 +29,4 @@ private:
 	int theme = -1;
 private slots:
 	void saveConfig();
-
 };

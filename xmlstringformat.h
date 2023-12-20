@@ -11,7 +11,7 @@ class XmlStringFormat : public QWidget
 	Q_OBJECT
 
 public:
-	XmlStringFormat(QWidget *parent = nullptr);
+	XmlStringFormat(QWidget* parent = nullptr);
 	~XmlStringFormat();
 
 private:

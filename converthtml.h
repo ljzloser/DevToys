@@ -9,7 +9,7 @@ class ConvertHtml : public QWidget
 	Q_OBJECT
 
 public:
-	ConvertHtml(QWidget *parent = nullptr);
+	ConvertHtml(QWidget* parent = nullptr);
 	~ConvertHtml();
 
 private:

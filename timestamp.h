@@ -14,7 +14,7 @@ class Timestamp : public QWidget
 	Q_OBJECT
 
 public:
-	Timestamp(QWidget *parent = nullptr);
+	Timestamp(QWidget* parent = nullptr);
 	~Timestamp();
 
 private slots:

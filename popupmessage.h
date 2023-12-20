@@ -9,12 +9,12 @@
 /**
  * @brief 弹出式消息框
 */
-class PopupMessage  : public QLabel
+class PopupMessage : public QLabel
 {
 	Q_OBJECT
 
 public:
-	PopupMessage(QWidget *parent);
+	PopupMessage(QWidget* parent);
 	~PopupMessage();
 	void setShowTime(int time) { this->m_showTime = time; };
 private:

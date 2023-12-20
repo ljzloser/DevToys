@@ -4,7 +4,7 @@
 #include <qfiledialog.h>
 #include <qmessagebox.h>
 
-MarkDownPreviewWidget::MarkDownPreviewWidget(QWidget *parent)
+MarkDownPreviewWidget::MarkDownPreviewWidget(QWidget* parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);

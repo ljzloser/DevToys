@@ -62,12 +62,11 @@ void PasswordGeneration::onGenerateButtonClicked()
 	QProgressDialog progressDialog(this);
 	if (flag)
 	{
-
 		progressDialog.setLabelText("正在生成密码...");
 		progressDialog.setRange(0, totalLength);
 		progressDialog.setCancelButton(nullptr);
 		progressDialog.setWindowModality(Qt::WindowModal);
-		progressDialog.setWindowFlags(progressDialog.windowFlags()  & ~Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
+		progressDialog.setWindowFlags(progressDialog.windowFlags() & ~Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
 	}
 
 	QAtomicInt atomicInt(0);
