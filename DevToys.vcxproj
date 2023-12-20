@@ -173,6 +173,7 @@
     <ClCompile Include="jsonstringformat.cpp" />
     <ClCompile Include="jsontoyaml.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="markdownpreviewwidget.cpp" />
     <ClCompile Include="navigatorview.cpp" />
     <ClCompile Include="passwordgeneration.cpp" />
     <ClCompile Include="popupmessage.cpp" />
@@ -215,6 +216,7 @@
     <QtUic Include="iconlabel.ui" />
     <QtUic Include="jsonstringformat.ui" />
     <QtUic Include="JsonToYaml.ui" />
+    <QtUic Include="markdownpreviewwidget.ui" />
     <QtUic Include="passwordgeneration.ui" />
     <QtUic Include="settingwidget.ui" />
     <QtUic Include="stringhashgeneration.ui" />
@@ -245,6 +247,7 @@
     <QtMoc Include="MainWindow.h" />
     <QtMoc Include="filtercombobox.h" />
     <QtMoc Include="escapestringwidget.h" />
+    <QtMoc Include="markdownpreviewwidget.h" />
     <ClInclude Include="sciscintilla.h" />
     <QtMoc Include="timestamp.h" />
     <QtMoc Include="slidebutton.h" />

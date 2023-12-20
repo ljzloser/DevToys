@@ -136,6 +136,9 @@
     <ClCompile Include="escapestringwidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="markdownpreviewwidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -220,6 +223,9 @@
     <QtMoc Include="escapestringwidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="markdownpreviewwidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="iconlabel.ui">
@@ -265,6 +271,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="escapestringwidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="markdownpreviewwidget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

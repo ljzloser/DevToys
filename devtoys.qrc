@@ -42,5 +42,6 @@
         <file>icon/theme.png</file>
         <file>icon/文本转义-反转义.png</file>
         <file>icon/设置.png</file>
+        <file>icon/MarkDown预览工具.png</file>
     </qresource>
 </RCC>

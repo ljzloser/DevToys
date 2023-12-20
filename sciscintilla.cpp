@@ -12,7 +12,9 @@ SciScintilla::SciScintilla(QWidget *parent)
 	this->setAutoCompletionSource(QsciScintilla::AutoCompletionSource::AcsAll); // 设置自动完成
 	this->setAutoCompletionThreshold(1); // 设置自动完成阈值
 	this->setWrapMode(QsciScintilla::WrapMode::WrapWord); // 设置自动换行
-
+	connect(this, &QsciScintilla::linesChanged, [=]() {
+		this->setMarginWidth(0, QString::number(this->lines()) + "0");
+		});
 }
 
 SciScintilla::~SciScintilla()

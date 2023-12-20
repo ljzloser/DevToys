@@ -22,6 +22,7 @@
 #include "uuidgeneration.h"
 #include "settingwidget.h"
 #include "escapestringwidget.h"
+#include "markdownpreviewwidget.h"
 #include <qevent.h>
 
 class DevToys : public QWidget
@@ -68,5 +69,6 @@ private:
     PasswordGeneration* passwordGeneration = new PasswordGeneration();
 	UuidGeneration* uuidGeneration = new UuidGeneration();
 	EscapeStringWidget* escapeStringWidget = new EscapeStringWidget();
+    MarkDownPreviewWidget* markDownPreviewWidget = new MarkDownPreviewWidget();
 
 };
