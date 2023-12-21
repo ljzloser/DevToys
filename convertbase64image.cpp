@@ -227,20 +227,13 @@ void ConvertBase64Image::dragEnterEvent(QDragEnterEvent* event)
 	if (event->mimeData()->hasUrls())
 	{
 		QString fileName = event->mimeData()->urls()[0].toLocalFile();
-		// 判断是不是图片
-		if (QFileInfo(fileName).suffix().toLower() == "png" ||
-			QFileInfo(fileName).suffix().toLower() == "jpeg" ||
-			QFileInfo(fileName).suffix().toLower() == "jpg" ||
-			QFileInfo(fileName).suffix().toLower() == "bmp" ||
-			QFileInfo(fileName).suffix().toLower() == "gif" ||
-			QFileInfo(fileName).suffix().toLower() == "ico" ||
-			QFileInfo(fileName).suffix().toLower() == "webp" ||
-			QFileInfo(fileName).suffix().toLower() == "svg")
-		{
+		QString suffix = QFileInfo(fileName).suffix().toLower();
+		QSet<QString> validImageFormats{ "png", "jpeg", "jpg", "bmp", "gif", "ico", "webp", "svg" };
+
+		if (validImageFormats.contains(suffix)) {
 			event->acceptProposedAction();
 		}
-		else
-		{
+		else {
 			event->ignore();
 		}
 	}

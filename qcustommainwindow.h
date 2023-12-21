@@ -53,15 +53,15 @@ public:
 	//设置背景颜色
 	virtual void setBackgroundColor(QColor background_color);
 	//绘图事件
-	void paintEvent(QPaintEvent* event);
+	void paintEvent(QPaintEvent* event) override;
 	//光标更新事件
 	virtual void updateCursorShape();
 	//鼠标移动事件
-	void mouseMoveEvent(QMouseEvent* event);
+	void mouseMoveEvent(QMouseEvent* event)override;
 	//鼠标按下事件
-	void mousePressEvent(QMouseEvent* event);
+	void mousePressEvent(QMouseEvent* event)override;
 	//鼠标释放事件
-	void mouseReleaseEvent(QMouseEvent* event);
+	void mouseReleaseEvent(QMouseEvent* event)override;
 	//拦截事件
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
 	bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result);
@@ -71,11 +71,17 @@ public:
 	//设置分割线颜色
 	virtual void setSplitLineColor(QColor split_line_color);
 	//事件过滤器
-	virtual bool eventFilter(QObject* obj, QEvent* event);
+	bool eventFilter(QObject* obj, QEvent* event) override;
 	// 窗口大小改变事件
-	virtual void resizeEvent(QResizeEvent* event);
+	void resizeEvent(QResizeEvent* event)override;
 signals:
+	/**
+	 * @brief 窗口状态改变
+	*/
 	void windowStateChanged();
+	/**
+	 * @brief 系统设置改变
+	*/
 	void systemSettingsChanged();
 protected:
 	QString dragging_edge = nullptr; //拖动的边缘

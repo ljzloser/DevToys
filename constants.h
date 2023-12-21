@@ -13,6 +13,8 @@ const std::map<QString, QStringList> treeMap{
 	{"生成类型工具",{"哈希散列生成工具","密码生成器","通用唯一识别码生成工具"}},
 	{"文本处理类型工具",{"文本转义-反转义","MarkDown预览工具"}},
 	{"图片处理类型工具",{}},
+	{"系统信息工具",{"系统信息"}},
+	{"数据库类型工具",{"简易SqlLite查询工具"}},
 };
 const std::map<QString, QString> descriptionsMap{
 	{"JSON-YAML数据类型互转工具","JSON和YAML数据类型互转工具"},
@@ -30,7 +32,9 @@ const std::map<QString, QString> descriptionsMap{
 	{"文本转义-反转义","转义或反转义一个字符串"},
 	{"MarkDown预览工具","预览MarkDown文档"},
 
-	{"设置","对程序某些选项进行设置提供更好的体验"}
+	{"系统信息","获取系统相关信息"},
+	{"简易SqlLite查询工具","查询SqlLite数据库"},
+	{"设置","对程序某些选项进行设置提供更好的体验" }
 };
 // Icon资源目录
 const QString ICONDIR = ":/DevToys/icon/";

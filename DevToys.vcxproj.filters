@@ -46,9 +46,6 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="navigatorview.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -139,6 +136,21 @@
     <ClCompile Include="markdownpreviewwidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="systeminfowidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlliteide.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SqlExecutor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -226,6 +238,15 @@
     <QtMoc Include="markdownpreviewwidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="SystemInfo.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="systeminfowidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="sqlliteide.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="iconlabel.ui">
@@ -276,6 +297,12 @@
     <QtUic Include="markdownpreviewwidget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="systeminfowidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="sqlliteide.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constants.h">
@@ -291,6 +318,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SqlExecutor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkSpeedMonitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

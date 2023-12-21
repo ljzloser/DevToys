@@ -6,6 +6,8 @@
 #include <qdebug.h>
 #include "tools.h"
 #include <qcolordialog.h>
+#include <qfiledialog.h>
+#include <qmessagebox.h>
 SettingWidget::SettingWidget(QWidget* parent)
 	: QWidget(parent)
 {
@@ -181,8 +183,34 @@ void SettingWidget::loadConnect()
 			ui.frame_6->setVisible(!ui.frame_6->isVisible());
 			ui.textBrowser->setVisible(!ui.textBrowser->isVisible());
 		});
-}
+	connect(ui.CSVButton, &QPushButton::clicked, [=]()
+		{
+			// 保存为CSV
+			// 获取文件名
 
+			QString fileName = QFileDialog::getSaveFileName(this, tr("保存文件"), "日志", tr("CSV文件(*.csv)"));
+			if (!fileName.isEmpty())
+			{
+				// 打开文件
+				QFile file(fileName);
+				if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+				{
+					QMessageBox::warning(this, tr("提示"), tr("保存失败"));
+					return;
+				}
+				SqlExecutor sqlExecutor(QApplication::applicationDirPath() + "\\database.db");
+				QString text = QString("SELECT id as '序号',datetime as '时间', content as '日志' FROM log WHERE datetime BETWEEN '%1' AND '%2'").arg(ui.beginDateEdit->date().toString("yyyy-MM-dd"), ui.endDateEdit->date().toString("yyyy-MM-dd"));
+				QString data = sqlExecutor.executeQueryCsv(text);
+
+				file.write("\xEF\xBB\xBF" + data.toUtf8());
+
+				// 关闭文件
+
+				file.close();
+				QMessageBox::information(this, tr("提示"), QString("保存至%1").arg(fileName));
+			}
+		});
+}
 void SettingWidget::loadLog()
 {
 	QList<QVariantMap> result = SqlLog::readLog(ui.beginDateEdit->date(), ui.endDateEdit->date());

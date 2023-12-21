@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <QWidget>
+#include <QtWidgets/QWidget>
 #include "ui_convertbase64.h"
 #include "tools.h"
 #include <qfiledialog.h>

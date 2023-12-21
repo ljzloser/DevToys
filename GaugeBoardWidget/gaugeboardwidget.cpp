@@ -17,6 +17,7 @@ GaugeBoardWidget::~GaugeBoardWidget()
 }
 void GaugeBoardWidget::init()
 {
+	this->value = minValue;
 	this->drawValue = minValue;
 	this->colorMap = QMap<ColorKey, QColor>({
 		{ColorKey::Background,QColor(Qt::GlobalColor::transparent)},
@@ -309,7 +310,7 @@ void GaugeBoardWidget::contextMenuEvent(QContextMenuEvent* e)
 	connect(&copyAction, &QAction::triggered, [=]()
 		{
 			QClipboard* clipboard = QApplication::clipboard();
-			QString text = QString("%1%2").arg(QString::number(this->drawValue, 'f', this->precision)).arg(this->unit);
+			QString text = QString("{%1 : %2%3}").arg(this->getName()).arg(QString::number(this->drawValue, 'f', this->precision)).arg(this->unit);
 			clipboard->setText(text);
 		});
 	menu.exec(e->globalPos());

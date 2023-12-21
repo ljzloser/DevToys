@@ -16,6 +16,7 @@ public:
 	~RandomStringTask();
 	// 重写QRunnable的run方法，这里执行任务
 	void run() override;
+
 signals:
 	// 进度信号，用于通知进度变化
 	void progress(int value);
@@ -24,6 +25,6 @@ private:
 	QString* m_result;          // 指向结果字符串的指针
 	QMutex* m_mutex;            // 用于互斥访问的互斥锁
 	int m_offset;               // 结果字符串的偏移量
-	QList<int> m_type;          // 字符串类型的列表，可能用于定义生成字符串的规则
+	QList<int> m_type;          // 字符串类型的列表，用于定义生成字符串的规则
 	QAtomicInt* m_atomicInt;    // 原子操作的整型，用于多线程中安全操作
 };

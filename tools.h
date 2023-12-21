@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "json/json.h"
+#include <json/json.h>
 #include <yaml-cpp/yaml.h>
 #include "constants.h"
 #include <qstring.h>

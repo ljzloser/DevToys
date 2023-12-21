@@ -96,8 +96,7 @@ void MainWindow::loadConnect()
 				this->setSplitLineColor(QColor("#19232D"));
 				titleBar->setTitleIcon(QIcon(":/DevToys/icon/生成类型工具.png"));
 			}
-		}
-	);
+		});
 	QObject::connect(devtoys->settingWidget, &SettingWidget::borderColorChanged, [=](QColor color)
 		{
 			this->setBorderColor(color);

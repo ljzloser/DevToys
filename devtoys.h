@@ -24,6 +24,9 @@
 #include <qstring.h>
 #include <qtmetamacros.h>
 #include <qwidget.h>
+#include "GaugeBoardWidget/gaugeboardwidget.h"
+#include "systeminfowidget.h"
+#include "sqlliteide.h"
 
 class DevToys : public QWidget
 {
@@ -35,26 +38,29 @@ public:
 	SettingWidget* settingWidget = new SettingWidget();
 	QSplitter* splitter = new QSplitter();
 public slots:
+	/**
+	 * 根据输入文本过滤树视图，通过选择并滚动到第一个匹配的项。
+	 * 如果找不到匹配项，则显示相应的工具小部件。
+	 *
+	 * @param text 用于过滤树视图的文本。
+	 */
 	void onFiterComboBoxTextChanged(QString text);
 
 private slots:
-	/**
-	 * @brief 根据objectName找到对应的widget并切换
-	 * 这里的name是widget的objectName
-	*/
+
 	void showToolWidget(QString name);
 	void onParentItemClicked(QStringList& names);
 
 private:
 	void loadUi();
 	void loadConnect();
+	void addWidgetToLayout(QString name, QWidget* widget);
 
 	IconLabelListView* listView = new IconLabelListView();
 	NavigatorView* navigator = new NavigatorView();
 
 	QStackedLayout* stackedLayout = new QStackedLayout();
-
-	QLabel* label = new QLabel();
+	GaugeBoardWidget* gaugeBoardWidget = new GaugeBoardWidget(0, 180);
 	JsonToYaml* jsonToYaml = new JsonToYaml();
 	Timestamp* timestamp = new Timestamp();
 	ConvertBinary* convertBinary = new ConvertBinary();
@@ -69,4 +75,7 @@ private:
 	UuidGeneration* uuidGeneration = new UuidGeneration();
 	EscapeStringWidget* escapeStringWidget = new EscapeStringWidget();
 	MarkDownPreviewWidget* markDownPreviewWidget = new MarkDownPreviewWidget();
+	SqlLiteIDE* sqlLiteIDE = new SqlLiteIDE();
+
+	SystemInfoWidget* systemInfoWidget = new SystemInfoWidget();
 };

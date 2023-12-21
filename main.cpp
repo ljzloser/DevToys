@@ -6,8 +6,7 @@
 #include <cstdlib>
 #include "Config.h"
 #include <qcolordialog.h>
-
-#include "GaugeBoardWidget/gaugeboardwidget.h"
+#include "SystemInfo.h"
 
 int main(int argc, char* argv[])
 {
@@ -19,20 +18,15 @@ int main(int argc, char* argv[])
 	if (translator.load(QApplication::applicationDirPath() + "\\translations\\qt_zh_CN.qm")) {
 		a.installTranslator(&translator);
 	}
-	QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // 启用高DPI缩放
+	//	QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // 启用高DPI缩放
 	MainWindow w;
+	//SqlLiteIDE w;
 	// 获取当前屏幕大小
 	QRect screenRect = QGuiApplication::primaryScreen()->geometry();
 	QRect rect(0, 0, 1280, 720);
 	rect.moveCenter(screenRect.center());
 	w.setGeometry(rect);
-	QObject::connect(&a, &QGuiApplication::paletteChanged, [&a]()
-		{
-			qDebug() << QGuiApplication::palette();
-		});
 	w.show();
 	qDebug() << "程序启动";
-	GaugeBoardWidget g(1, 180);
-	g.show();
 	return a.exec();
 }

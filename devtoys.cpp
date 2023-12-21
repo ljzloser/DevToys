@@ -81,56 +81,34 @@ void DevToys::onFiterComboBoxTextChanged(QString text)
 
 void DevToys::loadUi()
 {
-	this->jsonToYaml->setObjectName("JSON-YAML数据类型互转工具");
-	this->timestamp->setObjectName("Unix时间戳转换工具");
-	this->convertBinary->setObjectName("进制转换工具");
-	this->convertHtml->setObjectName("HTML编码解码工具");
-	this->convertUrl->setObjectName("URL编码解码工具");
-	this->convertBase64->setObjectName("Base64文本编码解码工具");
-	this->convertBase64Image->setObjectName("Base64图像编码解码工具");
-	this->jsonStringFormat->setObjectName("JSON字符串格式化工具");
-	this->xmlStringFormat->setObjectName("可扩展标记语言XML格式化工具");
-	this->stringHashGeneration->setObjectName("哈希散列生成工具");
-	this->passwordGeneration->setObjectName("密码生成器");
-	this->uuidGeneration->setObjectName("通用唯一识别码生成工具");
-	this->escapeStringWidget->setObjectName("文本转义-反转义");
-	this->markDownPreviewWidget->setObjectName("MarkDown预览工具");
-	this->settingWidget->setObjectName("设置");
 	QWidget* widget = new QWidget(this);
 	widget->setLayout(this->stackedLayout);
-
 	this->stackedLayout->setContentsMargins(0, 0, 0, 0);
-	this->stackedLayout->addWidget(this->listView);
-	this->stackedLayout->addWidget(this->label);
-	this->stackedLayout->addWidget(this->jsonToYaml);
-	this->stackedLayout->addWidget(this->timestamp);
-	this->stackedLayout->addWidget(this->convertBinary);
-	this->stackedLayout->addWidget(this->convertHtml);
-	this->stackedLayout->addWidget(this->convertUrl);
-	this->stackedLayout->addWidget(this->convertBase64);
-	this->stackedLayout->addWidget(this->convertBase64Image);
-	this->stackedLayout->addWidget(this->jsonStringFormat);
-	this->stackedLayout->addWidget(this->xmlStringFormat);
-	this->stackedLayout->addWidget(this->stringHashGeneration);
-	this->stackedLayout->addWidget(this->passwordGeneration);
-	this->stackedLayout->addWidget(this->uuidGeneration);
-	this->stackedLayout->addWidget(this->escapeStringWidget);
-	this->stackedLayout->addWidget(this->markDownPreviewWidget);
-
-	this->stackedLayout->addWidget(this->settingWidget);
+	addWidgetToLayout("列表", this->listView);
+	addWidgetToLayout("其他", this->gaugeBoardWidget);
+	addWidgetToLayout("JSON-YAML数据类型互转工具", this->jsonToYaml);
+	addWidgetToLayout("Unix时间戳转换工具", this->timestamp);
+	addWidgetToLayout("进制转换工具", this->convertBinary);
+	addWidgetToLayout("HTML编码解码工具", this->convertHtml);
+	addWidgetToLayout("URL编码解码工具", this->convertUrl);
+	addWidgetToLayout("Base64文本编码解码工具", this->convertBase64);
+	addWidgetToLayout("Base64图像编码解码工具", this->convertBase64Image);
+	addWidgetToLayout("JSON字符串格式化工具", this->jsonStringFormat);
+	addWidgetToLayout("可扩展标记语言XML格式化工具", this->xmlStringFormat);
+	addWidgetToLayout("哈希散列生成工具", this->stringHashGeneration);
+	addWidgetToLayout("密码生成器", this->passwordGeneration);
+	addWidgetToLayout("通用唯一识别码生成工具", this->uuidGeneration);
+	addWidgetToLayout("文本转义-反转义", this->escapeStringWidget);
+	addWidgetToLayout("MarkDown预览工具", this->markDownPreviewWidget);
+	addWidgetToLayout("简易SqlLite查询工具", this->sqlLiteIDE);
+	addWidgetToLayout("系统信息", this->systemInfoWidget);
+	addWidgetToLayout("设置", this->settingWidget);
 
 	splitter->addWidget(this->navigator);
 	splitter->addWidget(widget);
 	QVBoxLayout* layout = new QVBoxLayout();
 	layout->addWidget(this->splitter);
 	this->setLayout(layout);
-
-	for (int i = 0; i < this->stackedLayout->count(); i++)
-	{
-		QWidget* layoutWidget = this->stackedLayout->widget(i);
-		AnimationOpacityEffect* opacityEffect = new AnimationOpacityEffect(layoutWidget);
-		layoutWidget->setGraphicsEffect(opacityEffect);
-	}
 }
 
 void DevToys::showToolWidget(QString name)
@@ -154,8 +132,10 @@ void DevToys::showToolWidget(QString name)
 	}
 	else
 	{
+		AnimationOpacityEffect* opacityEffect = static_cast<AnimationOpacityEffect*>(this->gaugeBoardWidget->graphicsEffect());
+		opacityEffect->setOpacity(0.0);
 		this->stackedLayout->setCurrentIndex(1);
-		this->label->setText(name + "正在开发啦！！！");
+		opacityEffect->inAnimationStart();
 	}
 }
 
@@ -174,6 +154,14 @@ void DevToys::loadConnect()
 		}
 		this->onParentItemClicked(names);
 		});
+}
+
+void DevToys::addWidgetToLayout(QString name, QWidget* widget)
+{
+	widget->setObjectName(name);
+	AnimationOpacityEffect* opacityEffect = new AnimationOpacityEffect(widget);
+	widget->setGraphicsEffect(opacityEffect);
+	this->stackedLayout->addWidget(widget);
 }
 
 void DevToys::onParentItemClicked(QStringList& names)

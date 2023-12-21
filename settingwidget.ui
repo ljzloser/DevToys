@@ -205,6 +205,13 @@
                 </spacer>
                </item>
                <item>
+                <widget class="QPushButton" name="CSVButton">
+                 <property name="text">
+                  <string>导出为CSV</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <widget class="QPushButton" name="pushButton">
                  <property name="toolTip">
                   <string>展开/收起</string>
@@ -213,7 +220,7 @@
                   <string/>
                  </property>
                  <property name="icon">
-                  <iconset resource="devtoys.qrc">
+                  <iconset>
                    <normaloff>:/DevToys/icon/展开.png</normaloff>:/DevToys/icon/展开.png</iconset>
                  </property>
                 </widget>
@@ -338,7 +345,7 @@
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap resource="devtoys.qrc">:/DevToys/icon/font.png</pixmap>
+                  <pixmap>:/DevToys/icon/font.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>true</bool>
@@ -450,7 +457,7 @@
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap resource="devtoys.qrc">:/DevToys/icon/wrap.png</pixmap>
+                  <pixmap>:/DevToys/icon/wrap.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>true</bool>
@@ -514,7 +521,7 @@
                   <string/>
                  </property>
                  <property name="icon">
-                  <iconset resource="devtoys.qrc">
+                  <iconset>
                    <normaloff>:/DevToys/icon/展开.png</normaloff>:/DevToys/icon/展开.png</iconset>
                  </property>
                 </widget>
@@ -589,7 +596,7 @@
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap resource="devtoys.qrc">:/DevToys/icon/font.png</pixmap>
+                  <pixmap>:/DevToys/icon/font.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>true</bool>
@@ -729,7 +736,7 @@
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap resource="devtoys.qrc">:/DevToys/icon/可扩展标记语言XML格式化工具.png</pixmap>
+                  <pixmap>:/DevToys/icon/可扩展标记语言XML格式化工具.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>true</bool>
@@ -780,7 +787,7 @@
                   <string/>
                  </property>
                  <property name="icon">
-                  <iconset resource="devtoys.qrc">
+                  <iconset>
                    <normaloff>:/DevToys/icon/link.png</normaloff>:/DevToys/icon/link.png</iconset>
                  </property>
                 </widget>
@@ -794,7 +801,7 @@
                   <string/>
                  </property>
                  <property name="icon">
-                  <iconset resource="devtoys.qrc">
+                  <iconset>
                    <normaloff>:/DevToys/icon/展开.png</normaloff>:/DevToys/icon/展开.png</iconset>
                  </property>
                 </widget>
@@ -869,7 +876,7 @@
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap resource="devtoys.qrc">:/DevToys/icon/boom.png</pixmap>
+                  <pixmap>:/DevToys/icon/boom.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>true</bool>
@@ -920,7 +927,7 @@
                   <string/>
                  </property>
                  <property name="icon">
-                  <iconset resource="devtoys.qrc">
+                  <iconset>
                    <normaloff>:/DevToys/icon/link.png</normaloff>:/DevToys/icon/link.png</iconset>
                  </property>
                 </widget>
@@ -1039,7 +1046,7 @@
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap resource="devtoys.qrc">:/DevToys/icon/theme.png</pixmap>
+                  <pixmap>:/DevToys/icon/theme.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>true</bool>
@@ -1158,7 +1165,7 @@
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap resource="devtoys.qrc">:/DevToys/icon/theme.png</pixmap>
+                  <pixmap>:/DevToys/icon/theme.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>true</bool>
@@ -1277,7 +1284,7 @@
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap resource="devtoys.qrc">:/DevToys/icon/theme.png</pixmap>
+                  <pixmap>:/DevToys/icon/theme.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>true</bool>
@@ -1396,7 +1403,7 @@
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap resource="devtoys.qrc">:/DevToys/icon/theme.png</pixmap>
+                  <pixmap>:/DevToys/icon/theme.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>true</bool>
@@ -1463,7 +1470,7 @@
                   <string/>
                  </property>
                  <property name="icon">
-                  <iconset resource="devtoys.qrc">
+                  <iconset>
                    <normaloff>:/DevToys/icon/展开.png</normaloff>:/DevToys/icon/展开.png</iconset>
                  </property>
                 </widget>
@@ -1538,7 +1545,7 @@
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap resource="devtoys.qrc">:/DevToys/icon/theme.png</pixmap>
+                  <pixmap>:/DevToys/icon/theme.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>true</bool>
@@ -1613,9 +1620,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="devtoys.qrc"/>
-  <include location="C:/Users/13123/.designer/backup/devtoys.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

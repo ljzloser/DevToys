@@ -21,7 +21,6 @@
         <file>icon/HTML编码解码工具.png</file>
         <file>icon/URL编码解码工具.png</file>
         <file>icon/JSON字符串格式化工具.png</file>
-        <file>icon/可扩展标记语言XML格式化工具.png</file>
         <file>icon/哈希散列生成工具.png</file>
         <file>icon/密码生成器.png</file>
         <file>icon/通用唯一识别码生成工具.png</file>
@@ -43,5 +42,6 @@
         <file>icon/文本转义-反转义.png</file>
         <file>icon/设置.png</file>
         <file>icon/MarkDown预览工具.png</file>
+        <file>icon/可扩展标记语言XML格式化工具.png</file>
     </qresource>
 </RCC>

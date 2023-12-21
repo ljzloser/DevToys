@@ -476,7 +476,7 @@
  </customwidgets>
  <resources>
   <include location="devtoys.qrc"/>
-  <include location="C:/Users/13123/.designer/backup/devtoys.qrc"/>
+  <include location="devtoys.qrc"/>
  </resources>
  <connections/>
 </ui>

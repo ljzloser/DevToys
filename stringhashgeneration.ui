@@ -112,7 +112,7 @@
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap resource="devtoys.qrc">:/DevToys/icon/letter.png</pixmap>
+                  <pixmap>:/DevToys/icon/letter.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>true</bool>
@@ -225,7 +225,7 @@
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap resource="devtoys.qrc">:/DevToys/icon/type.png</pixmap>
+                  <pixmap>:/DevToys/icon/type.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>true</bool>
@@ -326,7 +326,7 @@
             <string>粘贴</string>
            </property>
            <property name="icon">
-            <iconset resource="devtoys.qrc">
+            <iconset>
              <normaloff>:/DevToys/icon/粘贴.png</normaloff>:/DevToys/icon/粘贴.png</iconset>
            </property>
           </widget>
@@ -337,7 +337,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="devtoys.qrc">
+            <iconset>
              <normaloff>:/DevToys/icon/打开文件.png</normaloff>:/DevToys/icon/打开文件.png</iconset>
            </property>
           </widget>
@@ -348,7 +348,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="devtoys.qrc">
+            <iconset>
              <normaloff>:/DevToys/icon/清空.png</normaloff>:/DevToys/icon/清空.png</iconset>
            </property>
           </widget>
@@ -409,7 +409,7 @@
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="devtoys.qrc">
+               <iconset>
                 <normaloff>:/DevToys/icon/复制.png</normaloff>:/DevToys/icon/复制.png</iconset>
               </property>
              </widget>
@@ -420,7 +420,7 @@
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="devtoys.qrc">
+               <iconset>
                 <normaloff>:/DevToys/icon/复制.png</normaloff>:/DevToys/icon/复制.png</iconset>
               </property>
              </widget>
@@ -431,7 +431,7 @@
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="devtoys.qrc">
+               <iconset>
                 <normaloff>:/DevToys/icon/复制.png</normaloff>:/DevToys/icon/复制.png</iconset>
               </property>
              </widget>
@@ -473,7 +473,7 @@
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="devtoys.qrc">
+               <iconset>
                 <normaloff>:/DevToys/icon/复制.png</normaloff>:/DevToys/icon/复制.png</iconset>
               </property>
              </widget>
@@ -511,9 +511,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="devtoys.qrc"/>
-  <include location="C:/Users/13123/.designer/backup/devtoys.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

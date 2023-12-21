@@ -13,12 +13,6 @@ QCustomMainWindow::QCustomMainWindow(QWidget* parent)
 {
 	this->setWindowFlag(Qt::FramelessWindowHint); //无边框
 	this->setAttribute(Qt::WA_TranslucentBackground); //背景透明
-	//this->setMouseTracking(true); //鼠标追踪
-	//connect(this->timer, &QTimer::timeout, [=]() {
-	//	this->updateCursorShape(); //更新光标形状
-	//	});
-	//this->timer->setParent(this); //设置父对象
-	//this->timer->start(1000); //启动定时器
 	this->layout->setContentsMargins(this->edge_size, this->edge_size, this->edge_size, this->edge_size); //设置布局边距
 	this->layout->setSpacing(0); //设置布局间距
 	this->setLayout(this->layout); //设置布局

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <qgraphicseffect.h>
+#include <QGraphicsOpacityEffect>
 #include <qobject.h>
 #include <qpropertyanimation.h>
 #include <qtmetamacros.h>

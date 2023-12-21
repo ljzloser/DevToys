@@ -1,4 +1,7 @@
-﻿#include <QSqlDatabase>
+﻿#ifndef SQLEXECUTOR_H
+#define SQLEXECUTOR_H
+
+#include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QSqlRecord>
@@ -8,13 +11,16 @@
 #include <qdebug.h>
 #include <qstandarditemmodel.h>
 
-class SqlExecutor {
+class SqlExecutor : public QObject
+{
 public:
 	//explicit SqlExecutor(const QString &connectionString) {
 	//    db = QSqlDatabase::addDatabase("QODBC");
 	//    db.setDatabaseName(connectionString);
 	//}
-	SqlExecutor(const QString& sqlLitepath) {
+	SqlExecutor(const QString& sqlLitepath, QObject* parent = nullptr)
+		:QObject(parent)
+	{
 		if (QSqlDatabase::contains(sqlLitepath)) {
 			db = QSqlDatabase::database(sqlLitepath);
 		}
@@ -24,6 +30,14 @@ public:
 		}
 	}
 	~SqlExecutor() {
+	}
+	bool isValid()
+	{
+		return db.isValid();
+	}
+	QString lastError()
+	{
+		return db.lastError().text();
 	}
 	/**
 	 * @brief 查询第一行第一列，如果没有就返回T的默认值
@@ -165,6 +179,60 @@ public:
 		return r;
 	}
 	/**
+	 * @brief 执行批量语句,注意占位符只能是?,不支持其他占位符
+	 * @brief SqlExecutor sql("filename");
+	 * @brief QString query = "insert into table values(?, ?)"
+	 * @brief QList<QVariantList> data = { {1, 2}, {3, 4} }
+	 * @brief sql.executeBatch(query, data)
+	 * @param query 要执行的语句
+	 * @param data 要操作的数据
+	 * @param useTransaction 是否开启事务
+	 * @return true 成功,false 失败
+	*/
+	bool executeBatch(const QString& query, const QList<QVariantList>& data, bool useTransaction = true)
+	{
+		if (!db.open()) {
+			throw std::runtime_error(db.lastError().text().toStdString());
+		}
+		QSqlQuery q(db);
+		q.prepare(query);
+		// 获取query 内的参数个数
+		int paramCount = query.count("?");
+
+		// 检查数据长度是否一致
+		if (!data.isEmpty())
+		{
+			for (const QVariantList& list : data)
+			{
+				if (list.size() != paramCount)
+				{
+					throw std::runtime_error("数据长度不一致");
+					return false;
+				}
+			}
+		}
+		// 插入数据
+		for (const QVariant& v : data)
+		{
+			q.addBindValue(v);
+		}
+		if (useTransaction && !db.transaction()) {
+			throw std::runtime_error(db.lastError().text().toStdString());
+		}
+
+		if (!q.execBatch()) {
+			if (useTransaction) {
+				db.rollback();
+			}
+			throw std::runtime_error(q.lastError().text().toStdString());
+		}
+		if (useTransaction && !db.commit()) {
+			throw std::runtime_error(db.lastError().text().toStdString());
+		}
+		return true;
+	}
+
+	/**
 	 * @brief 执行查询
 	 * @param query 要执行的语句
 	 * @param useTransaction 是否开启事务
@@ -234,7 +302,38 @@ public:
 		}
 		return model;
 	}
+	/**
+	 * @brief 执行查询，返回一个csv样式的字符串
+	 * @param query	查询语句
+	 * @param splitChar 分隔符
+	 * @return
+	*/
+	QString executeQueryCsv(const QString& query, QChar splitChar = ',')
+	{
+		QList<QSqlRecord> list = executeQueryRecord(query);
+		QStringList result;
+		for (int i = 0; i < list.count(); i++)
+		{
+			if (i == 0)
+			{
+				QStringList head;
+				for (int j = 0; j < list.at(i).count(); j++)
+				{
+					head.append(list.at(i).fieldName(j));
+				}
+				result.append(head.join(splitChar));
+			}
+			QStringList row;
+			for (int j = 0; j < list.at(i).count(); j++)
+			{
+				row.append(list.at(i).value(j).toString());
+			}
+			result.append(row.join(splitChar));
+		}
+		return result.join("\n");
+	}
 
 private:
 	QSqlDatabase db;
 };
+#endif // SQLEXECUTOR_H

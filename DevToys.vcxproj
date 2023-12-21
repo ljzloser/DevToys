@@ -41,14 +41,14 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>6.3.0_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets;sql;xml</QtModules>
+    <QtModules>core;gui;network;widgets;sql;xml</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
     <QtPlugin>false</QtPlugin>
     <QtToolsDesignTime>false</QtToolsDesignTime>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>6.3.0_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets;sql;xml</QtModules>
+    <QtModules>core;gui;network;widgets;sql;xml</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
     <QtPlugin>false</QtPlugin>
     <QtToolsDesignTime>false</QtToolsDesignTime>
@@ -186,8 +186,12 @@
     <ClCompile Include="sciscintilla.cpp" />
     <ClCompile Include="settingwidget.cpp" />
     <ClCompile Include="slidebutton.cpp" />
+    <ClCompile Include="SqlExecutor.cpp" />
+    <ClCompile Include="sqlliteide.cpp" />
     <ClCompile Include="sqllog.cpp" />
     <ClCompile Include="stringhashgeneration.cpp" />
+    <ClCompile Include="SystemInfo.cpp" />
+    <ClCompile Include="systeminfowidget.cpp" />
     <ClCompile Include="timestamp.cpp" />
     <ClCompile Include="tools.cpp" />
     <ClCompile Include="uuidgeneration.cpp" />
@@ -197,7 +201,12 @@
     <QtRcc Include="devtoys.qrc" />
     <QtMoc Include="devtoys.h" />
     <ClCompile Include="devtoys.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
     <None Include="cpp.hint" />
     <None Include="DevToys.ico" />
     <QtRcc Include="light\lightstyle.qrc" />
@@ -222,7 +231,9 @@
     <QtUic Include="markdownpreviewwidget.ui" />
     <QtUic Include="passwordgeneration.ui" />
     <QtUic Include="settingwidget.ui" />
+    <QtUic Include="sqlliteide.ui" />
     <QtUic Include="stringhashgeneration.ui" />
+    <QtUic Include="systeminfowidget.ui" />
     <QtUic Include="timestamp.ui" />
     <QtUic Include="uuidgeneration.ui" />
     <QtUic Include="xmlstringformat.ui" />
@@ -251,6 +262,7 @@
     <QtMoc Include="filtercombobox.h" />
     <QtMoc Include="escapestringwidget.h" />
     <QtMoc Include="markdownpreviewwidget.h" />
+    <ClInclude Include="NetworkSpeedMonitor.h" />
     <ClInclude Include="sciscintilla.h" />
     <QtMoc Include="timestamp.h" />
     <QtMoc Include="slidebutton.h" />
@@ -258,6 +270,9 @@
     <QtMoc Include="settingwidget.h" />
     <ClInclude Include="SqlExecutor.h" />
     <QtMoc Include="sqllog.h" />
+    <QtMoc Include="SystemInfo.h" />
+    <QtMoc Include="systeminfowidget.h" />
+    <QtMoc Include="sqlliteide.h" />
     <ClInclude Include="tools.h" />
     <QtMoc Include="jsontoyaml.h" />
   </ItemGroup>
