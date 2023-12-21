@@ -267,6 +267,8 @@
   <ItemGroup>
     <ProjectReference Include="GaugeBoardWidget\GaugeBoardWidget.vcxproj">
       <Project>{5dbc9636-4ed6-4f50-9683-d556a0dfd9a5}</Project>
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
