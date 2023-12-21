@@ -7,6 +7,8 @@
 #include "Config.h"
 #include <qcolordialog.h>
 
+#include "GaugeBoardWidget/gaugeboardwidget.h"
+
 int main(int argc, char* argv[])
 {
 	_putenv_s("QT_FONT_DPI", "96");
@@ -30,5 +32,7 @@ int main(int argc, char* argv[])
 		});
 	w.show();
 	qDebug() << "程序启动";
+	GaugeBoardWidget g(1, 180);
+	g.show();
 	return a.exec();
 }

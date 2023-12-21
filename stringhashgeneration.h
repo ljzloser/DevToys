@@ -1,9 +1,9 @@
 ﻿#pragma once
 
-#include <QWidget>
-#include "ui_stringhashgeneration.h"
 #include "tools.h"
+#include "ui_stringhashgeneration.h"
 #include <QCryptographicHash>
+#include <QWidget>
 
 class StringHashGeneration : public QWidget
 {
