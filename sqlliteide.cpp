@@ -8,6 +8,8 @@
 #include <QSCi/qsciapis.h>
 #include <Qsci/qsciscintilla.h>
 
+#include "Config.h"
+
 static QStringList sqliteKeywords() {
 	QStringList keywords;
 	keywords << "ABORT" << "ACTION" << "ADD" << "AFTER" << "ALL" << "ALTER" << "ANALYZE"
@@ -82,17 +84,31 @@ SqlLiteIDE::SqlLiteIDE(QWidget* parent)
 
 	ui.codeEdit->setLexer(this->sqlLexer);
 	ui.codeEdit->setAutoCompletionCaseSensitivity(ui.codeEdit->caseSensitive()); // 补全的时候不区分大小写
-	QString name = QString("I:\\project\\C++\\Qt\\DevToys\\x64\\Debug\\database.db");
-	loadBaseApis();
-	this->addDataBase(name);
+	//QString name = QString("I:\\project\\C++\\Qt\\DevToys\\x64\\Debug\\database.db");
+	//loadBaseApis();
+	//this->addDataBase(name);
+	QStringList dbs = Config::getValue("dbs").toString().split(",");
+	for (QString& db : dbs)
+	{
+		this->addDataBase(db);
+	}
+	this->loadBaseApis();
 }
 
 SqlLiteIDE::~SqlLiteIDE()
-{}
+{
+	QStringList dbs;
+
+	for (int i = 0; i < this->dbsComboBox->count(); i++)
+	{
+		dbs.append(this->dbsComboBox->itemText(i));
+	}
+	Config::setValue("dbs", dbs.join(","));
+}
 
 bool SqlLiteIDE::addDataBase(QString& fileName)
 {
-	if (this->dbsComboBox->findText(fileName) == 1)
+	if (this->dbsComboBox->findText(fileName) == 1 || fileName.isEmpty())
 	{
 		return true;
 	}
@@ -180,9 +196,11 @@ void SqlLiteIDE::loadUi()
 	dbInfoMenuBarLayout->setContentsMargins(0, 0, 0, 0);
 	QPushButton* openButton = new QPushButton("打开");
 	QPushButton* refreshButton = new QPushButton("刷新");
+	QPushButton* deleteButton = new QPushButton("删除");
 	QSpacerItem* horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Maximum);
 	dbInfoMenuBarLayout->addWidget(openButton);
 	dbInfoMenuBarLayout->addWidget(refreshButton);
+	dbInfoMenuBarLayout->addWidget(deleteButton);
 	dbInfoMenuBarLayout->addItem(horizontalSpacer);
 	ui.dbInfoMenuBar->setLayout(dbInfoMenuBarLayout);
 
@@ -210,6 +228,23 @@ void SqlLiteIDE::loadUi()
 				this->addDataBase(dbName);
 			}
 		});
+	connect(deleteButton, &QPushButton::clicked, [=]()
+		{
+			// 获取树形控件选中的项
+			QTreeWidgetItem* item = ui.dbInfoTreeWidget->currentItem();
+			if (item == NULL)
+			{
+				return;
+			}
+			// 循环获取最顶层的项
+			while (item->parent())
+			{
+				item = item->parent();
+			}
+			QString fileName = item->text(0);
+			this->dbsComboBox->removeItem(this->dbsComboBox->findText(fileName));
+			ui.dbInfoTreeWidget->takeTopLevelItem(ui.dbInfoTreeWidget->indexOfTopLevelItem(item));
+		});
 #pragma endregion
 
 #pragma region 右边栏
@@ -221,6 +256,9 @@ void SqlLiteIDE::loadUi()
 	// 设置快捷键
 	executeButton->setShortcut(Qt::Key_F5);
 
+	QPushButton* saveResultButton = new QPushButton("保存结果");
+	saveResultButton->setShortcut(Qt::CTRL + Qt::Key_S);
+
 	this->executeTypeComboBox->addItem(ExecuteTypeToString(ExecuteType::Query), QVariant::fromValue(ExecuteType::Query));
 	this->executeTypeComboBox->addItem(ExecuteTypeToString(ExecuteType::NonQuery), QVariant::fromValue(ExecuteType::NonQuery));
 	QSpacerItem* horizontalSpacer1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Maximum);
@@ -228,11 +266,42 @@ void SqlLiteIDE::loadUi()
 	codeInfoMenuBarLayout->addWidget(this->dbsComboBox);
 	codeInfoMenuBarLayout->addWidget(this->executeTypeComboBox);
 	codeInfoMenuBarLayout->addWidget(executeButton);
+	codeInfoMenuBarLayout->addWidget(saveResultButton);
 	codeInfoMenuBarLayout->addItem(horizontalSpacer1);
 	ui.codeMenuBar->setLayout(codeInfoMenuBarLayout);
 	connect(executeButton, &QPushButton::clicked, [=]()
 		{
 			ExecuteSql();
+		});
+	connect(saveResultButton, &QPushButton::clicked, [=]()
+		{
+			if (this->lastSql.isEmpty())
+			{
+				return;
+			}
+			SqlExecutor sqlExecutor(this->dbsComboBox->currentText());
+			QString data = sqlExecutor.executeQueryCsv(this->lastSql);
+			if (data.isEmpty())
+			{
+				return;
+			}
+			QString fileName = QFileDialog::getSaveFileName(this, tr("保存文件"), "结果", tr("CSV文件(*.csv)"));
+			if (!fileName.isEmpty())
+			{
+				// 打开文件
+				QFile file(fileName);
+				if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+				{
+					QMessageBox::warning(this, tr("提示"), tr("保存失败"));
+					return;
+				}
+				file.write("\xEF\xBB\xBF" + data.toUtf8());
+
+				// 关闭文件
+
+				file.close();
+				QMessageBox::information(this, tr("提示"), QString("保存至%1").arg(fileName));
+			}
 		});
 	connect(this->dbsComboBox, &QComboBox::currentTextChanged, [=]()
 		{
@@ -272,10 +341,11 @@ void SqlLiteIDE::ExecuteSql()
 			break;
 		}
 		}
+		lastSql = text;
 	}
 	catch (const std::exception& e)
 	{
-		this->executeText->setPlainText(e.what());
+		this->executeText->setPlainText(QString("Error:%1").arg(e.what()));
 		ui.dockWidget->setWidget(this->executeText);
 		ui.dockWidget->show();
 	}

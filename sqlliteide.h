@@ -55,4 +55,5 @@ private:
 	void ExecuteSql();
 	QComboBox* dbsComboBox = new QComboBox();
 	QComboBox* executeTypeComboBox = new QComboBox();
+	QString lastSql{ "" };
 };
