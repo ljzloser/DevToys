@@ -80,7 +80,7 @@ void ConvertBase64Image::onPlainTextEditChanged()
 		return;
 	}
 
-	if (!typeLists.contains(type.toLower()))
+	if (!constants::typeLists.contains(type.toLower()))
 	{
 		Tools::showPopupMessage("解析图片格式信息失败");
 		this->pixmap = QPixmap();

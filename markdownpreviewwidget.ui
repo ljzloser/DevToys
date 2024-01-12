@@ -308,6 +308,23 @@
                      </property>
                     </widget>
                    </item>
+                   <item>
+                    <widget class="QPushButton" name="pushButton">
+                     <property name="maximumSize">
+                      <size>
+                       <width>50</width>
+                       <height>25</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>打印</string>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="devtoys.qrc">
+                       <normaloff>:/DevToys/icon/打印.png</normaloff>:/DevToys/icon/打印.png</iconset>
+                     </property>
+                    </widget>
+                   </item>
                   </layout>
                  </item>
                 </layout>

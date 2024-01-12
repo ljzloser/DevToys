@@ -3,6 +3,7 @@
 #include <qpainterpath.h>
 #include "filtercombobox.h"
 #include "constants.h"
+#include "tools.h"
 
 QCustomTitleBar::QCustomTitleBar(QWidget* parent) : QWidget(parent)
 {
@@ -13,11 +14,13 @@ QCustomTitleBar::QCustomTitleBar(QWidget* parent) : QWidget(parent)
 	QSpacerItem* spacerItem = new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
 	QStringList list;
-	for (std::pair<const QString, QString> var : descriptionsMap)
+	for (auto& var : constants::descriptionsMap)
 	{
-		list.append(var.first);
+		comboBox->addItem(QIcon(Tools::formatIconPath(var.first)), var.first);
 	}
-	comboBox->setItems(list);
+	comboBox->lineEdit()->setPlaceholderText("输入想要使用的工具");
+	comboBox->lineEdit()->setText("");
+	comboBox->setCurrentIndex(-1);
 
 	this->topButton = new QPushButton(this);
 	this->topButton->setFixedSize(25, 25);

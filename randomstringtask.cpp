@@ -22,8 +22,8 @@ void RandomStringTask::run()
 	for (int i = 0; i < m_length; i++)
 	{
 		int key = QRandomGenerator::global()->bounded(typeCount);
-		int index = QRandomGenerator::global()->bounded(randomStringCharMap.at(key).length());
-		result.append(randomStringCharMap.at(key).at(index));
+		int index = QRandomGenerator::global()->bounded(constants::randomStringCharMap.at(key).length());
+		result.append(constants::randomStringCharMap.at(key).at(index));
 		this->m_atomicInt->fetchAndAddRelaxed(1);
 		if (i % 100 == 0)
 		{

@@ -137,7 +137,7 @@ bool Tools::convertJsonToYaml(const Json::Value& jnode, YAML::Node& ynode)
 
 QString Tools::formatIconPath(QString name)
 {
-	return QString("%1%2.png").arg(ICONDIR).arg(name);
+	return QString("%1%2.png").arg(constants::ICONDIR).arg(name);
 }
 
 QString Tools::formatJson(const Json::Value& jnode, int indent)

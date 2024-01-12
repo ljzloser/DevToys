@@ -3,6 +3,10 @@
 #include <qfile.h>
 #include <qfiledialog.h>
 #include <qmessagebox.h>
+#include <qprintdialog.h>
+#include <qprintpreviewdialog.h>
+#include <qprinter.h>
+#include <qpainter.h>
 
 MarkDownPreviewWidget::MarkDownPreviewWidget(QWidget* parent)
 	: QWidget(parent)
@@ -41,5 +45,16 @@ void MarkDownPreviewWidget::loadConnect()
 					QMessageBox::warning(this, tr("警告"), file.errorString());
 				}
 			}
+		});
+	connect(ui.pushButton, &QPushButton::clicked, [=]()
+		{
+			QPrinter printer;
+			QPrintPreviewDialog dialog(&printer, this);
+			QObject::connect(&dialog, &QPrintPreviewDialog::paintRequested, this, [=](QPrinter* printer)
+				{
+					ui.textBrowser->document()->print(printer);
+				}
+			);
+			dialog.exec();
 		});
 }

@@ -112,5 +112,5 @@ void NavigatorView::loadConnect()
 
 std::map<QString, QStringList> NavigatorView::loadTree()
 {
-	return treeMap;
+	return constants::treeMap;
 }

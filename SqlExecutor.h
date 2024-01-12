@@ -39,18 +39,7 @@ public:
 	{
 		return db.lastError().text();
 	}
-	/**
-	 * @brief 查询第一行第一列，如果没有就返回T的默认值
-	 * @tparam T 要返回的类型
-	 * @param query 要执行的语句
-	 * @param nullValue 为空时返回的值
-	 * @return 返回T
-	*/
-	template<typename T>
-	T executeScalar(const QString& query, T nullValue = T()) {
-		QVariant v = executeScalar(query);
-		return v.isNull() ? nullValue : v.value<T>();
-	}
+
 	/**
 	 * @brief 查询第一行第一列
 	 * @param query 要执行的语句
@@ -74,6 +63,18 @@ public:
 			return QVariant();
 		}
 		return v;
+	}
+	/**
+	 * @brief 查询第一行第一列，如果没有就返回T的默认值
+	 * @tparam T 要返回的类型
+	 * @param query 要执行的语句
+	 * @param nullValue 为空时返回的值
+	 * @return 返回T
+	*/
+	template<typename T>
+	T executeScalar(const QString& query, T nullValue = T()) {
+		QVariant v = executeScalar(query);
+		return v.isNull() ? nullValue : v.value<T>();
 	}
 	/**
 	 * @brief 查询第一列的值
@@ -308,7 +309,7 @@ public:
 	 * @param splitChar 分隔符
 	 * @return
 	*/
-	QString executeQueryCsv(const QString& query, QChar splitChar = ',')
+	QString executeQueryCsv(const QString& query, const QChar& splitChar = ',')
 	{
 		QList<QSqlRecord> list = executeQueryRecord(query);
 		QStringList result;

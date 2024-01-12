@@ -26,7 +26,7 @@ void IconLabelListView::setIconLabels(QStringList names)
 		IconLabel* label = new IconLabel(this);
 		item->setSizeHint(QSize(label->size()));
 		label->setTitle(name);
-		label->setDescriptions(descriptionsMap.at(name));
+		label->setDescriptions(constants::descriptionsMap.at(name));
 		label->setIcon(QPixmap(Tools::formatIconPath(name)));
 		connect(label, &IconLabel::clicked, [=]()
 			{

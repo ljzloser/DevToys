@@ -16,6 +16,7 @@
 #include <qtreeview.h>
 #include <qwidget.h>
 #include <utility>
+#include <QImageWriter>
 
 DevToys::DevToys(QWidget* parent)
 	: QWidget(parent)
@@ -23,6 +24,13 @@ DevToys::DevToys(QWidget* parent)
 	this->loadUi();
 	this->loadConnect();
 	this->navigator->getAllToolsButton()->click();
+	// 获取并打印所有支持的图像读取格式
+	QList<QByteArray> readFormats = QImageReader::supportedImageFormats();
+	qDebug() << "Supported read formats:" << readFormats.join(", ");
+
+	// 获取并打印所有支持的图像写入格式
+	QList<QByteArray> writeFormats = QImageWriter::supportedImageFormats();
+	qDebug() << "Supported write formats:" << writeFormats.join(", ");
 }
 
 DevToys::~DevToys()
@@ -123,7 +131,7 @@ void DevToys::showToolWidget(QString name)
 		AnimationOpacityEffect* opacityEffect = static_cast<AnimationOpacityEffect*>(widget->graphicsEffect());
 		opacityEffect->setOpacity(0.0);
 		this->stackedLayout->setCurrentWidget(widget);
-		if (!descriptionsMap.count(name))
+		if (!constants::descriptionsMap.count(name))
 			this->navigator->getTree()->selectionModel()->clearSelection();
 		// 判断sender 是不是NavigatorView
 		if (!qobject_cast<NavigatorView*>(sender()))
@@ -148,7 +156,7 @@ void DevToys::loadConnect()
 	connect(this->navigator->getAllToolsButton(), &QPushButton::clicked, [=]() {
 		this->navigator->getTree()->selectionModel()->clearSelection();
 		QStringList names;
-		for (std::pair<const QString, QString> var : descriptionsMap)
+		for (std::pair<const QString, QString> var : constants::descriptionsMap)
 		{
 			names.append(var.first);
 		}
