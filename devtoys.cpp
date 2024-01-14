@@ -8,6 +8,7 @@
 #include <qboxlayout.h>
 #include <qcontainerfwd.h>
 #include <qdir.h>
+#include <QImageWriter>
 #include <qitemselectionmodel.h>
 #include <qobject.h>
 #include <qpushbutton.h>
@@ -16,7 +17,6 @@
 #include <qtreeview.h>
 #include <qwidget.h>
 #include <utility>
-#include <QImageWriter>
 
 DevToys::DevToys(QWidget* parent)
 	: QWidget(parent)

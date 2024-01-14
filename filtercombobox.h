@@ -3,8 +3,8 @@
 #include <QComboBox>
 #include <qcompleter.h>
 #include <qlineedit.h>
-#include <qstringlistmodel.h>
 #include <qstring.h>
+#include <qstringlistmodel.h>
 #include <qvariant.h>
 
 class FilterComboBox : public QComboBox

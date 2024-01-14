@@ -2,21 +2,21 @@
 #define GAUGEBOARDWIDGET_H
 
 #include "GaugeBoardWidget_global.h"
-#include <QWidget>
-#include <QPainterPath>
-#include <QPainter>
-#include <QPaintEvent>
-#include <QDebug>
-#include <QPoint>
-#include <QPolygon>
-#include <QtMath>
-#include <QTimer>
-#include <QLinearGradient>
-#include <QTime>
-#include <QContextMenuEvent>
-#include <QMenu>
 #include <QApplication>
 #include <QClipboard>
+#include <QContextMenuEvent>
+#include <QDebug>
+#include <QLinearGradient>
+#include <QMenu>
+#include <QPainter>
+#include <QPainterPath>
+#include <QPaintEvent>
+#include <QPoint>
+#include <QPolygon>
+#include <QTime>
+#include <QTimer>
+#include <QtMath>
+#include <QWidget>
 class GAUGEBOARDWIDGET_EXPORT GaugeBoardWidget : public QWidget
 {
 	Q_OBJECT

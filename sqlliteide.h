@@ -1,12 +1,12 @@
 ﻿#pragma once
 
-#include <QWidget>
-#include "ui_sqlliteide.h"
 #include "Qsci/qscilexersql.h"
-#include <qmenubar.h>
 #include "SqlExecutor.h"
+#include "ui_sqlliteide.h"
+#include <qmenubar.h>
 #include <qtreewidget.h>
 #include <qvariant.h>
+#include <QWidget>
 
 #include <qcombobox.h>
 
