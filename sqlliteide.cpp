@@ -64,7 +64,7 @@ void SqlLiteIDE::loadBaseApis()
 	}
 	if (!this->dbsComboBox->currentText().isEmpty())
 	{
-		SqlExecutor sqlExecutor(this->dbsComboBox->currentText());
+		SqlExecutor sqlExecutor(this->DbsComboBox()->currentText());
 		QStringList tables = sqlExecutor.executeFirstColumn<QString>("SELECT name FROM sqlite_master");
 
 		for (QString& table : tables)
@@ -87,7 +87,7 @@ SqlLiteIDE::SqlLiteIDE(QWidget* parent)
 	//QString name = QString("I:\\project\\C++\\Qt\\DevToys\\x64\\Debug\\database.db");
 	//loadBaseApis();
 	//this->addDataBase(name);
-	QStringList dbs = Config::getValue("dbs").toString().split(",");
+	QStringList dbs = Config::getValue("dbs").toString().split(";");
 	for (QString& db : dbs)
 	{
 		this->addDataBase(db);
@@ -99,16 +99,16 @@ SqlLiteIDE::~SqlLiteIDE()
 {
 	QStringList dbs;
 
-	for (int i = 0; i < this->dbsComboBox->count(); i++)
+	for (int i = 0; i < this->DbsComboBox()->count(); i++)
 	{
-		dbs.append(this->dbsComboBox->itemText(i));
+		dbs.append(this->DbsComboBox()->itemText(i));
 	}
-	Config::setValue("dbs", dbs.join(","));
+	Config::setValue("dbs", dbs.join(";"));
 }
 
 bool SqlLiteIDE::addDataBase(QString& fileName)
 {
-	if (this->dbsComboBox->findText(fileName) == 1 || fileName.isEmpty())
+	if (this->DbsComboBox()->findText(fileName) == 1 || fileName.isEmpty())
 	{
 		return true;
 	}
@@ -164,27 +164,27 @@ bool SqlLiteIDE::addDataBase(QString& fileName)
 		viewNameItem->setText(0, view);
 		viewItem->addChild(viewNameItem);
 	}
-	this->dbsComboBox->addItem(fileName);
+	this->DbsComboBox()->addItem(fileName);
 	// Calculate the width of the widest item.
 	// 计算 最宽的 item
-	QFontMetrics fm(dbsComboBox->font());
+	QFontMetrics fm(DbsComboBox()->font());
 	int widestItemWidth = 0;
-	for (int i = 0; i < dbsComboBox->count(); ++i) {
-		widestItemWidth = qMax(widestItemWidth, fm.horizontalAdvance(dbsComboBox->itemText(i)));
+	for (int i = 0; i < DbsComboBox()->count(); ++i) {
+		widestItemWidth = qMax(widestItemWidth, fm.horizontalAdvance(DbsComboBox()->itemText(i)));
 	}
 
 	// Calculate extra width for margins, frame and dropdown arrow.
 	// 计算 边距，边框和下拉箭头
-	int extraWidth = dbsComboBox->style()->pixelMetric(QStyle::PM_ComboBoxFrameWidth) * 2;
-	extraWidth += dbsComboBox->style()->pixelMetric(QStyle::PM_ScrollBarExtent);
-	extraWidth += 2 * dbsComboBox->style()->pixelMetric(QStyle::PM_FocusFrameHMargin) + 1;
+	int extraWidth = DbsComboBox()->style()->pixelMetric(QStyle::PM_ComboBoxFrameWidth) * 2;
+	extraWidth += DbsComboBox()->style()->pixelMetric(QStyle::PM_ScrollBarExtent);
+	extraWidth += 2 * DbsComboBox()->style()->pixelMetric(QStyle::PM_FocusFrameHMargin) + 1;
 
 	if (widestItemWidth + extraWidth > 300)
 	{
 		widestItemWidth = 300 - extraWidth;
 	}
 
-	dbsComboBox->setFixedWidth(widestItemWidth + extraWidth);
+	DbsComboBox()->setFixedWidth(widestItemWidth + extraWidth);
 
 	return true;
 }
@@ -205,6 +205,8 @@ void SqlLiteIDE::loadUi()
 	ui.dbInfoMenuBar->setLayout(dbInfoMenuBarLayout);
 
 	ui.dbInfoTreeWidget->setHeaderHidden(true);
+	ui.dbInfoTreeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+	connect(ui.dbInfoTreeWidget, &QTreeWidget::customContextMenuRequested, this, &SqlLiteIDE::treeMenuShow);
 
 	connect(openButton, &QPushButton::clicked, [=]()
 		{
@@ -217,11 +219,11 @@ void SqlLiteIDE::loadUi()
 	connect(refreshButton, &QPushButton::clicked, [=]()
 		{
 			QStringList dbList;
-			for (int i = 0; i < this->dbsComboBox->count(); i++)
+			for (int i = 0; i < this->DbsComboBox()->count(); i++)
 			{
-				dbList.append(this->dbsComboBox->itemText(i));
+				dbList.append(this->DbsComboBox()->itemText(i));
 			}
-			this->dbsComboBox->clear();
+			this->DbsComboBox()->clear();
 			ui.dbInfoTreeWidget->clear();
 			for (QString& dbName : dbList)
 			{
@@ -242,7 +244,7 @@ void SqlLiteIDE::loadUi()
 				item = item->parent();
 			}
 			QString fileName = item->text(0);
-			this->dbsComboBox->removeItem(this->dbsComboBox->findText(fileName));
+			this->DbsComboBox()->removeItem(this->DbsComboBox()->findText(fileName));
 			ui.dbInfoTreeWidget->takeTopLevelItem(ui.dbInfoTreeWidget->indexOfTopLevelItem(item));
 		});
 #pragma endregion
@@ -263,7 +265,7 @@ void SqlLiteIDE::loadUi()
 	this->executeTypeComboBox->addItem(ExecuteTypeToString(ExecuteType::NonQuery), QVariant::fromValue(ExecuteType::NonQuery));
 	QSpacerItem* horizontalSpacer1 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Maximum);
 	codeInfoMenuBarLayout->addItem(leftSpacer);
-	codeInfoMenuBarLayout->addWidget(this->dbsComboBox);
+	codeInfoMenuBarLayout->addWidget(this->DbsComboBox());
 	codeInfoMenuBarLayout->addWidget(this->executeTypeComboBox);
 	codeInfoMenuBarLayout->addWidget(executeButton);
 	codeInfoMenuBarLayout->addWidget(saveResultButton);
@@ -279,7 +281,7 @@ void SqlLiteIDE::loadUi()
 			{
 				return;
 			}
-			SqlExecutor sqlExecutor(this->dbsComboBox->currentText());
+			SqlExecutor sqlExecutor(this->DbsComboBox()->currentText());
 			QString data = sqlExecutor.executeQueryCsv(this->lastSql);
 			if (data.isEmpty())
 			{
@@ -303,7 +305,7 @@ void SqlLiteIDE::loadUi()
 				QMessageBox::information(this, tr("提示"), QString("保存至%1").arg(fileName));
 			}
 		});
-	connect(this->dbsComboBox, &QComboBox::currentTextChanged, [=]()
+	connect(this->DbsComboBox(), &QComboBox::currentTextChanged, [=]()
 		{
 			this->loadBaseApis();
 		});
@@ -317,7 +319,7 @@ void SqlLiteIDE::ExecuteSql()
 	{
 		text = ui.codeEdit->text();
 	}
-	SqlExecutor sqlExceutor(this->dbsComboBox->currentText());
+	SqlExecutor sqlExceutor(this->DbsComboBox()->currentText());
 	ExecuteType type = (ExecuteType)this->executeTypeComboBox->currentData().toInt();
 	try
 	{
@@ -349,4 +351,174 @@ void SqlLiteIDE::ExecuteSql()
 		ui.dockWidget->setWidget(this->executeText);
 		ui.dockWidget->show();
 	}
+}
+
+void SqlLiteIDE::treeMenuShow(QPoint point)
+{
+	QTreeWidgetItem* item = ui.dbInfoTreeWidget->itemAt(point);
+	if (item)
+	{
+		QTreeWidgetItem* parent = item->parent();
+		if (parent)
+		{
+			QString text = parent->text(0);
+			QMenu menu;
+			if (text == "表")
+			{
+				QAction* createAction = menu.addAction("创建脚本");
+				createAction->setData(QVariant(ScriptType::Create));
+				QAction* updateAction = menu.addAction("更新脚本");
+				updateAction->setData(QVariant(ScriptType::Update));
+				QAction* deleteAction = menu.addAction("删除脚本");
+				deleteAction->setData(QVariant(ScriptType::Delete));
+				QAction* insertAction = menu.addAction("插入脚本");
+				insertAction->setData(QVariant(ScriptType::Insert));
+				QAction* selectAction = menu.addAction("查询脚本");
+				selectAction->setData(QVariant(ScriptType::Select));
+				// 分隔
+				menu.addSeparator();
+				QAction* viewDataAction = menu.addAction("查看数据");
+				viewDataAction->setData(QVariant(ScriptType::ViewData));
+
+				QAction* UpdateDataAction = menu.addAction("修改数据");
+				UpdateDataAction->setData(QVariant(ScriptType::UpdateData));
+
+				QAction* exportAction = menu.addAction("导出数据");
+				exportAction->setData(QVariant(ScriptType::ExportData));
+			}
+			else if (text == "视图")
+			{
+				QAction* createAction = menu.addAction("创建脚本");
+				createAction->setData(QVariant(ScriptType::Create));
+
+				QAction* updateAction = menu.addAction("查询脚本");
+				updateAction->setData(QVariant(ScriptType::Select));
+			}
+			connect(&menu, &QMenu::triggered, [=](QAction* action)
+				{
+					ScriptType scriptType = (ScriptType)action->data().toInt();
+					createSqlScript(scriptType, item);
+				});
+			menu.exec(ui.dbInfoTreeWidget->viewport()->mapToGlobal(point));
+		}
+	}
+}
+
+void SqlLiteIDE::createSqlScript(ScriptType scriptType, QTreeWidgetItem* item)
+{
+	SqlExecutor sqlExecutor(this->DbsComboBox()->currentText());
+	QString script = "";
+	QString table = item->text(0);
+	switch (scriptType)
+	{
+	case SqlLiteIDE::ScriptType::Create:
+	{
+		script = sqlExecutor.executeScalar<QString>(QString("SELECT sql FROM sqlite_master WHERE name = '%1'").arg(table));
+		break;
+	}
+	case SqlLiteIDE::ScriptType::Update:
+	{
+		auto map = sqlExecutor.executeQuery("PRAGMA table_info(" + table + ")");
+		QStringList columnList;
+		for (auto& map : map)
+		{
+			QString column = map.value("name").toString();
+			QString type = map.value("type").toString();
+			if (type == "INTEGER" || type == "REAL" || type == "NUMERIC ")
+			{
+				columnList << ("    " + column + " = " + type);
+			}
+			else
+			{
+				columnList << ("    " + column + " = '" + type + "'");
+			}
+		}
+		script = QString("UPDATE %1 SET \n%2\nWHERE 1 = 1").arg(table).arg(columnList.join(",\n"));
+
+		break;
+	}
+	case SqlLiteIDE::ScriptType::Delete:
+	{
+		script = "DELETE FROM " + table + " WHERE 1 = 1";
+		break;
+	}
+	case SqlLiteIDE::ScriptType::Insert:
+	{
+		auto map = sqlExecutor.executeQuery("PRAGMA table_info(" + table + ")");
+
+		QStringList columnList;
+		QStringList typeList;
+
+		for (auto& map : map)
+		{
+			columnList << ("    " + map.value("name").toString());
+			QString type = map.value("type").toString();
+			if (type == "INTEGER" || type == "REAL" || type == "NUMERIC ")
+			{
+				typeList << "    " + type;
+			}
+			else
+			{
+				typeList << QString("    '%1'").arg(type);
+			}
+		}
+		script = QString("INSERT INTO %1 (\n%2\n) VALUES (\n%3\n)").arg(table).arg(columnList.join(",\n")).arg(typeList.join(",\n"));
+
+		break;
+	}
+	case SqlLiteIDE::ScriptType::Select:
+	{
+		auto map = sqlExecutor.executeQuery("PRAGMA table_info(" + table + ")");
+		QStringList columnList;
+		for (auto& map : map)
+		{
+			columnList << "    " + map.value("name").toString();
+		}
+
+		script = QString("SELECT\n%1\nFROM %2").arg(columnList.join(",\n")).arg(table);
+
+		break;
+	}
+	case SqlLiteIDE::ScriptType::ViewData:
+	{
+		QTableView* view = getTableView(table);
+
+		// 设置只读
+		view->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+		view->show();
+
+		break;
+	}
+	case SqlLiteIDE::ScriptType::UpdateData:
+	{
+		QTableView* view = getTableView(table);
+		QSqlTableModel* model = (QSqlTableModel*)view->model();
+		//connect(model, &QSqlTableModel::be, [=]()
+		//	{
+		//		qDebug()<< "这里触发了"
+		//	});
+
+		break;
+	}
+	case SqlLiteIDE::ScriptType::ExportData:
+	{
+		break;
+	}
+	default:
+		break;
+	}
+	ui.codeEdit->setText(script);
+}
+
+QTableView* SqlLiteIDE::getTableView(QString& table)
+{
+	QTableView* view = new QTableView();
+	QSqlDatabase db = SqlExecutor(this->DbsComboBox()->currentText()).getDatabase();
+	QSqlTableModel* model = new QSqlTableModel(view, db);
+	model->setTable(table);
+	model->select();
+	view->setModel(model);
+	view->resizeColumnsToContents();
+	return view;
 }

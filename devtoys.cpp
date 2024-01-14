@@ -141,7 +141,8 @@ void DevToys::showToolWidget(QString name)
 	}
 	else
 	{
-		AnimationOpacityEffect* opacityEffect = static_cast<AnimationOpacityEffect*>(this->gaugeBoardWidget->graphicsEffect());
+		AnimationOpacityEffect* opacityEffect = static_cast<AnimationOpacityEffect*>(
+			this->gaugeBoardWidget->graphicsEffect());
 		opacityEffect->setOpacity(0.0);
 		this->stackedLayout->setCurrentIndex(1);
 		opacityEffect->inAnimationStart();

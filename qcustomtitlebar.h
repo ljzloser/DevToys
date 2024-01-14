@@ -56,7 +56,6 @@ public:
 	QIcon setCloseButtonIcon(const QString& iconPath);
 
 	void paintEvent(QPaintEvent* event) override;
-
 signals:
 	void minButtonClicked(); //最小化按钮点击信号
 	void maxButtonClicked(); //最大化按钮点击信号

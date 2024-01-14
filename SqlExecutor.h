@@ -333,7 +333,7 @@ public:
 		}
 		return result.join("\n");
 	}
-
+	QSqlDatabase getDatabase() { return db; }
 private:
 	QSqlDatabase db;
 };

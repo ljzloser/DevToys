@@ -7,14 +7,11 @@
 #include <qtreewidget.h>
 #include <qvariant.h>
 #include <QWidget>
-
 #include <qcombobox.h>
-
 #include "qplaintextedit.h"
-
 #include "qtableview.h"
-
 #include "qevent.h"
+#include <qsqltablemodel.h>
 
 class SqlLiteIDE : public QWidget
 {
@@ -25,11 +22,25 @@ private:
 		Query, //select
 		NonQuery, //insert, update, delete
 	};
+	// 脚本类型
+	enum ScriptType
+	{
+		Create = 0, //创建
+		Update = 1, //更新
+		Delete = 2, //删除
+		Insert = 3, //插入
+		Select = 4, //查询
+		ViewData = 5, //查看数据
+		UpdateData = 6, //更新数据
+		ExportData = 7, //导出数据
+	};
 public:
 	void loadBaseApis();
 	SqlLiteIDE(QWidget* parent = nullptr);
 	~SqlLiteIDE();
 
+	QComboBox* DbsComboBox() const { return dbsComboBox; }
+	void DbsComboBox(QComboBox* val) { dbsComboBox = val; }
 private:
 	QString ExecuteTypeToString(ExecuteType type)
 	{
@@ -56,4 +67,7 @@ private:
 	QComboBox* dbsComboBox = new QComboBox();
 	QComboBox* executeTypeComboBox = new QComboBox();
 	QString lastSql{ "" };
+	void treeMenuShow(QPoint point);
+	void createSqlScript(ScriptType scriptType, QTreeWidgetItem* item);
+	QTableView* getTableView(QString& table);
 };

@@ -14,7 +14,6 @@ class ConvertBinary : public QWidget
 public:
 	ConvertBinary(QWidget* parent = nullptr);
 	~ConvertBinary();
-
 private slots:
 	void onLineEidtTextChange();
 
