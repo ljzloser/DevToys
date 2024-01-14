@@ -172,7 +172,7 @@ QColor GaugeBoardWidget::getColor(ColorKey key)
 void GaugeBoardWidget::paintEvent(QPaintEvent* e)
 {
 	// 获取需要绘制的区域
-	QRect rect = e->rect();
+	QRectF rect = e->rect();
 
 	// 创建 QPainter 对象，并指定绘图设备为当前窗口
 	QPainter painter(this);
@@ -182,9 +182,9 @@ void GaugeBoardWidget::paintEvent(QPaintEvent* e)
 
 	// 绘制背景
 	painter.drawRect(rect);
-	QRect boardRect = QRect(20, 20, this->width() - 40, this->height() - 40);
+	QRectF boardRect = QRectF(20, 20, this->width() - 40, this->height() - 40);
 
-	int side = qMin(boardRect.width(), boardRect.height()); // 获取较小尺寸
+	double side = qMin(boardRect.width(), boardRect.height()); // 获取较小尺寸
 	// 画仪表盘外圆
 	painter.setPen(this->colorMap[ColorKey::MaxCir]);
 	painter.setBrush(this->colorMap[ColorKey::MaxCir]);
@@ -196,7 +196,7 @@ void GaugeBoardWidget::paintEvent(QPaintEvent* e)
 	//    painter.setBrush(this->colorMap[ColorKey::MidCir]);
 	//    painter.drawEllipse(boardRect.center(),int(side / 2 / 20 * 19) ,int(side / 2 / 20 * 19));
 
-	QRectF outRect(0, 0, int(side / 20 * 19), int(side / 20 * 19));//矩形长宽为窗口的长宽
+	QRectF outRect(0, 0, double(side / 20 * 19), double(side / 20 * 19));//矩形长宽为窗口的长宽
 	outRect.moveCenter(boardRect.center());
 
 	painter.setPen(Qt::NoPen);
@@ -216,7 +216,7 @@ void GaugeBoardWidget::paintEvent(QPaintEvent* e)
 
 	painter.setPen(this->colorMap[ColorKey::MinCir]);
 	painter.setBrush(this->colorMap[ColorKey::MinCir]);
-	painter.drawEllipse(boardRect.center(), int(side / 2 / 20 * 15), int(side / 2 / 20 * 15));
+	painter.drawEllipse(boardRect.center(), double(side / 2 / 20 * 15), double(side / 2 / 20 * 15));
 
 	// 画仪表盘刻度
 	QPen ScalePen = QPen(this->colorMap[ColorKey::Scale]);
@@ -230,7 +230,7 @@ void GaugeBoardWidget::paintEvent(QPaintEvent* e)
 			(boardRect.center().y() - (side / 2 / 20 * 19) * qSin(rad)));
 		QPointF innerPoint((boardRect.center().x() + (side / 2 / 20 * k) * qCos(rad)),
 			(boardRect.center().y() - (side / 2 / 20 * k) * qSin(rad)));
-		painter.drawLine(outerPoint, innerPoint);
+		painter.drawLine(QLineF(outerPoint, innerPoint));
 		if (k == 15)
 		{
 			points.append(innerPoint);
@@ -270,33 +270,33 @@ void GaugeBoardWidget::paintEvent(QPaintEvent* e)
 	painter.setPen(pen);
 	painter.setBrush(Qt::red);
 	qreal rad = qDegreesToRadians(valueToAngle());
-	QPoint center = boardRect.center();
+	QPointF center = boardRect.center();
 	int radius = side / 2 / 20 * 10;
-	QPoint hand(static_cast<int>(width() / 2 + radius * qCos(rad)),
-		static_cast<int>(height() / 2 - radius * qSin(rad)));
-	painter.drawLine(center, hand);
+	QPointF hand(static_cast<double>(width() / 2 + radius * qCos(rad)),
+		static_cast<double>(height() / 2 - radius * qSin(rad)));
+	painter.drawLine(QLineF(center, hand));
 
 	// 画仪表盘中心圆
 
 	painter.setPen(this->colorMap[ColorKey::CenterCir]);
 	painter.setBrush(this->colorMap[ColorKey::CenterCir]);
-	painter.drawEllipse(boardRect.center(), int(side / 2 / 20 * 2), int(side / 2 / 20 * 2));
+	painter.drawEllipse(boardRect.center(), double(side / 2 / 20 * 2), double(side / 2 / 20 * 2));
 
 	// 画数值
 	QString text = QString("%1%2").arg(QString::number(this->drawValue, 'f', this->precision)).arg(this->unit);
 	painter.setPen(this->colorMap[ColorKey::Value]);
 	font = QFont("Arial", side / 20);
 	painter.setFont(font);
-	QPoint p(boardRect.center().x(), boardRect.center().y() + (side / 2 / 20 * 9));
+	QPointF p(boardRect.center().x(), boardRect.center().y() + (side / 2 / 20 * 9));
 	// 计算文字的大小
 	QFontMetrics fm(font);
-	QRect textRect = fm.boundingRect(text);
+	QRectF textRect = fm.boundingRect(text);
 	textRect.moveCenter(p);
 	painter.drawText(textRect, Qt::AlignCenter, text); // 绘制文字
 
 	//画名称
 	painter.setPen(this->colorMap[ColorKey::Name]);
-	p = QPoint(boardRect.center().x(), boardRect.center().y() + (side / 2 / 20 * 12));
+	p = QPointF(boardRect.center().x(), boardRect.center().y() + (side / 2 / 20 * 12));
 	textRect = fm.boundingRect(this->name);
 	textRect.moveCenter(p);
 	painter.drawText(textRect, Qt::AlignCenter, this->name); // 绘制文字

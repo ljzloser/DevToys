@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 	_putenv_s("QT_FONT_DPI", "96");
 	QApplication a(argc, argv);
 	// 加载样式表文件
-
+	a.setStyleSheet(":/qdarkstyle/light/lightstyle.qss");
 	QTranslator translator;
 	if (translator.load(QApplication::applicationDirPath() + "\\translations\\qt_zh_CN.qm")) {
 		a.installTranslator(&translator);

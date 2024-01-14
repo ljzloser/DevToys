@@ -566,10 +566,13 @@ bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, 
 			}
 			//识别标题栏拖动产生半屏全屏效果
 			if (titleBar && titleBar->geometry().contains(pos))
-			{ //如果鼠标在标题栏上
-				QWidget* child = titleBar->childAt(pos); //获取标题栏上的控件
+			{
+				//如果鼠标在标题栏上,不知道什么原因，需要对pos进行边框宽度的处理，处理后正常，不处理就有点问题
+				QWidget* child = titleBar->childAt(pos - QPoint(2 * this->border_size, 2 * this->border_size));
+
 				if (!child)
-				{ //如果标题栏上没有控件
+				{
+					//如果标题栏上没有控件
 					*result = HTCAPTION; //设置为标题栏
 					return true;
 				}
@@ -585,11 +588,11 @@ bool QCustomMainWindow::nativeEvent(const QByteArray& eventType, void* message, 
 			//系统休眠的时候自动最小化可以规避程序可能出现的问题
 			this->showMinimized();
 		}
-		else if (msg->wParam == PBT_APMRESUMEAUTOMATIC)
-		{
-			//休眠唤醒后自动打开
-			this->showCustomNormal();
-		}
+		//else if (msg->wParam == PBT_APMRESUMEAUTOMATIC)
+		//{
+		//	//休眠唤醒后自动打开
+		//	this->showCustomNormal();
+		//}
 		else if (msg->message == WM_NCRBUTTONUP) //如果是鼠标右键
 		{
 			// 获取系统菜单的句柄

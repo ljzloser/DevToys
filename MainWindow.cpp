@@ -36,7 +36,7 @@ void MainWindow::loadUi()
 void MainWindow::loadConnect()
 {
 	QObject::connect(titleBar, &QCustomTitleBar::closeButtonClicked, this, &MainWindow::close);
-	QObject::connect(titleBar, &QCustomTitleBar::maxButtonClicked, this, &MainWindow::showCustomNormal);
+	//QObject::connect(titleBar, &QCustomTitleBar::maxButtonClicked, this, &MainWindow::showCustomNormal);
 	QObject::connect(titleBar, &QCustomTitleBar::minButtonClicked, this, &MainWindow::showMinimized);
 	QObject::connect(this, &MainWindow::windowStateChanged, titleBar, &QCustomTitleBar::updateIcon);
 	QObject::connect(titleBar->comboBox, &QComboBox::currentTextChanged, devtoys, &DevToys::onFiterComboBoxTextChanged);
@@ -110,4 +110,12 @@ void MainWindow::loadConnect()
 MainWindow::~MainWindow()
 {
 	SqlLog::saveLog("QDevToys退出", true);
+}
+
+void MainWindow::keyPressEvent(QKeyEvent* event)
+{
+	if (event->modifiers() == (Qt::ShiftModifier | Qt::ControlModifier) && event->key() == Qt::Key_F)
+	{
+		titleBar->comboBox->setFocus();
+	}
 }

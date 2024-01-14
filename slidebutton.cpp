@@ -1,9 +1,8 @@
 ﻿#include "slidebutton.h"
 
 SlideButton::SlideButton(QWidget* parent, QVector<QString> names)
-	: QWidget(parent)
+	: QWidget(parent), m_names(names)
 {
-	QVector<QString> m_names = names;
 	this->setDefaultChecked(false);
 	this->setborderColor(QColor(0, 0, 0));
 	this->setborderColorHover(QColor(127, 127, 127));

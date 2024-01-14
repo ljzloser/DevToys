@@ -18,7 +18,7 @@ QCustomTitleBar::QCustomTitleBar(QWidget* parent) : QWidget(parent)
 	{
 		comboBox->addItem(QIcon(Tools::formatIconPath(var.first)), var.first);
 	}
-	comboBox->lineEdit()->setPlaceholderText("输入想要使用的工具");
+	comboBox->lineEdit()->setPlaceholderText("输入想要使用的工具(Ctrl+Shift+F)");
 	comboBox->lineEdit()->setText("");
 	comboBox->setCurrentIndex(-1);
 

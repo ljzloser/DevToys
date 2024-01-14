@@ -115,6 +115,7 @@ void DevToys::loadUi()
 	splitter->addWidget(this->navigator);
 	splitter->addWidget(widget);
 	QVBoxLayout* layout = new QVBoxLayout();
+	layout->setContentsMargins(5, 5, 5, 5);
 	layout->addWidget(this->splitter);
 	this->setLayout(layout);
 }

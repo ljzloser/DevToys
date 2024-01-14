@@ -12,4 +12,6 @@ public:
 	~MainWindow();
 	DevToys* devtoys = new DevToys();
 	QCustomTitleBar* titleBar = new QCustomTitleBar();
+private:
+	void keyPressEvent(QKeyEvent* event) override;
 };
