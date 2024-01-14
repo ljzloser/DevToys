@@ -19,7 +19,7 @@ public:
 	 */
 	PasswordGeneration(QWidget* parent = nullptr);
 
-    /**
+	/**
 	 * PasswordGeneration 类的析构函数。
 	 */
 	~PasswordGeneration();
